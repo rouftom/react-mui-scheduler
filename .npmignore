@@ -1,0 +1,22 @@
+## the src folder
+src
+.babelrc
+rollup.config.js
+## node modules folder
+node_modules
+## incase you have a git repositiory initiated
+.git
+.gitignore
+CVS
+.svn
+.hg
+.lock-wscript
+.wafpickle-N
+.DS_Store
+npm-debug.log
+.npmrc
+
+config.gypi
+package-lock.json
+.idea/
+.travis.yml
