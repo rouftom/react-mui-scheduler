@@ -7,26 +7,26 @@
 
 <p align="center">
   <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue.svg">
-  <img alt="Travis (.com)" src="https://img.shields.io/travis/com/rouftom/react-material-scheduler">
-  <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/rouftom/react-material-scheduler">
-  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/rouftom/react-material-scheduler">
-  <img alt="Snyk Vulnerabilities for GitHub Repo" src="https://img.shields.io/snyk/vulnerabilities/github/rouftom/react-material-scheduler">
+  <img alt="Travis (.com)" src="https://img.shields.io/travis/com/rouftom/react-mui-scheduler">
+  <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/rouftom/react-mui-scheduler">
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/rouftom/react-mui-scheduler">
+  <img alt="Snyk Vulnerabilities for GitHub Repo" src="https://img.shields.io/snyk/vulnerabilities/github/rouftom/react-mui-scheduler">
 </p>
 
 ---
 
-React material scheduler is a react component based on @mui v5 that allows you to manage data in a calendar.
+React mui scheduler is a react component based on @mui v5 that allows you to manage data in a calendar.
 
 ## Installation
 ```nodejs
-  npm install react-material-scheduler
+  npm install react-mui-scheduler
 ```
 
 ## Usage
 ```javascript
  import React from 'react'
  import ReactDOM from 'react-dom'
- import Scheduler from "react-material-scheduler"
+ import Scheduler from "react-mui-scheduler"
  
   function App() {
     const events = [
@@ -122,7 +122,7 @@ React material scheduler is a react component based on @mui v5 that allows you t
 
 ## License
 
-### react-material-scheduler
+### react-mui-scheduler
 
 MIT License
 
