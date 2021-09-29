@@ -2,12 +2,11 @@
 
 
 
-<h1 align="center">React Material Scheduler</h1>
+<h1 align="center">📅 React Material Scheduler</h1>
 <p align="center">developed with <a target="_blank" href="https://mui.com">@mui</a> </p>
 
 <p align="center">
   <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue.svg">
-  <img alt="Travis (.com)" src="https://img.shields.io/travis/com/rouftom/react-mui-scheduler">
   <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/rouftom/react-mui-scheduler">
   <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/rouftom/react-mui-scheduler">
   <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/rouftom/react-mui-scheduler">
@@ -18,12 +17,12 @@
 
 React mui scheduler is a react component based on @mui v5 that allows you to manage data in a calendar.
 
-## Installation
+## 🗣️ Installation
 ```nodejs
   npm install react-mui-scheduler
 ```
 
-## Usage
+## 💻 Usage
 ```javascript
  import React from 'react'
  import ReactDOM from 'react-dom'
@@ -32,7 +31,7 @@ React mui scheduler is a react component based on @mui v5 that allows you to man
   function App() {
     const events = [
       {
-        id: `event-1`,
+        id: "event-1",
         label: "Consultation médicale",
         title: "Dr Shaun Murphy",
         color: "#f28f6a",
@@ -43,7 +42,7 @@ React mui scheduler is a react component based on @mui v5 that allows you to man
         createdBy: "Kristina Mayer"
       },
       {
-        id: `event-2`,
+        id: "event-2",
         label: "Consultation médicale",
         title: "Dr Claire Brown",
         color: "#099ce5",
@@ -54,7 +53,7 @@ React mui scheduler is a react component based on @mui v5 that allows you to man
         createdBy: "Kristina Mayer"
       },
       {
-        id: `event-3`,
+        id: "event-3",
         label: "Consultation médicale",
         title: "Dr Menlendez Hary",
         color: "#263686",
@@ -95,26 +94,41 @@ React mui scheduler is a react component based on @mui v5 that allows you to man
 ```
 
 
-##Authors
+## 😁 Authors
 
 - Muller Roufaou ([rouftom](http://github.com/rouftom))
 
 
 
-## FAQ
+## 🤔 FAQ
 
 * __Where can I find more documentation?__
 
   This library is a marriage of [@mui](http://mui.com/getting-started/usage/) and a React setup created with [React](https://fr.reactjs.org/). Either one would be a great place to start!
 
 
-## Extra
+## 🙇‍♂️ Extra
 
     😊 Do you like this library ? Buy me a coffee
 
 * Btc address: `1A2VNHSLGDyYsKWniJBe8cCqYWC52NvNZx`
 
 * Eth address: `0xFe444a01D9494Ec04f61797e15193C8016D666A5`
+
+
+## 🔥 Some features to add in next releases
+
+- 👉 Week and day mode switch view
+
+- 👉 Option menu 
+
+- 👉 Export events to PDF and CSV
+
+- 👉 Internationalization
+
+- 👉 Typescript support
+
+- 👉 Theme customization
 
 
 ## License
