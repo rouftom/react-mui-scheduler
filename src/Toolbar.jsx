@@ -24,7 +24,7 @@ import ToolbarSearchbar from "./ToolbarSeachBar.jsx"
 function SchedulerToolbar (props) {
   const {
     // events data
-    events, today,
+    events, today, toolbarProps,
     // Mode
     onModeChange, onSearchResult,
     // Alert props
@@ -141,6 +141,7 @@ function SchedulerToolbar (props) {
         component="div"
         sx={{m: .5, display: 'flex', alignItems: 'center'}}
       >
+        {toolbarProps.showDatePicker &&
         <Typography component="div" sx={{ flexGrow: 1 }}>
           <Hidden smDown>
             <IconButton
@@ -149,13 +150,6 @@ function SchedulerToolbar (props) {
               onClick={() => handleChangeDate(sub)}
             >
               <ChevronLeftIcon />
-            </IconButton>
-            <IconButton
-              sx={{ mr: 2 }}
-              {...commonIconButtonProps}
-              onClick={() => handleChangeDate(add)}
-            >
-              <ChevronRightIcon />
             </IconButton>
             <Button
               size="medium"
@@ -168,6 +162,13 @@ function SchedulerToolbar (props) {
             >
               {format(selectedDate, 'MMMM-yyyy')}
             </Button>
+            <IconButton
+              sx={{ mr: 2 }}
+              {...commonIconButtonProps}
+              onClick={() => handleChangeDate(add)}
+            >
+              <ChevronRightIcon />
+            </IconButton>
           </Hidden>
           <Hidden smUp>
             <IconButton{...commonIconButtonProps} onClick={handleOpenDateSelector}>
@@ -194,11 +195,12 @@ function SchedulerToolbar (props) {
               />
             </LocalizationProvider>
           </Menu>
-        </Typography>
+        </Typography>}
         <Typography
           component="div"
           sx={{display: 'inline-flex', alignItems: 'center'}}
         >
+          {toolbarProps?.showSearchBar &&
           <ToolbarSearchbar
             events={events}
             onInputChange={(newValue) => {
@@ -207,7 +209,8 @@ function SchedulerToolbar (props) {
               setSelectedDate(newDate)
               setSearchResult(newValue)
             }}
-          />
+          />}
+          {toolbarProps?.showSwitchModeButtons &&
           <ToggleButtonGroup
             exclusive
             disabled
@@ -220,10 +223,11 @@ function SchedulerToolbar (props) {
             {['month', 'Week', 'Day'].map(tb => (
               <ToggleButton key={tb} value={tb}>{tb}</ToggleButton>
             ))}
-          </ToggleButtonGroup>
+          </ToggleButtonGroup>}
+          {toolbarProps?.showOptions &&
           <IconButton sx={{ ml: 1 }} onClick={handleOpenMenu}{...commonIconButtonProps}>
             <MoreVertIcon />
-          </IconButton>
+          </IconButton>}
         </Typography>
       </Typography>
       <Menu
@@ -272,7 +276,13 @@ SchedulerToolbar.propTypes = {
 SchedulerToolbar.defaultProps = {
   openAlert: false,
   alertMessage: 'This is a scheduler alert',
-  alertProps: {color: 'info', severity: 'info'}
+  alertProps: {color: 'info', severity: 'info'},
+  toolbarProps: {
+    showSearchBar: true,
+    showSwitchModeButtons: true,
+    showDatePicker: true,
+    showOptions: true
+  }
 }
 
 export default SchedulerToolbar

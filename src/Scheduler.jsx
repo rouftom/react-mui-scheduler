@@ -18,8 +18,13 @@ import MonthModeView from "./MonthModeView.jsx"
  */
 function Scheduler(props) {
   const {
-    events, onCellClick, onTaskClick, onEventsChange,
-    openAlert, alertMessage, alertProps
+    events,
+    onCellClick,
+    onTaskClick,
+    onEventsChange,
+    openAlert,
+    alertMessage,
+    alertProps
   } = props
   const today = new Date()
   const theme = useTheme()
