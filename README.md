@@ -10,6 +10,7 @@
   <img alt="Travis (.com)" src="https://img.shields.io/travis/com/rouftom/react-mui-scheduler">
   <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/rouftom/react-mui-scheduler">
   <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/rouftom/react-mui-scheduler">
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/rouftom/react-mui-scheduler">
   <img alt="Snyk Vulnerabilities for GitHub Repo" src="https://img.shields.io/snyk/vulnerabilities/github/rouftom/react-mui-scheduler">
 </p>
 
@@ -101,10 +102,6 @@ React mui scheduler is a react component based on @mui v5 that allows you to man
 
 
 ## FAQ
-
-* __How do I use this with the @mui?__
-
-  Just install [@mui](http://mui.com) in your project and you are done!
 
 * __Where can I find more documentation?__
 

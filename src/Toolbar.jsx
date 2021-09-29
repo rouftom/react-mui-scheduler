@@ -279,9 +279,9 @@ SchedulerToolbar.defaultProps = {
   alertProps: {color: 'info', severity: 'info'},
   toolbarProps: {
     showSearchBar: true,
-    showSwitchModeButtons: true,
+    showSwitchModeButtons: false,
     showDatePicker: true,
-    showOptions: true
+    showOptions: false
   }
 }
 
