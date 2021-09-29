@@ -122,7 +122,7 @@ React mui scheduler is a react component based on @mui v5 that allows you to man
 
 - 👉 Option menu 
 
-- 👉 Export events to PDF and CSV
+- 👉 Export events as PDF and CSV
 
 - 👉 Internationalization
 

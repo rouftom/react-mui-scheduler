@@ -145,7 +145,7 @@ function SchedulerToolbar (props) {
         <Typography component="div" sx={{ flexGrow: 1 }}>
           <Hidden smDown>
             <IconButton
-              sx={{ mr: 1, ml: 0 }}
+              sx={{ mr: .5, ml: 0 }}
               {...commonIconButtonProps}
               onClick={() => handleChangeDate(sub)}
             >
@@ -163,7 +163,7 @@ function SchedulerToolbar (props) {
               {format(selectedDate, 'MMMM-yyyy')}
             </Button>
             <IconButton
-              sx={{ ml: 1 }}
+              sx={{ ml: 1.5 }}
               {...commonIconButtonProps}
               onClick={() => handleChangeDate(add)}
             >
