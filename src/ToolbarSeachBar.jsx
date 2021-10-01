@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { format, parse } from 'date-fns'
 import { styled } from '@mui/material/styles'
 import { TextField, Autocomplete, Box } from "@mui/material"
-import { useTheme } from '@mui/material/styles'
 
 const StyledAutoComplete = styled(Autocomplete)(({ theme }) => ({
   color: 'inherit',
@@ -17,7 +16,6 @@ const StyledAutoComplete = styled(Autocomplete)(({ theme }) => ({
 }))
 
 function ToolbarSearchbar (props) {
-  const theme = useTheme()
   const {events, onInputChange} = props
   
   const [value, setValue] = useState('')
@@ -31,26 +29,12 @@ function ToolbarSearchbar (props) {
   return (
     <StyledAutoComplete
       value={value}
-      id="autocomplete-2-demo"
+      id="scheduler-autocomplete"
       inputValue={inputValue}
       sx={{display: 'inline-flex'}}
       onChange={handleOnChange}
-      options={events}
-      groupBy={(option) => (
-        <Box sx={{display: "flex", alignItems: "center"}}>
-          <Box
-            component="span"
-            sx={{
-              width: 16,
-              height: 16,
-              mr: 1,
-              borderRadius: "50%",
-              backgroundColor: option?.color || theme.palette.secondary.main
-            }}
-          />
-          {option?.title}
-        </Box>
-      )}
+      options={events?.sort((a, b) => -b.groupLabel.localeCompare(a.groupLabel))}
+      groupBy={(option) => option?.groupLabel}
       /*
       (
           <Box sx={{display: "flex", alignItems: "center"}}>
@@ -64,13 +48,13 @@ function ToolbarSearchbar (props) {
                 backgroundColor: option?.color || theme.palette.secondary.main
               }}
             />
-            {option?.title}
+            {option?.groupLabel}
           </Box>
         )
        */
       getOptionLabel={(option) => (
         option &&
-        `${option?.title} | (${option?.startHour} - ${option?.endHour})`
+        `${option?.groupLabel} | (${option?.startHour ?? ''} - ${option?.endHour ?? ''})`
       )}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue)
@@ -78,7 +62,8 @@ function ToolbarSearchbar (props) {
       }}
       renderOption={(props, option) => (
         <Box component="li" sx={{fontSize: 12}} {...props}>
-          {format(parse(option?.date, 'yyyy-MM-dd', new Date()), 'dd-MMMM-yyyy')} ({option?.startHour} - {option?.endHour})
+          {format(parse(option?.date, 'yyyy-MM-dd', new Date()), 'dd-MMMM-yyyy')}
+          ({option?.startHour ?? ''} - {option?.endHour ?? ''})
         </Box>
       )}
       renderInput={(params) => (

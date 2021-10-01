@@ -9,8 +9,10 @@ import {
 } from "@mui/material"
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import StaticDatePicker from '@mui/lab/StaticDatePicker'
+import CloseIcon from '@mui/icons-material/Close'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+// eslint-disable-next-line
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import TodayIcon from '@mui/icons-material/Today'
 import SettingsIcon from '@mui/icons-material/Settings'
@@ -24,17 +26,17 @@ import ToolbarSearchbar from "./ToolbarSeachBar.jsx"
 function SchedulerToolbar (props) {
   const {
     // events data
-    events, today, toolbarProps,
+    events, switchMode, today, toolbarProps,
     // Mode
     onModeChange, onSearchResult,
     // Alert props
-    openAlert, alertMessage, alertProps,
+    alertProps, onAlertCloseButtonClicked,
     // Date
     onDateChange
   } = props
   
   const [searchResult, setSearchResult] = useState()
-  const [mode, setMode] = useState('month')
+  const [mode, setMode] = useState(switchMode)
   const [anchorMenuEl, setAnchorMenuEl] = useState(null)
   const [anchorDateEl, setAnchorDateEl] = useState(null)
   const [selectedDate, setSelectedDate] = useState(today || new Date())
@@ -75,6 +77,7 @@ function SchedulerToolbar (props) {
    * @param event
    * @return void
    */
+  // eslint-disable-next-line
   const handleOpenMenu = (event) => {
     setAnchorMenuEl(event.currentTarget)
   }
@@ -115,21 +118,25 @@ function SchedulerToolbar (props) {
    */
   const handleChangeDate = (method) => {
     if (typeof method !== 'function') return
-    let newDate = method(selectedDate, {months: 1})
+    let options = mode === 'month' ? {months: 1} : {weeks: 1}
+    let newDate = method(selectedDate, options)
     setDaysInMonth(getDaysInMonth(newDate))
     setSelectedDate(newDate)
   }
   
   useEffect(() => {
     if (mode) { onModeChange(mode) }
+    // eslint-disable-next-line
   }, [mode])
   
   useEffect(() => {
     onDateChange(daysInMonth, selectedDate)
+    // eslint-disable-next-line
   }, [daysInMonth, selectedDate])
   
   useEffect(() => {
     onSearchResult(searchResult)
+    // eslint-disable-next-line
   }, [searchResult])
   
   return (
@@ -145,7 +152,7 @@ function SchedulerToolbar (props) {
         <Typography component="div" sx={{ flexGrow: 1 }}>
           <Hidden smDown>
             <IconButton
-              sx={{ mr: .5, ml: 0 }}
+              sx={{  ml: 0 }}
               {...commonIconButtonProps}
               onClick={() => handleChangeDate(sub)}
             >
@@ -160,10 +167,10 @@ function SchedulerToolbar (props) {
               onClick={handleOpenDateSelector}
               aria-expanded={openDateSelector ? 'true' : undefined}
             >
-              {format(selectedDate, 'MMMM-yyyy')}
+              {format(selectedDate, mode === 'month' ? 'MMMM-yyyy' : 'PPP')}
             </Button>
             <IconButton
-              sx={{ ml: 1.5 }}
+              sx={{ ml: .5 }}
               {...commonIconButtonProps}
               onClick={() => handleChangeDate(add)}
             >
@@ -213,21 +220,20 @@ function SchedulerToolbar (props) {
           {toolbarProps?.showSwitchModeButtons &&
           <ToggleButtonGroup
             exclusive
-            disabled
             value={mode}
             size="small"
             color="primary"
             aria-label="text button group"
             onChange={(e, newMode) => { setMode(newMode) }}
           >
-            {['month', 'Week', 'Day'].map(tb => (
+            {['month', 'week'].map(tb => (
               <ToggleButton key={tb} value={tb}>{tb}</ToggleButton>
             ))}
           </ToggleButtonGroup>}
-          {toolbarProps?.showOptions &&
+          {/*toolbarProps?.showOptions &&
           <IconButton sx={{ ml: 1 }} onClick={handleOpenMenu}{...commonIconButtonProps}>
             <MoreVertIcon />
-          </IconButton>}
+          </IconButton>*/}
         </Typography>
       </Typography>
       <Menu
@@ -253,11 +259,26 @@ function SchedulerToolbar (props) {
           <Typography variant="body2">Settings</Typography>
         </MenuItem>
       </Menu>
-      {openAlert &&
+      {alertProps?.open &&
       <Typography component="div" sx={{mt: 1}}>
         <Collapse in>
-          <Alert {...alertProps} sx={{borderRadius: 0, mb: 0}}>
-            {alertMessage}
+          <Alert
+            color={alertProps?.color}
+            severity={alertProps?.severity}
+            sx={{borderRadius: 0, mb: 0}}
+            action={
+              alertProps?.showActionButton ?
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={onAlertCloseButtonClicked}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton> : null
+            }
+          >
+            {alertProps?.message}
           </Alert>
         </Collapse>
       </Typography>}
@@ -266,20 +287,28 @@ function SchedulerToolbar (props) {
 }
 
 SchedulerToolbar.propTypes = {
-  title: PropTypes.string,
-  openAlert: PropTypes.bool,
-  alertMessage: PropTypes.string,
+  today: PropTypes.object.isRequired,
+  events: PropTypes.array.isRequired,
+  switchMode: PropTypes.string.isRequired,
   alertProps: PropTypes.object,
-  onDateChange: PropTypes.func
+  toolbarProps: PropTypes.object,
+  onDateChange: PropTypes.func.isRequired,
+  onModeChange: PropTypes.func.isRequired,
+  onSearchResult: PropTypes.func.isRequired,
+  onAlertCloseButtonClicked: PropTypes.func.isRequired,
 }
 
 SchedulerToolbar.defaultProps = {
-  openAlert: false,
-  alertMessage: 'This is a scheduler alert',
-  alertProps: {color: 'info', severity: 'info'},
+  alertProps: {
+    open: false,
+    message: '',
+    color: 'info',
+    severity: 'info',
+    showActionButton: true,
+  },
   toolbarProps: {
     showSearchBar: true,
-    showSwitchModeButtons: false,
+    showSwitchModeButtons: true,
     showDatePicker: true,
     showOptions: false
   }

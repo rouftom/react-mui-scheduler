@@ -15,7 +15,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     borderTop: `1px solid #ccc !important`,
     borderBottom: `1px solid #ccc !important`,
     borderLeft: `1px solid #ccc !important`,
-    '&:nth-child(1)': {
+    '&:nth-of-type(1)': {
       borderLeft: `0px !important`
     }
   },
@@ -23,12 +23,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 14,
     height: 96,
     width: 64,
+    maxWidth: 64,
     cursor: 'pointer',
     borderLeft: `1px solid #ccc`,
-    '&:nth-child(7n+1)': {
+    '&:nth-of-type(7n+1)': {
       borderLeft: 0
     },
-    '&:nth-child(even)': {
+    '&:nth-of-type(even)': {
       backgroundColor: theme.palette.action.hover
     },
   },
@@ -73,7 +74,19 @@ function MonthModeView (props) {
    */
   const onCellDragStart = (e, item, rowIndex) => {
     setState({...state, itemTransfert: {item, rowIndex}})
-    //e.dataTransfer.setData('text/plain', `${item.id}_${rowIndex}`)
+  }
+  
+  /**
+   * @name onCellDragEnter
+   * @description
+   * @param e
+   * @param elementId
+   * @param rowIndex
+   * @return void
+   */
+  const onCellDragEnter = (e, elementId, rowIndex) => {
+    e.preventDefault()
+    setState({...state, transfertTarget: {elementId, rowIndex}})
   }
   
   /**
@@ -98,20 +111,21 @@ function MonthModeView (props) {
         let splittedDate = transfert?.item?.date?.split('-')
         
         if (!transfert?.item?.day) {
-          // Jour de la date du début du mois en chiffre
+          // Get day of the date (DD)
           transfert.item.day = parseInt(splittedDate[2])
         }
         
         if (transfert.item.day !== day?.day) {
           let itemCheck = day.data.findIndex(item => (
-            item.day === transfert.item.day && item.title === transfert.item.title
+            item.day === transfert.item.day && item.label === transfert.item.label
           ))
           
           if (itemCheck === -1) {
             let prevDayEvents = rowsCopy[transfert.rowIndex].days.find(d => d.day === transfert.item.day)
             let itemIndexToRemove = prevDayEvents?.data?.findIndex(i => i.id === transfert.item.id)
-  
+            
             if (itemIndexToRemove === undefined || itemIndexToRemove === -1) {
+              console.log(prevDayEvents)
               return console.log("item to remove is not found")
             }
             
@@ -119,24 +133,11 @@ function MonthModeView (props) {
             transfert.item.day = day?.day
             transfert.item.date = format(day?.date, 'yyyy-MM-dd')
             day.data.push(transfert.item)
-            setState({...state, rows: rowsCopy})
+            setState({...state, rows: rowsCopy, itemTransfert: null, transfertTarget: null})
           }
         }
       }
     }
-  }
-  
-  /**
-   * @name onCellDragEnter
-   * @description
-   * @param e
-   * @param elementId
-   * @param rowIndex
-   * @return void
-   */
-  const onCellDragEnter = (e, elementId, rowIndex) => {
-    e.preventDefault()
-    setState({...state, transfertTarget: {elementId, rowIndex}})
   }
   
   /**
@@ -164,7 +165,13 @@ function MonthModeView (props) {
    */
   const renderTask = (tasks = [], rowId) => {
     return tasks?.map((task, index) => (
-      ((searchResult && task?.title === searchResult?.title) || !searchResult) && (
+      (
+        (
+          searchResult &&
+          (task?.groupLabel === searchResult?.groupLabel || task?.user === searchResult?.user)
+        ) || !searchResult
+      ) &&
+      (
         <Paper
           draggable
           onClick={(e) => handleTaskClick(e, task)}
@@ -181,7 +188,7 @@ function MonthModeView (props) {
           onDragStart={e => onCellDragStart(e, task, rowId)}
         >
           <Box sx={{px: 0.5}}>
-            <Typography variant="caption">{task?.title}</Typography>
+            <Typography variant="caption">{task?.label}</Typography>
           </Box>
         </Paper>
       )
@@ -205,6 +212,7 @@ function MonthModeView (props) {
     if (state?.rows) {
       onEventsChange(Object.assign({}, state?.itemTransfert?.item))
     }
+    // eslint-disable-next-line
   }, [state?.rows, state?.itemTransfert])
   
   return (

@@ -1,7 +1,4 @@
 
-
-
-
 <h1 align="center">📅 React Material Scheduler</h1>
 <p align="center">developed with <a target="_blank" href="https://mui.com">@mui</a> </p>
 
@@ -17,80 +14,124 @@
 
 React mui scheduler is a react component based on @mui v5 that allows you to manage data in a calendar.
 
-## 🗣️ Installation
+## 🚀 Installation
 ```nodejs
   npm install react-mui-scheduler
 ```
 
 ## 💻 Usage
 ```javascript
- import React from 'react'
- import ReactDOM from 'react-dom'
- import Scheduler from "react-mui-scheduler"
- 
-  function App() {
-    const events = [
-      {
-        id: "event-1",
-        label: "Consultation médicale",
-        title: "Dr Shaun Murphy",
-        color: "#f28f6a",
-        startHour: "9 AM",
-        endHour: "10 AM",
-        date: "2021-09-09",
-        createdAt: new Date(),
-        createdBy: "Kristina Mayer"
-      },
-      {
-        id: "event-2",
-        label: "Consultation médicale",
-        title: "Dr Claire Brown",
-        color: "#099ce5",
-        startHour: "9 AM",
-        endHour: "10 AM",
-        date: "2021-09-09",
-        createdAt: new Date(),
-        createdBy: "Kristina Mayer"
-      },
-      {
-        id: "event-3",
-        label: "Consultation médicale",
-        title: "Dr Menlendez Hary",
-        color: "#263686",
-        startHour: "13 AM",
-        endHour: "14 AM",
-        date: "2021-09-12",
-        createdAt: new Date(),
-        createdBy: "Kristina Mayer"
-      },
-    ]
-    
-    const onCellClick = (event, row, day) => {
-      // Do something...
-    }
-    
-    const onEventClick = (event, task) => {
-      // Do something...
-    }
-    
-    const onEventsChange = (item) => {
-      // Do something...
-    }
-  
-    return (
-      <Scheduler
-        events={events}
-        openAlert={false}
-        alertMessage={'This is a scheduler alert'}
-        alertProps={{color: 'info', severity: 'success'}}
-        onEventsChange={onEventsChange}
-        onCellClick={onCellClick}
-        onTaskClick={onEventClick}
-      />
-    )
-  }
+import React, {useState} from 'react'
+import ReactDOM from 'react-dom'
+import Scheduler from "react-mui-scheduler"
 
-  ReactDOM.render(<App />, document.querySelector('#app'))
+function App() {
+  const [state, setState] = useState({
+    options: {
+      transitionMode: "zoom",
+      startWeekOn: "Mon",
+      defaultMode: "week"
+    },
+    alertProps: {
+      open: true,
+      color: "info",
+      severity: "info",
+      message: "🚀 Let's start with awesome react-mui-scheduler 🔥 🔥 🔥" ,
+      showActionButton: true,
+    },
+    toolbarProps: {
+      showSearchBar: true,
+      showSwitchModeButtons: true,
+      showDatePicker: true
+    }
+  })
+  
+  const events = [
+    {
+      id: "event-1",
+      label: "Consultation médicale",
+      groupLabel: "Dr Shaun Murphy",
+      user: "Dr Shaun Murphy",
+      color: "#f28f6a",
+      startHour: "04:00 AM",
+      endHour: "05:00 AM",
+      date: "2021-09-28",
+      createdAt: new Date(),
+      createdBy: "Kristina Mayer"
+    },
+    {
+      id: "event-2",
+      label: "Consultation médicale",
+      groupLabel: "Dr Claire Brown",
+      user: "Dr Claire Brown",
+      color: "#099ce5",
+      startHour: "09:00 AM",
+      endHour: "10:00 AM",
+      date: "2021-09-29",
+      createdAt: new Date(),
+      createdBy: "Kristina Mayer"
+    },
+    {
+      id: "event-3",
+      label: "Consultation médicale",
+      groupLabel: "Dr Menlendez Hary",
+      user: "Dr Menlendez Hary",
+      color: "#263686",
+      startHour: "13 AM",
+      endHour: "14 AM",
+      date: "2021-09-30",
+      createdAt: new Date(),
+      createdBy: "Kristina Mayer"
+    },
+    {
+      id: "event-4",
+      label: "Consultation prénatale",
+      groupLabel: "Dr Shaun Murphy",
+      user: "Dr Shaun Murphy",
+      color: "#f28f6a",
+      startHour: "08:00 AM",
+      endHour: "09:00 AM",
+      date: "2021-10-01",
+      createdAt: new Date(),
+      createdBy: "Kristina Mayer"
+    }
+  ]
+  
+  const handleCellClick = (event, row, day) => {
+    // Do something...
+  }
+  
+  const handleEventClick = (event, task) => {
+    // Do something...
+  }
+  
+  const handleEventsChange = (item) => {
+    // Do something...
+  }
+  
+  const handleAlertCloseButtonClicked = (item) => {
+    // Do something...
+    setState({
+      ...state, 
+      alertProps: {...state.alertProps, open: false}
+    })
+  }
+  
+  return (
+    <Scheduler
+      events={events}
+      options={state?.options}
+      alertProps={state?.alertProps}
+      toolbarProps={state?.toolbarProps}
+      onEventsChange={handleEventsChange}
+      onCellClick={handleCellClick}
+      onTaskClick={handleEventClick}
+      onAlertCloseButtonClicked={handleAlertCloseButtonClicked}
+    />
+  )
+}
+
+ReactDOM.render(<App />, document.querySelector('#yourComponentRootId'))
 ```
 
 
@@ -109,16 +150,18 @@ React mui scheduler is a react component based on @mui v5 that allows you to man
 
 ## 🙇‍♂️ Extra
 
-    😊 Do you like this library ? Buy me a coffee
+    Do you like this library ? Buy me a coffee
 
-* Btc address: `1A2VNHSLGDyYsKWniJBe8cCqYWC52NvNZx`
+* Btc address: `bc1qettgagenn9nc8ks7ghntjfme96yvvkfhntk774`
 
-* Eth address: `0xFe444a01D9494Ec04f61797e15193C8016D666A5`
+* Eth address: `0xB0413d8D0336E263e289A915c383e152155881E0`
 
 
 ## 🔥 Some features to add in next releases
 
-- 👉 Week and day mode switch view
+- ✅ Week mode switch view
+  
+- 👉 Day mode switch view
 
 - 👉 Option menu 
 
