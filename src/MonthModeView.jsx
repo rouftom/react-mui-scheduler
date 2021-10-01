@@ -50,7 +50,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function MonthModeView (props) {
   const {
-    columns, rows, searchResult, onTaskClick, onCellClick, onEventsChange
+    options, columns, rows, searchResult, onTaskClick, onCellClick, onEventsChange
   } = props
   const theme = useTheme()
   const [state, setState] = useState({})
@@ -216,11 +216,20 @@ function MonthModeView (props) {
   }, [state?.rows, state?.itemTransfert])
   
   return (
-    <TableContainer component={Paper}>
+    <TableContainer
+      component={Paper}
+      sx={{
+        minHeight: options?.minHeight || 540,
+        maxHeight: options?.maxHeight || 540
+      }}
+    >
       <Table
         size="small"
         aria-label="simple table"
-        stickyHeader sx={{ minWidth: 650 }}
+        stickyHeader sx={{
+          minWidth: options?.minWidth || 650,
+          maxWidth: options?.maxWidth || 650
+        }}
       >
         <TableHead sx={{height: 24}}>
           <StyledTableRow>
@@ -274,6 +283,7 @@ MonthModeView.propTypes = {
   columns: PropTypes.array,
   rows: PropTypes.array,
   date: PropTypes.string,
+  options: PropTypes.object,
   onDateChange: PropTypes.func,
   onTaskClick: PropTypes.func,
   onCellClick: PropTypes.func

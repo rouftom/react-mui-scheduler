@@ -28,9 +28,13 @@ import Scheduler from "react-mui-scheduler"
 function App() {
   const [state, setState] = useState({
     options: {
-      transitionMode: "zoom",
-      startWeekOn: "Mon",
-      defaultMode: "week"
+      transitionMode: "zoom", // or fade
+      startWeekOn: "Mon",     // or Sun
+      defaultMode: "week",    // or month
+      minWidth: 540,
+      maxWidth: 540,
+      minHeight: 540,
+      maxHeight: 540
     },
     alertProps: {
       open: true,

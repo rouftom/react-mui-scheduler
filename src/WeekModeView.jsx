@@ -69,7 +69,7 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 
 function WeekModeView (props) {
   const {
-    columns, rows, searchResult, onTaskClick, onCellClick, onEventsChange
+    options, columns, rows, searchResult, onTaskClick, onCellClick, onEventsChange
   } = props
   const theme = useTheme()
   const [state, setState] = useState({columns, rows})
@@ -276,11 +276,20 @@ function WeekModeView (props) {
   }, [state?.rows, state?.itemTransfert?.item])
   
   return (
-    <StyledTableContainer component={Paper} sx={{ maxHeight: 540 }}>
+    <StyledTableContainer
+      component={Paper}
+      sx={{
+        minHeight: options?.minHeight || 540,
+        maxHeight: options?.maxHeight || 540
+      }}
+    >
       <Table
         size="small"
         aria-label="simple table"
-        stickyHeader sx={{ minWidth: 540 }}
+        stickyHeader sx={{
+          minWidth: options?.minWidth || 650,
+          maxWidth: options?.maxWidth || 650
+        }}
       >
         <TableHead sx={{height: 24}}>
           <StyledTableRow>
@@ -352,6 +361,7 @@ WeekModeView.propTypes = {
   columns: PropTypes.array,
   rows: PropTypes.array,
   date: PropTypes.string,
+  options: PropTypes.object,
   searchResult: PropTypes.object,
   onDateChange: PropTypes.func.isRequired,
   onTaskClick: PropTypes.func.isRequired,

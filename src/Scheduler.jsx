@@ -292,6 +292,7 @@ function Scheduler(props) {
           <TransitionMode in>
             <Grid item xs={12}>
               <MonthModeView
+                options={options}
                 date={selectedDate}
                 rows={state?.rows}
                 columns={state?.columns}
@@ -308,6 +309,7 @@ function Scheduler(props) {
             <Grid item xs={12}>
               <WeekModeView
                 events={events}
+                options={options}
                 date={selectedDate}
                 rows={state?.rows}
                 columns={state?.columns}
