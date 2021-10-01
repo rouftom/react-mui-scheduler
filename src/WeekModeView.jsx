@@ -276,20 +276,11 @@ function WeekModeView (props) {
   }, [state?.rows, state?.itemTransfert?.item])
   
   return (
-    <StyledTableContainer
-      component={Paper}
-      sx={{
-        minHeight: options?.minHeight || 540,
-        maxHeight: options?.maxHeight || 540
-      }}
-    >
+    <StyledTableContainer component={Paper} sx={{ maxHeight: options?.maxHeight || 540 }}>
       <Table
         size="small"
         aria-label="simple table"
-        stickyHeader sx={{
-          minWidth: options?.minWidth || 650,
-          maxWidth: options?.maxWidth || 650
-        }}
+        stickyHeader sx={{ minWidth: options.minWidth || 540 }}
       >
         <TableHead sx={{height: 24}}>
           <StyledTableRow>

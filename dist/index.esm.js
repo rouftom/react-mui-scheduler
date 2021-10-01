@@ -691,18 +691,13 @@ function MonthModeView(props) {
 
   }, [state === null || state === void 0 ? void 0 : state.rows, state === null || state === void 0 ? void 0 : state.itemTransfert]);
   return /*#__PURE__*/React.createElement(TableContainer, {
-    component: Paper,
-    sx: {
-      minHeight: (options === null || options === void 0 ? void 0 : options.minHeight) || 540,
-      maxHeight: (options === null || options === void 0 ? void 0 : options.maxHeight) || 540
-    }
+    component: Paper
   }, /*#__PURE__*/React.createElement(Table, {
     size: "small",
     "aria-label": "simple table",
     stickyHeader: true,
     sx: {
-      minWidth: (options === null || options === void 0 ? void 0 : options.minWidth) || 650,
-      maxWidth: (options === null || options === void 0 ? void 0 : options.maxWidth) || 650
+      minWidth: (options === null || options === void 0 ? void 0 : options.minWidth) || 650
     }
   }, /*#__PURE__*/React.createElement(TableHead, {
     sx: {
@@ -1092,7 +1087,6 @@ function WeekModeView(props) {
   return /*#__PURE__*/React.createElement(StyledTableContainer, {
     component: Paper,
     sx: {
-      minHeight: (options === null || options === void 0 ? void 0 : options.minHeight) || 540,
       maxHeight: (options === null || options === void 0 ? void 0 : options.maxHeight) || 540
     }
   }, /*#__PURE__*/React.createElement(Table, {
@@ -1100,8 +1094,7 @@ function WeekModeView(props) {
     "aria-label": "simple table",
     stickyHeader: true,
     sx: {
-      minWidth: (options === null || options === void 0 ? void 0 : options.minWidth) || 650,
-      maxWidth: (options === null || options === void 0 ? void 0 : options.maxWidth) || 650
+      minWidth: options.minWidth || 540
     }
   }, /*#__PURE__*/React.createElement(TableHead, {
     sx: {

@@ -694,18 +694,13 @@
 
     }, [state === null || state === void 0 ? void 0 : state.rows, state === null || state === void 0 ? void 0 : state.itemTransfert]);
     return /*#__PURE__*/React__default["default"].createElement(material.TableContainer, {
-      component: material.Paper,
-      sx: {
-        minHeight: (options === null || options === void 0 ? void 0 : options.minHeight) || 540,
-        maxHeight: (options === null || options === void 0 ? void 0 : options.maxHeight) || 540
-      }
+      component: material.Paper
     }, /*#__PURE__*/React__default["default"].createElement(material.Table, {
       size: "small",
       "aria-label": "simple table",
       stickyHeader: true,
       sx: {
-        minWidth: (options === null || options === void 0 ? void 0 : options.minWidth) || 650,
-        maxWidth: (options === null || options === void 0 ? void 0 : options.maxWidth) || 650
+        minWidth: (options === null || options === void 0 ? void 0 : options.minWidth) || 650
       }
     }, /*#__PURE__*/React__default["default"].createElement(material.TableHead, {
       sx: {
@@ -1095,7 +1090,6 @@
     return /*#__PURE__*/React__default["default"].createElement(StyledTableContainer, {
       component: material.Paper,
       sx: {
-        minHeight: (options === null || options === void 0 ? void 0 : options.minHeight) || 540,
         maxHeight: (options === null || options === void 0 ? void 0 : options.maxHeight) || 540
       }
     }, /*#__PURE__*/React__default["default"].createElement(material.Table, {
@@ -1103,8 +1097,7 @@
       "aria-label": "simple table",
       stickyHeader: true,
       sx: {
-        minWidth: (options === null || options === void 0 ? void 0 : options.minWidth) || 650,
-        maxWidth: (options === null || options === void 0 ? void 0 : options.maxWidth) || 650
+        minWidth: options.minWidth || 540
       }
     }, /*#__PURE__*/React__default["default"].createElement(material.TableHead, {
       sx: {

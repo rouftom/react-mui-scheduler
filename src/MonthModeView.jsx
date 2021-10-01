@@ -216,20 +216,11 @@ function MonthModeView (props) {
   }, [state?.rows, state?.itemTransfert])
   
   return (
-    <TableContainer
-      component={Paper}
-      sx={{
-        minHeight: options?.minHeight || 540,
-        maxHeight: options?.maxHeight || 540
-      }}
-    >
+    <TableContainer component={Paper}>
       <Table
         size="small"
         aria-label="simple table"
-        stickyHeader sx={{
-          minWidth: options?.minWidth || 650,
-          maxWidth: options?.maxWidth || 650
-        }}
+        stickyHeader sx={{ minWidth: options?.minWidth || 650 }}
       >
         <TableHead sx={{height: 24}}>
           <StyledTableRow>
