@@ -4,12 +4,14 @@ import { Grid, Paper, Fade, Zoom } from "@mui/material"
 import {ThemeProvider} from "@mui/system"
 import { useTheme } from '@mui/material/styles'
 import {
-  format, getDaysInMonth, getDay, sub, startOfMonth, isSameDay, parse,
-  add, startOfDay, startOfWeek, getWeeksInMonth
+  format, getDaysInMonth, getDay, sub, startOfMonth, parse,
+  add, startOfDay, startOfWeek, getWeeksInMonth, isSameDay
 } from 'date-fns'
 import SchedulerToolbar from "./Toolbar.jsx"
 import MonthModeView from "./MonthModeView.jsx"
 import WeekModeView from "./WeekModeView.jsx"
+import DayModeView from "./DayModeView.jsx"
+import TimeLineModeView from "./TimeLineModeView.jsx"
 
 
 /**
@@ -25,7 +27,6 @@ function Scheduler(props) {
     onCellClick,
     onTaskClick,
     onEventsChange,
-    alertMessage,
     alertProps,
     onAlertCloseButtonClicked,
     toolbarProps
@@ -35,6 +36,7 @@ function Scheduler(props) {
   const TransitionMode = options?.transitionMode === 'zoom' ? Zoom : Fade
   
   const [state, setState] = useState({})
+  const [alrtProps, setAlrtProps] = useState(alertProps)
   const [searchResult, setSearchResult] = useState()
   const [mode, setMode] = useState(options?.defaultMode || 'month')
   const [selectedDay, setSelectedDay] = useState(today)
@@ -227,6 +229,54 @@ function Scheduler(props) {
     return data
   }
   
+  const getDayHeader = () => ([{
+    date: selectedDay,
+    weekDay: format(selectedDay, 'iii'),
+    day: format(selectedDay, 'dd'),
+    month: format(selectedDay, 'MM')
+  }])
+  
+  const getDayRows = () => {
+    const HOURS = 24
+    let data = []
+    let dayStartHour = startOfDay(selectedDay)
+    
+    for (let i = 0; i <= HOURS; i++) {
+      let id = `line_${i}`
+      let label = format(dayStartHour, 'HH:mm aaa')
+      
+      if (i > 0) {
+        let obj = { id: id, label: label, days: [] }
+        let columns = getDayHeader()
+        let column = columns[0]
+        let matchedEvents = events.filter((event) => {
+          let eventDate = parse(event?.date, 'yyyy-MM-dd', new Date())
+          return (
+            isSameDay(column?.date, eventDate) &&
+            event?.startHour?.toUpperCase() === label?.toUpperCase()
+          )
+        })
+        obj.days.push({
+          id: `column-_m-${column?.month}_d-${column?.day}_${id}`,
+          date: column?.date,
+          data: matchedEvents
+        })
+        
+        data.push(obj)
+        dayStartHour = add(dayStartHour, {minutes: 60})
+      }
+    }
+    return data
+  }
+  
+  
+  const getTimeLineRows = () => (
+    events.filter((event) => {
+      let eventDate = parse(event?.date, 'yyyy-MM-dd', new Date())
+      return isSameDay(selectedDay, eventDate)
+    })
+  )
+  
   /**
    * @name handleDateChange
    * @description
@@ -260,14 +310,39 @@ function Scheduler(props) {
     setSearchResult(item)
   }
   
+  const handleEventsChange = async (item) => {
+    onEventsChange(item)
+    let eventIndex = events.findIndex(e => e.id === item?.id)
+    if (eventIndex !== -1) {
+      let oldObject = Object.assign({}, events[eventIndex])
+      if (alrtProps?.showNotification && !alrtProps.open) {
+        setAlrtProps({
+          ...alrtProps,
+          open: true,
+          message: `
+            ${item?.label} successfully moved from ${oldObject?.date}
+            ${oldObject?.startHour} to ${item?.date} ${item?.startHour}
+          `
+        })
+        setTimeout(() => {
+          setAlrtProps({ ...alrtProps, open: false, message: '' })
+        }, alrtProps.delay)
+      }
+    }
+  }
+  
   useEffect(() => {
-    if (mode) {
-      if (mode === 'month') {
-        setState({columns: getMonthHeader(), rows: getMonthRows()})
-      }
-      if (mode === 'week') {
-        setState({columns: getWeekHeader(), rows: getWeekRows()})
-      }
+    if (mode === 'month') {
+      setState({...state, columns: getMonthHeader(), rows: getMonthRows()})
+    }
+    if (mode === 'week') {
+      setState({...state, columns: getWeekHeader(), rows: getWeekRows()})
+    }
+    if (mode === 'day') {
+      setState({...state, columns: getDayHeader(), rows: getDayRows()})
+    }
+    if (mode === 'timeline') {
+      setState({...state, columns: getDayHeader(), rows: getTimeLineRows()})
     }
     // eslint-disable-next-line
   }, [daysInMonth, selectedDay, selectedDate, mode])
@@ -279,8 +354,7 @@ function Scheduler(props) {
           today={today}
           events={events}
           switchMode={mode}
-          alertProps={alertProps}
-          alertMessage={alertMessage}
+          alertProps={alrtProps}
           toolbarProps={toolbarProps}
           onDateChange={handleDateChange}
           onModeChange={handleModeChange}
@@ -300,7 +374,7 @@ function Scheduler(props) {
                 onCellClick={onCellClick}
                 searchResult={searchResult}
                 onDateChange={handleDateChange}
-                onEventsChange={onEventsChange}
+                onEventsChange={handleEventsChange}
               />
             </Grid>
           </TransitionMode>}
@@ -308,6 +382,40 @@ function Scheduler(props) {
           <TransitionMode in>
             <Grid item xs={12}>
               <WeekModeView
+                events={events}
+                options={options}
+                date={selectedDate}
+                rows={state?.rows}
+                columns={state?.columns}
+                onTaskClick={onTaskClick}
+                onCellClick={onCellClick}
+                searchResult={searchResult}
+                onDateChange={handleDateChange}
+                onEventsChange={handleEventsChange}
+              />
+            </Grid>
+          </TransitionMode>}
+          {mode === 'day' &&
+          <TransitionMode in>
+            <Grid item xs={12}>
+              <DayModeView
+                events={events}
+                options={options}
+                date={selectedDate}
+                rows={state?.rows}
+                columns={state?.columns}
+                onTaskClick={onTaskClick}
+                onCellClick={onCellClick}
+                searchResult={searchResult}
+                onDateChange={handleDateChange}
+                onEventsChange={handleEventsChange}
+              />
+            </Grid>
+          </TransitionMode>}
+          {mode === 'timeline' &&
+          <TransitionMode in>
+            <Grid item xs={12}>
+              <TimeLineModeView
                 events={events}
                 options={options}
                 date={selectedDate}

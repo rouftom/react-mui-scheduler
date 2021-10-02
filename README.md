@@ -1,6 +1,6 @@
 
 <h1 align="center">📅 React Material Scheduler</h1>
-<p align="center">developed with <a target="_blank" href="https://mui.com">@mui</a> </p>
+<p align="center">developed with <a target="_blank" href="https://mui.com">@mui v5</a> </p>
 
 <p align="center">
   <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue.svg">
@@ -31,6 +31,10 @@ function App() {
       transitionMode: "zoom", // or fade
       startWeekOn: "Mon",     // or Sun
       defaultMode: "week",    // or month
+      minWidth: 540,
+      maxWidth: 540,
+      minHeight: 540,
+      maxHeight: 540
     },
     alertProps: {
       open: true,
@@ -38,6 +42,8 @@ function App() {
       severity: "info",       // info | success | warning | error
       message: "🚀 Let's start with awesome react-mui-scheduler 🔥 🔥 🔥" ,
       showActionButton: true,
+       showNotification: true,
+      delay: 1500
     },
     toolbarProps: {
       showSearchBar: true,
@@ -49,7 +55,7 @@ function App() {
   const events = [
     {
       id: "event-1",
-      label: "Consultation médicale",
+      label: "Medical consultation",
       groupLabel: "Dr Shaun Murphy",
       user: "Dr Shaun Murphy",
       color: "#f28f6a",
@@ -61,7 +67,7 @@ function App() {
     },
     {
       id: "event-2",
-      label: "Consultation médicale",
+      label: "Medical consultation",
       groupLabel: "Dr Claire Brown",
       user: "Dr Claire Brown",
       color: "#099ce5",
@@ -73,7 +79,7 @@ function App() {
     },
     {
       id: "event-3",
-      label: "Consultation médicale",
+      label: "Medical consultation",
       groupLabel: "Dr Menlendez Hary",
       user: "Dr Menlendez Hary",
       color: "#263686",
@@ -159,10 +165,8 @@ ReactDOM.render(<App />, document.querySelector('#yourComponentRootId'))
 
 ## 🔥 Some features to add in next releases
 
-- ✅ Week mode switch view
+- ✅ Week, day and timeline mode switch view
   
-- 👉 Day mode switch view
-
 - 👉 Option menu 
 
 - 👉 Export events as PDF and CSV

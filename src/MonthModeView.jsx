@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import { format } from 'date-fns'
 import {styled} from "@mui/system"
@@ -125,8 +125,7 @@ function MonthModeView (props) {
             let itemIndexToRemove = prevDayEvents?.data?.findIndex(i => i.id === transfert.item.id)
             
             if (itemIndexToRemove === undefined || itemIndexToRemove === -1) {
-              console.log(prevDayEvents)
-              return console.log("item to remove is not found")
+              return
             }
             
             prevDayEvents?.data?.splice(itemIndexToRemove, 1)
@@ -134,6 +133,7 @@ function MonthModeView (props) {
             transfert.item.date = format(day?.date, 'yyyy-MM-dd')
             day.data.push(transfert.item)
             setState({...state, rows: rowsCopy, itemTransfert: null, transfertTarget: null})
+            onEventsChange(transfert.item)
           }
         }
       }
@@ -207,13 +207,6 @@ function MonthModeView (props) {
     event.stopPropagation()
     onTaskClick(event, task)
   }
-  
-  useEffect(() => {
-    if (state?.rows) {
-      onEventsChange(Object.assign({}, state?.itemTransfert?.item))
-    }
-    // eslint-disable-next-line
-  }, [state?.rows, state?.itemTransfert])
   
   return (
     <TableContainer component={Paper}>

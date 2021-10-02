@@ -15,7 +15,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     borderTop: `1px solid #ccc !important`,
     borderBottom: `1px solid #ccc !important`,
     borderLeft: `1px solid #ccc !important`,
-    "&:nth-of-type(1)": { borderLeft: `0px !important` }
+    "&:nth-of-type(1)": {
+      borderLeft: `0px !important`
+    }
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 12,
@@ -24,14 +26,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     maxWidth: 128,
     cursor: 'pointer',
     borderLeft: `1px solid #ccc`,
-    "&:nth-of-type(1)": {
-      width: 80,
-      maxWidth: 80,
-    },
-    "&:nth-of-type(8n+1)": { borderLeft: 0 },
-    "&:nth-of-type(even)": {
-      //backgroundColor: theme.palette.action.hover
-    },
+    "&:nth-of-type(1)": { borderLeft: 0 }
   },
   [`&.${tableCellClasses.body}:hover`]: {
     backgroundColor: "#eee"
@@ -67,7 +62,7 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
   }
 }))
 
-function WeekModeView (props) {
+function DayModeView (props) {
   const {
     options, columns, rows, searchResult, onTaskClick, onCellClick, onEventsChange
   } = props
@@ -246,7 +241,10 @@ function WeekModeView (props) {
   }
   
   return (
-    <StyledTableContainer component={Paper} sx={{ maxHeight: options?.maxHeight || 540 }}>
+    <StyledTableContainer
+      component={Paper}
+      sx={{ maxHeight: options?.maxHeight || 540 }}
+    >
       <Table
         size="small"
         aria-label="simple table"
@@ -258,7 +256,7 @@ function WeekModeView (props) {
             {
               columns?.map((column, index) => (
                 <StyledTableCell
-                  align="center"
+                  align="center" colSpan={2}
                   key={`weekday-${column?.day}-${index}`}
                 >
                   {column?.weekDay} {column?.month}/{column?.day}
@@ -281,10 +279,8 @@ function WeekModeView (props) {
                     title={`${lineTasks} event${lineTasks > 1 ? 's' : ''} on this week timeline`}
                   >
                     <StyledTableCell
-                      scope="row"
-                      align="center"
-                      component="th"
-                      sx={{px: 1}}
+                      scope="row" align="center"
+                      component="th" sx={{px: 1}}
                       onClick={(event) => handleCellClick(event, row)}
                     >
                       <Typography variant="body2">{row?.label}</Typography>
@@ -298,12 +294,8 @@ function WeekModeView (props) {
                         scope="row"
                         align="center"
                         component="th"
-                        sx={{
-                          px: .3, py: .5,
-                          //backgroundColor: (
-                          //  state?.activeItem?.id === day?.id ? theme.palette.action.hover : 'inherit'
-                          //)
-                        }}
+                        colSpan={2}
+                        sx={{ px: .3, py: .5 }}
                         onDragEnd={onCellDragEnd}
                         onDragOver={onCellDragOver}
                         onDragEnter={e => onCellDragEnter(e, row?.label, rowIndex, dayIndex)}
@@ -325,7 +317,7 @@ function WeekModeView (props) {
   )
 }
 
-WeekModeView.propTypes = {
+DayModeView.propTypes = {
   events: PropTypes.array,
   columns: PropTypes.array,
   rows: PropTypes.array,
@@ -338,8 +330,8 @@ WeekModeView.propTypes = {
   onEventsChange: PropTypes.func.isRequired
 }
 
-WeekModeView.defaultProps = {
+DayModeView.defaultProps = {
 
 }
 
-export default WeekModeView
+export default DayModeView

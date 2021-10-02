@@ -118,7 +118,7 @@ function SchedulerToolbar (props) {
    */
   const handleChangeDate = (method) => {
     if (typeof method !== 'function') return
-    let options = mode === 'month' ? {months: 1} : {weeks: 1}
+    let options = mode === 'month' ? {months: 1} : mode === 'week' ? {weeks: 1} : {days: 1}
     let newDate = method(selectedDate, options)
     setDaysInMonth(getDaysInMonth(newDate))
     setSelectedDate(newDate)
@@ -226,7 +226,7 @@ function SchedulerToolbar (props) {
             aria-label="text button group"
             onChange={(e, newMode) => { setMode(newMode) }}
           >
-            {['month', 'week'].map(tb => (
+            {['month', 'week', 'day', 'timeline'].map(tb => (
               <ToggleButton key={tb} value={tb}>{tb}</ToggleButton>
             ))}
           </ToggleButtonGroup>}
@@ -259,15 +259,13 @@ function SchedulerToolbar (props) {
           <Typography variant="body2">Settings</Typography>
         </MenuItem>
       </Menu>
-      {alertProps?.open &&
-      <Typography component="div" sx={{mt: 1}}>
-        <Collapse in>
-          <Alert
-            color={alertProps?.color}
-            severity={alertProps?.severity}
-            sx={{borderRadius: 0, mb: 0}}
-            action={
-              alertProps?.showActionButton ?
+      <Collapse in={alertProps?.open}>
+        <Alert
+          color={alertProps?.color}
+          severity={alertProps?.severity}
+          sx={{borderRadius: 0, mb: 0}}
+          action={
+            alertProps?.showActionButton ?
               <IconButton
                 aria-label="close"
                 color="inherit"
@@ -276,12 +274,11 @@ function SchedulerToolbar (props) {
               >
                 <CloseIcon fontSize="inherit" />
               </IconButton> : null
-            }
-          >
-            {alertProps?.message}
-          </Alert>
-        </Collapse>
-      </Typography>}
+          }
+        >
+          {alertProps?.message}
+        </Alert>
+      </Collapse>
     </Toolbar>
   )
 }
