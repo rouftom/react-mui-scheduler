@@ -44,7 +44,7 @@ function TimeLineModeView (props) {
   const handleTaskClick = (event, task) => {
     event.preventDefault()
     event.stopPropagation()
-    onTaskClick(event, task)
+    onTaskClick && onTaskClick(event, task)
   }
   
   let fileredEvents = rows?.sort((a, b) => -b?.groupLabel?.localeCompare(a?.groupLabel))
@@ -68,6 +68,7 @@ function TimeLineModeView (props) {
           return (
             <TimelineItem
               key={`timeline-${index}`}
+              sx={{cursor: 'pointer'}}
               onClick={event => handleTaskClick(event, task)}
             >
               <TimelineOppositeContent

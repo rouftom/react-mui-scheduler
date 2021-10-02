@@ -133,7 +133,7 @@ function MonthModeView (props) {
             transfert.item.date = format(day?.date, 'yyyy-MM-dd')
             day.data.push(transfert.item)
             setState({...state, rows: rowsCopy, itemTransfert: null, transfertTarget: null})
-            onEventsChange(transfert.item)
+            onEventsChange && onEventsChange(transfert.item)
           }
         }
       }
@@ -151,7 +151,7 @@ function MonthModeView (props) {
   const handleCellClick = (event, row, day) => {
     event.preventDefault()
     event.stopPropagation()
-    if (day?.data?.length === 0) {
+    if (day?.data?.length === 0 && onCellClick) {
       onCellClick(event, row, day)
     }
   }
@@ -205,7 +205,7 @@ function MonthModeView (props) {
   const handleTaskClick = (event, task) => {
     event.preventDefault()
     event.stopPropagation()
-    onTaskClick(event, task)
+    onTaskClick && onTaskClick(event, task)
   }
   
   return (

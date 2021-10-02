@@ -23,7 +23,7 @@ function ToolbarSearchbar (props) {
   
   const handleOnChange = (event, newValue) => {
     setValue(newValue)
-    onInputChange(newValue)
+    onInputChange && onInputChange(newValue)
   }
   
   return (

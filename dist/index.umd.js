@@ -67,8 +67,7 @@
 
     var handleOnChange = function handleOnChange(event, newValue) {
       setValue(newValue);
-
-      _onInputChange(newValue);
+      _onInputChange && _onInputChange(newValue);
     };
 
     return /*#__PURE__*/React__default["default"].createElement(StyledAutoComplete, {
@@ -262,17 +261,21 @@
       setSelectedDate(newDate);
     };
 
+    var handleCloseAlert = function handleCloseAlert(e) {
+      onAlertCloseButtonClicked && onAlertCloseButtonClicked(e);
+    };
+
     React.useEffect(function () {
-      if (mode) {
+      if (mode && onModeChange) {
         onModeChange(mode);
       } // eslint-disable-next-line
 
     }, [mode]);
     React.useEffect(function () {
-      onDateChange(daysInMonth, selectedDate); // eslint-disable-next-line
+      onDateChange && onDateChange(daysInMonth, selectedDate); // eslint-disable-next-line
     }, [daysInMonth, selectedDate]);
     React.useEffect(function () {
-      onSearchResult(searchResult); // eslint-disable-next-line
+      onSearchResult && onSearchResult(searchResult); // eslint-disable-next-line
     }, [searchResult]);
     return /*#__PURE__*/React__default["default"].createElement(material.Toolbar, {
       variant: "dense",
@@ -408,7 +411,7 @@
         "aria-label": "close",
         color: "inherit",
         size: "small",
-        onClick: onAlertCloseButtonClicked
+        onClick: handleCloseAlert
       }, /*#__PURE__*/React__default["default"].createElement(CloseIcon__default["default"], {
         fontSize: "inherit"
       })) : null
@@ -611,7 +614,7 @@
                 itemTransfert: null,
                 transfertTarget: null
               }));
-              onEventsChange(transfert.item);
+              onEventsChange && onEventsChange(transfert.item);
             }
           }
         }
@@ -633,7 +636,7 @@
       event.preventDefault();
       event.stopPropagation();
 
-      if ((day === null || day === void 0 ? void 0 : (_day$data = day.data) === null || _day$data === void 0 ? void 0 : _day$data.length) === 0) {
+      if ((day === null || day === void 0 ? void 0 : (_day$data = day.data) === null || _day$data === void 0 ? void 0 : _day$data.length) === 0 && onCellClick) {
         onCellClick(event, row, day);
       }
     };
@@ -689,7 +692,7 @@
     var handleTaskClick = function handleTaskClick(event, task) {
       event.preventDefault();
       event.stopPropagation();
-      onTaskClick(event, task);
+      onTaskClick && onTaskClick(event, task);
     };
 
     return /*#__PURE__*/React__default["default"].createElement(material.TableContainer, {
@@ -972,7 +975,7 @@
         setState(_objectSpread$2(_objectSpread$2({}, state), {}, {
           rows: rowsData
         }));
-        onEventsChange(transfert === null || transfert === void 0 ? void 0 : transfert.item);
+        onEventsChange && onEventsChange(transfert === null || transfert === void 0 ? void 0 : transfert.item);
       }
     };
     /**
@@ -989,7 +992,7 @@
       event.preventDefault();
       event.stopPropagation(); //setState({...state, activeItem: day})
 
-      onCellClick(event, row, day);
+      onCellClick && onCellClick(event, row, day);
     };
     /**
      * @name renderTask
@@ -1044,7 +1047,7 @@
     var handleTaskClick = function handleTaskClick(event, task) {
       event.preventDefault();
       event.stopPropagation();
-      onTaskClick(event, task);
+      onTaskClick && onTaskClick(event, task);
     };
 
     return /*#__PURE__*/React__default["default"].createElement(StyledTableContainer$1, {
@@ -1349,7 +1352,7 @@
         setState(_objectSpread$1(_objectSpread$1({}, state), {}, {
           rows: rowsData
         }));
-        onEventsChange(transfert === null || transfert === void 0 ? void 0 : transfert.item);
+        onEventsChange && onEventsChange(transfert === null || transfert === void 0 ? void 0 : transfert.item);
       }
     };
     /**
@@ -1366,7 +1369,7 @@
       event.preventDefault();
       event.stopPropagation(); //setState({...state, activeItem: day})
 
-      onCellClick(event, row, day);
+      onCellClick && onCellClick(event, row, day);
     };
     /**
      * @name renderTask
@@ -1421,7 +1424,7 @@
     var handleTaskClick = function handleTaskClick(event, task) {
       event.preventDefault();
       event.stopPropagation();
-      onTaskClick(event, task);
+      onTaskClick && onTaskClick(event, task);
     };
 
     return /*#__PURE__*/React__default["default"].createElement(StyledTableContainer, {
@@ -1562,7 +1565,7 @@
     var handleTaskClick = function handleTaskClick(event, task) {
       event.preventDefault();
       event.stopPropagation();
-      onTaskClick(event, task);
+      onTaskClick && onTaskClick(event, task);
     };
 
     var fileredEvents = rows === null || rows === void 0 ? void 0 : rows.sort(function (a, b) {
@@ -1591,6 +1594,9 @@
     }, fileredEvents && ((_fileredEvents2 = fileredEvents) === null || _fileredEvents2 === void 0 ? void 0 : _fileredEvents2.map(function (task, index) {
       return /*#__PURE__*/React__default["default"].createElement(TimelineItem__default["default"], {
         key: "timeline-".concat(index),
+        sx: {
+          cursor: 'pointer'
+        },
         onClick: function onClick(event) {
           return handleTaskClick(event, task);
         }

@@ -169,7 +169,7 @@ function DayModeView (props) {
       transfert.item.date = format(day?.date, 'yyyy-MM-dd')
       day.data.push(transfert.item)
       setState({...state, rows: rowsData})
-      onEventsChange(transfert?.item)
+      onEventsChange && onEventsChange(transfert?.item)
     }
   }
   
@@ -185,7 +185,7 @@ function DayModeView (props) {
     event.preventDefault()
     event.stopPropagation()
     //setState({...state, activeItem: day})
-    onCellClick(event, row, day)
+    onCellClick && onCellClick(event, row, day)
   }
   
   /**
@@ -237,7 +237,7 @@ function DayModeView (props) {
   const handleTaskClick = (event, task) => {
     event.preventDefault()
     event.stopPropagation()
-    onTaskClick(event, task)
+    onTaskClick && onTaskClick(event, task)
   }
   
   return (

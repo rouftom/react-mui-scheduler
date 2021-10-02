@@ -124,18 +124,22 @@ function SchedulerToolbar (props) {
     setSelectedDate(newDate)
   }
   
+  const handleCloseAlert = (e) => {
+    onAlertCloseButtonClicked && onAlertCloseButtonClicked(e)
+  }
+  
   useEffect(() => {
-    if (mode) { onModeChange(mode) }
+    if (mode && onModeChange) { onModeChange(mode) }
     // eslint-disable-next-line
   }, [mode])
   
   useEffect(() => {
-    onDateChange(daysInMonth, selectedDate)
+    onDateChange && onDateChange(daysInMonth, selectedDate)
     // eslint-disable-next-line
   }, [daysInMonth, selectedDate])
   
   useEffect(() => {
-    onSearchResult(searchResult)
+    onSearchResult && onSearchResult(searchResult)
     // eslint-disable-next-line
   }, [searchResult])
   
@@ -270,7 +274,7 @@ function SchedulerToolbar (props) {
                 aria-label="close"
                 color="inherit"
                 size="small"
-                onClick={onAlertCloseButtonClicked}
+                onClick={handleCloseAlert}
               >
                 <CloseIcon fontSize="inherit" />
               </IconButton> : null
