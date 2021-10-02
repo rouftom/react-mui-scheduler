@@ -117,10 +117,6 @@ function App() {
   
   const handleAlertCloseButtonClicked = (item) => {
     // Do something...
-    setState({
-      ...state, 
-      alertProps: {...state.alertProps, open: false}
-    })
   }
   
   return (
