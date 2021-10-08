@@ -47,7 +47,7 @@ function TimeLineModeView (props) {
     onTaskClick && onTaskClick(event, task)
   }
   
-  let fileredEvents = rows?.sort((a, b) => -b?.groupLabel?.localeCompare(a?.groupLabel))
+  let fileredEvents = rows?.sort((a, b) => -b?.startHour?.localeCompare(a?.startHour))
   if (searchResult) {
     fileredEvents = fileredEvents?.filter(
       event => event?.groupLabel === searchResult?.groupLabel
@@ -92,7 +92,7 @@ function TimeLineModeView (props) {
                 <TimelineConnector />
               </TimelineSeparator>
               <TimelineContent sx={{ py: '12px', px: 2 }}>
-                <Typography variant="h6" component="span">
+                <Typography variant="body1" component="span">
                   {task?.label}
                 </Typography>
                 <Typography>{task?.groupLabel}</Typography>

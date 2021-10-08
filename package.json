@@ -1,11 +1,8 @@
 {
   "name": "react-mui-scheduler",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "📅 React mui scheduler is a react component based on @mui v5 that allows you to manage data in a calendar",
   "main": "dist/index.esm.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "build": "rollup -c"
   },
@@ -14,7 +11,8 @@
     "material",
     "scheduler",
     "material-ui",
-    "mui"
+    "mui",
+    "calendar"
   ],
   "author": "rouftom",
   "license": "MIT",
@@ -25,10 +23,6 @@
   "homepage": "https://github.com/rouftom/react-mui-scheduler#readme",
   "bugs": {
     "url": "https://github.com/rouftom/react-mui-scheduler/issues"
-  },
-  "peerDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
   },
   "dependencies": {
     "@emotion/styled": "^11.3.0",

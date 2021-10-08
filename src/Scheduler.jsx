@@ -361,7 +361,12 @@ function Scheduler(props) {
           onSearchResult={onSearchResult}
           onAlertCloseButtonClicked={onAlertCloseButtonClicked}
         />
-        <Grid container spacing={0} alignItems="center" justifyContent="center">
+        <Grid
+          container
+          spacing={0}
+          alignItems="center"
+          justifyContent="start"
+        >
           {mode === 'month' &&
           <TransitionMode in>
             <Grid item xs={12}>
@@ -412,8 +417,10 @@ function Scheduler(props) {
               />
             </Grid>
           </TransitionMode>}
-          {mode === 'timeline' &&
-          <TransitionMode in>
+        </Grid>
+        {mode === 'timeline' &&
+        <TransitionMode in>
+          <Grid container spacing={2} alignItems="start">
             <Grid item xs={12}>
               <TimeLineModeView
                 events={events}
@@ -428,8 +435,8 @@ function Scheduler(props) {
                 onEventsChange={onEventsChange}
               />
             </Grid>
-          </TransitionMode>}
-        </Grid>
+          </Grid>
+        </TransitionMode>}
       </Paper>
     </ThemeProvider>
   )

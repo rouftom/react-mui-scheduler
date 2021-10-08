@@ -4,7 +4,7 @@ import _slicedToArray from '@babel/runtime/helpers/slicedToArray';
 import _regeneratorRuntime from '@babel/runtime/regenerator';
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Autocomplete, Box, TextField, Toolbar, Typography, Hidden, IconButton, Button, Menu, ToggleButtonGroup, ToggleButton, MenuItem, ListItemIcon, Divider, Collapse, Alert, TableCell, tableCellClasses, TableRow, TableContainer, Paper, Table, TableHead, TableBody, Tooltip, Zoom, Fade, Grid } from '@mui/material';
+import { Autocomplete, Box, TextField, Toolbar, Grid, Typography, Hidden, IconButton, Button, Menu, ToggleButtonGroup, ToggleButton, MenuItem, ListItemIcon, Divider, Collapse, Alert, Paper, TableCell, tableCellClasses, TableRow, TableContainer, Table, TableHead, TableBody, Tooltip, Zoom, Fade } from '@mui/material';
 import { styled as styled$1, ThemeProvider } from '@mui/system';
 import { styled, useTheme } from '@mui/material/styles';
 import { format, parse, getDaysInMonth, sub, add, differenceInMinutes, isValid, isSameDay, getWeeksInMonth, startOfMonth, getDay, startOfWeek, startOfDay } from 'date-fns';
@@ -22,6 +22,7 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import GridViewIcon from '@mui/icons-material/GridView';
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
 import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';
@@ -36,16 +37,23 @@ function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if 
 
 function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var StyledAutoComplete = styled(Autocomplete)(function (_ref) {
+  var _ref2;
+
   var theme = _ref.theme;
-  return _defineProperty({
+  return _ref2 = {
     color: 'inherit',
-    minWidth: '20ch',
+    width: '94%',
     display: 'inline-flex',
     margin: theme.spacing(.5, 1.5),
     transition: theme.transitions.create('width')
-  }, theme.breakpoints.up('sm'), {
-    width: '30ch'
-  });
+  }, _defineProperty(_ref2, theme.breakpoints.up('sm'), {
+    //minWidth: '20ch',
+    width: '100%'
+  }), _defineProperty(_ref2, theme.breakpoints.up('md'), {
+    width: '25ch'
+  }), _defineProperty(_ref2, theme.breakpoints.up('lg'), {
+    width: '25ch'
+  }), _ref2;
 });
 
 function ToolbarSearchbar(props) {
@@ -277,42 +285,46 @@ function SchedulerToolbar(props) {
   return /*#__PURE__*/React.createElement(Toolbar, {
     variant: "dense",
     sx: {
-      display: 'contents',
-      alignItems: 'center'
+      px: '0px !important',
+      display: 'block'
     }
-  }, /*#__PURE__*/React.createElement(Typography, {
-    component: "div",
-    sx: {
-      m: .5,
-      display: 'flex',
-      alignItems: 'center'
-    }
+  }, /*#__PURE__*/React.createElement(Grid, {
+    container: true,
+    spacing: 0,
+    alignItems: "center",
+    justifyContent: "flex-end"
+  }, /*#__PURE__*/React.createElement(Grid, {
+    item: true,
+    xs: 1,
+    sm: true,
+    md: true
   }, toolbarProps.showDatePicker && /*#__PURE__*/React.createElement(Typography, {
     component: "div",
     sx: {
-      flexGrow: 1
+      display: 'flex'
     }
   }, /*#__PURE__*/React.createElement(Hidden, {
     smDown: true
   }, /*#__PURE__*/React.createElement(IconButton, _extends({
     sx: {
-      ml: 0
+      ml: 0,
+      mr: -.1
     }
   }, commonIconButtonProps, {
     onClick: function onClick() {
       return handleChangeDate(sub);
     }
   }), /*#__PURE__*/React.createElement(ChevronLeftIcon, null)), /*#__PURE__*/React.createElement(Button, {
-    size: "medium",
+    size: "small",
     id: "basic-button",
-    "aria-haspopup": "true",
-    endIcon: /*#__PURE__*/React.createElement(TodayIcon, null),
+    "aria-haspopup": "true" //endIcon={<TodayIcon />}
+    ,
     "aria-controls": "basic-menu",
     onClick: handleOpenDateSelector,
     "aria-expanded": openDateSelector ? 'true' : undefined
   }, format(selectedDate, mode === 'month' ? 'MMMM-yyyy' : 'PPP')), /*#__PURE__*/React.createElement(IconButton, _extends({
     sx: {
-      ml: .5
+      ml: .2
     }
   }, commonIconButtonProps, {
     onClick: function onClick() {
@@ -320,7 +332,13 @@ function SchedulerToolbar(props) {
     }
   }), /*#__PURE__*/React.createElement(ChevronRightIcon, null))), /*#__PURE__*/React.createElement(Hidden, {
     smUp: true
-  }, /*#__PURE__*/React.createElement(IconButton, _extends({}, commonIconButtonProps, {
+  }, /*#__PURE__*/React.createElement(IconButton, _extends({
+    sx: {
+      ml: 0,
+      "aria-label": "menu"
+    }
+  }, commonIconButtonProps, {
+    size: "small",
     onClick: handleOpenDateSelector
   }), /*#__PURE__*/React.createElement(TodayIcon, null))), /*#__PURE__*/React.createElement(Menu, {
     id: "date-menu",
@@ -343,11 +361,13 @@ function SchedulerToolbar(props) {
     renderInput: function renderInput(params) {
       return /*#__PURE__*/React.createElement(TextField, params);
     }
-  })))), /*#__PURE__*/React.createElement(Typography, {
-    component: "div",
+  }))))), /*#__PURE__*/React.createElement(Grid, {
+    item: true,
+    xs: true,
+    sm: true,
+    md: true,
     sx: {
-      display: 'inline-flex',
-      alignItems: 'center'
+      textAlign: 'right'
     }
   }, (toolbarProps === null || toolbarProps === void 0 ? void 0 : toolbarProps.showSearchBar) && /*#__PURE__*/React.createElement(ToolbarSearchbar, {
     events: events,
@@ -357,11 +377,34 @@ function SchedulerToolbar(props) {
       setSelectedDate(newDate);
       setSearchResult(newValue);
     }
-  }), (toolbarProps === null || toolbarProps === void 0 ? void 0 : toolbarProps.showSwitchModeButtons) && /*#__PURE__*/React.createElement(ToggleButtonGroup, {
+  })), /*#__PURE__*/React.createElement(Grid, {
+    item: true,
+    xs: 1,
+    sm: 1,
+    md: true,
+    sx: {
+      textAlign: 'right'
+    }
+  }, /*#__PURE__*/React.createElement(Hidden, {
+    mdUp: true
+  }, /*#__PURE__*/React.createElement(IconButton, _extends({
+    sx: {
+      mr: 0,
+      "aria-label": "menu"
+    }
+  }, commonIconButtonProps, {
+    size: "small",
+    onClick: handleOpenDateSelector
+  }), /*#__PURE__*/React.createElement(GridViewIcon, null))), /*#__PURE__*/React.createElement(Hidden, {
+    mdDown: true
+  }, (toolbarProps === null || toolbarProps === void 0 ? void 0 : toolbarProps.showSwitchModeButtons) && /*#__PURE__*/React.createElement(ToggleButtonGroup, {
     exclusive: true,
     value: mode,
     size: "small",
     color: "primary",
+    sx: {
+      mr: 1.3
+    },
     "aria-label": "text button group",
     onChange: function onChange(e, newMode) {
       setMode(newMode);
@@ -371,7 +414,13 @@ function SchedulerToolbar(props) {
       key: tb,
       value: tb
     }, tb);
-  })))), /*#__PURE__*/React.createElement(Menu, {
+  })))), /*#__PURE__*/React.createElement(Grid, {
+    item: true,
+    xs: 12,
+    sx: {
+      mb: .5
+    }
+  }, /*#__PURE__*/React.createElement(Menu, {
     id: "menu-menu",
     open: openMenu,
     anchorEl: anchorMenuEl,
@@ -412,7 +461,7 @@ function SchedulerToolbar(props) {
     }, /*#__PURE__*/React.createElement(CloseIcon, {
       fontSize: "inherit"
     })) : null
-  }, alertProps === null || alertProps === void 0 ? void 0 : alertProps.message)));
+  }, alertProps === null || alertProps === void 0 ? void 0 : alertProps.message)))));
 }
 
 SchedulerToolbar.propTypes = {
@@ -440,6 +489,48 @@ SchedulerToolbar.defaultProps = {
     showDatePicker: true,
     showOptions: false
   }
+};
+
+function EventItem(props) {
+  var event = props.event,
+      rowId = props.rowId,
+      sx = props.sx,
+      boxSx = props.boxSx,
+      elevation = props.elevation,
+      isMonthMode = props.isMonthMode,
+      onClick = props.onClick,
+      onDragStart = props.onDragStart;
+  return /*#__PURE__*/React.createElement(Paper, {
+    sx: sx,
+    draggable: true,
+    onClick: onClick,
+    onDragStart: onDragStart,
+    elevation: elevation || 0,
+    key: "item-d-".concat(event === null || event === void 0 ? void 0 : event.id, "-").concat(rowId)
+  }, /*#__PURE__*/React.createElement(Box, {
+    sx: boxSx
+  }, isMonthMode && /*#__PURE__*/React.createElement(Typography, {
+    variant: "caption",
+    sx: {
+      fontSize: 10
+    }
+  }, event === null || event === void 0 ? void 0 : event.startHour), /*#__PURE__*/React.createElement(Typography, {
+    variant: "body2",
+    sx: {
+      fontSize: 11
+    }
+  }, event === null || event === void 0 ? void 0 : event.label)));
+}
+
+EventItem.propTypes = {
+  sx: PropTypes.object,
+  boxSx: PropTypes.object,
+  event: PropTypes.object.isRequired,
+  rowId: PropTypes.number,
+  isMonthMode: PropTypes.bool,
+  onClick: PropTypes.func,
+  handleTaskClick: PropTypes.func,
+  onCellDragStart: PropTypes.func
 };
 
 function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
@@ -650,13 +741,22 @@ function MonthModeView(props) {
     var tasks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var rowId = arguments.length > 1 ? arguments[1] : undefined;
     return tasks === null || tasks === void 0 ? void 0 : tasks.map(function (task, index) {
-      return (searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult) && /*#__PURE__*/React.createElement(Paper, {
-        draggable: true,
+      var condition = searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult;
+      return condition && /*#__PURE__*/React.createElement(EventItem, {
+        isMonthMode: true,
+        event: task,
+        rowId: rowId,
+        elevation: 0,
+        boxSx: {
+          px: 0.5
+        },
+        key: "item-d-".concat(task === null || task === void 0 ? void 0 : task.id, "-").concat(rowId),
         onClick: function onClick(e) {
           return handleTaskClick(e, task);
         },
-        key: "item-d-".concat(task === null || task === void 0 ? void 0 : task.id, "-").concat(rowId),
-        elevation: 0,
+        onDragStart: function onDragStart(e) {
+          return onCellDragStart(e, task, rowId);
+        },
         sx: {
           width: "100%",
           py: 0,
@@ -664,17 +764,8 @@ function MonthModeView(props) {
           color: "#fff",
           display: 'inline-flex',
           backgroundColor: (task === null || task === void 0 ? void 0 : task.color) || theme.palette.primary.light
-        },
-        onDragStart: function onDragStart(e) {
-          return onCellDragStart(e, task, rowId);
         }
-      }, /*#__PURE__*/React.createElement(Box, {
-        sx: {
-          px: 0.5
-        }
-      }, /*#__PURE__*/React.createElement(Typography, {
-        variant: "caption"
-      }, task === null || task === void 0 ? void 0 : task.label)));
+      });
     });
   };
   /**
@@ -1004,9 +1095,13 @@ function WeekModeView(props) {
 
   var renderTask = function renderTask(tasks, rowLabel, rowIndex, dayIndex) {
     return tasks === null || tasks === void 0 ? void 0 : tasks.map(function (task, itemIndex) {
-      return (searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult) && /*#__PURE__*/React.createElement(Paper, {
-        draggable: true,
+      var condition = searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult;
+      return condition && /*#__PURE__*/React.createElement(EventItem, {
+        event: task,
         elevation: 0,
+        boxSx: {
+          px: 0.3
+        },
         onClick: function onClick(e) {
           return handleTaskClick(e, task);
         },
@@ -1022,14 +1117,7 @@ function WeekModeView(props) {
           color: "#fff",
           backgroundColor: (task === null || task === void 0 ? void 0 : task.color) || theme.palette.primary.light
         }
-      }, /*#__PURE__*/React.createElement(Box, {
-        sx: {
-          px: 0.3
-        }
-      }, /*#__PURE__*/React.createElement(Typography, {
-        variant: "caption",
-        noWrap: true
-      }, task === null || task === void 0 ? void 0 : task.label)));
+      });
     });
   };
   /**
@@ -1381,9 +1469,14 @@ function DayModeView(props) {
 
   var renderTask = function renderTask(tasks, rowLabel, rowIndex, dayIndex) {
     return tasks === null || tasks === void 0 ? void 0 : tasks.map(function (task, itemIndex) {
-      return (searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult) && /*#__PURE__*/React.createElement(Paper, {
+      var condition = searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult;
+      return condition && /*#__PURE__*/React.createElement(EventItem, {
         draggable: true,
+        event: task,
         elevation: 0,
+        boxSx: {
+          px: 0.3
+        },
         onClick: function onClick(e) {
           return handleTaskClick(e, task);
         },
@@ -1399,14 +1492,7 @@ function DayModeView(props) {
           color: "#fff",
           backgroundColor: (task === null || task === void 0 ? void 0 : task.color) || theme.palette.primary.light
         }
-      }, /*#__PURE__*/React.createElement(Box, {
-        sx: {
-          px: 0.3
-        }
-      }, /*#__PURE__*/React.createElement(Typography, {
-        variant: "caption",
-        noWrap: true
-      }, task === null || task === void 0 ? void 0 : task.label)));
+      });
     });
   };
   /**
@@ -1566,9 +1652,9 @@ function TimeLineModeView(props) {
   };
 
   var fileredEvents = rows === null || rows === void 0 ? void 0 : rows.sort(function (a, b) {
-    var _b$groupLabel;
+    var _b$startHour;
 
-    return -(b === null || b === void 0 ? void 0 : (_b$groupLabel = b.groupLabel) === null || _b$groupLabel === void 0 ? void 0 : _b$groupLabel.localeCompare(a === null || a === void 0 ? void 0 : a.groupLabel));
+    return -(b === null || b === void 0 ? void 0 : (_b$startHour = b.startHour) === null || _b$startHour === void 0 ? void 0 : _b$startHour.localeCompare(a === null || a === void 0 ? void 0 : a.startHour));
   });
 
   if (searchResult) {
@@ -1617,7 +1703,7 @@ function TimeLineModeView(props) {
         px: 2
       }
     }, /*#__PURE__*/React.createElement(Typography, {
-      variant: "h6",
+      variant: "body1",
       component: "span"
     }, task === null || task === void 0 ? void 0 : task.label), /*#__PURE__*/React.createElement(Typography, null, task === null || task === void 0 ? void 0 : task.groupLabel)));
   }))));
@@ -2128,7 +2214,7 @@ function Scheduler(props) {
     container: true,
     spacing: 0,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "start"
   }, mode === 'month' && /*#__PURE__*/React.createElement(TransitionMode, {
     in: true
   }, /*#__PURE__*/React.createElement(Grid, {
@@ -2176,8 +2262,12 @@ function Scheduler(props) {
     searchResult: searchResult,
     onDateChange: handleDateChange,
     onEventsChange: handleEventsChange
-  }))), mode === 'timeline' && /*#__PURE__*/React.createElement(TransitionMode, {
+  })))), mode === 'timeline' && /*#__PURE__*/React.createElement(TransitionMode, {
     in: true
+  }, /*#__PURE__*/React.createElement(Grid, {
+    container: true,
+    spacing: 2,
+    alignItems: "start"
   }, /*#__PURE__*/React.createElement(Grid, {
     item: true,
     xs: 12

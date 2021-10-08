@@ -4,9 +4,10 @@ import {styled} from "@mui/system"
 import { useTheme } from '@mui/material/styles'
 import {
   Paper, Typography, Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, tableCellClasses, Box, Tooltip
+  TableHead, TableRow, tableCellClasses, Tooltip
 } from "@mui/material"
 import { format, parse, add, differenceInMinutes, isValid } from 'date-fns'
+import EventItem from "./EventItem.jsx"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -203,18 +204,21 @@ function WeekModeView (props) {
    * @return {unknown[] | undefined}
    */
   const renderTask = (tasks, rowLabel, rowIndex, dayIndex) => {
-    return tasks?.map((task, itemIndex) => (
-      (
+    return tasks?.map((task, itemIndex) => {
+      let condition = (
+        searchResult &&
         (
-          searchResult &&
-          (task?.groupLabel === searchResult?.groupLabel || task?.user === searchResult?.user)
-        ) || !searchResult
-      ) &&
-      (
-        <Paper
-          draggable
+          task?.groupLabel === searchResult?.groupLabel ||
+          task?.user === searchResult?.user
+        )
+      ) || !searchResult
+      return (
+        condition &&
+        <EventItem
+          event={task}
           elevation={0}
-          onClick={(e) => handleTaskClick(e, task)}
+          boxSx={{px: 0.3}}
+          onClick={e => handleTaskClick(e, task)}
           key={`item_id-${itemIndex}_r-${rowIndex}_d-${dayIndex}`}
           onDragStart={e => onCellDragStart(
             e, {...task, itemIndex}, rowLabel, rowIndex, dayIndex
@@ -223,13 +227,9 @@ function WeekModeView (props) {
             py: 0, mb: .5, color: "#fff",
             backgroundColor: task?.color || theme.palette.primary.light
           }}
-        >
-          <Box sx={{px: 0.3}}>
-            <Typography variant="caption" noWrap>{task?.label}</Typography>
-          </Box>
-        </Paper>
+        />
       )
-    ))
+    })
   }
   
   /**

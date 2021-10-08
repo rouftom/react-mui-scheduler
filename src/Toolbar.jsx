@@ -5,7 +5,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import {
   Typography, Toolbar, IconButton, Button, ToggleButton,
   TextField, Hidden, Alert, Collapse, ToggleButtonGroup,
-  Divider, ListItemIcon, Menu, MenuItem
+  Divider, ListItemIcon, Menu, MenuItem, Grid
 } from "@mui/material"
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import StaticDatePicker from '@mui/lab/StaticDatePicker'
@@ -20,6 +20,7 @@ import ArchiveIcon from '@mui/icons-material/Archive'
 import AutorenewIcon from '@mui/icons-material/Autorenew'
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline'
+import GridViewIcon from '@mui/icons-material/GridView'
 import ToolbarSearchbar from "./ToolbarSeachBar.jsx"
 
 
@@ -144,73 +145,76 @@ function SchedulerToolbar (props) {
   }, [searchResult])
   
   return (
-    <Toolbar
-      variant="dense"
-      sx={{display: 'contents', alignItems: 'center'}}
-    >
-      <Typography
-        component="div"
-        sx={{m: .5, display: 'flex', alignItems: 'center'}}
+    <Toolbar variant="dense" sx={{px: '0px !important', display: 'block'}}>
+      <Grid
+        container
+        spacing={0}
+        alignItems="center"
+        justifyContent="flex-end"
       >
-        {toolbarProps.showDatePicker &&
-        <Typography component="div" sx={{ flexGrow: 1 }}>
-          <Hidden smDown>
-            <IconButton
-              sx={{  ml: 0 }}
-              {...commonIconButtonProps}
-              onClick={() => handleChangeDate(sub)}
+        <Grid item xs={1} sm md>
+          {toolbarProps.showDatePicker &&
+          <Typography component="div" sx={{display: 'flex'}}>
+            <Hidden smDown>
+              <IconButton
+                sx={{  ml: 0, mr: -.1 }}
+                {...commonIconButtonProps}
+                onClick={() => handleChangeDate(sub)}
+              >
+                <ChevronLeftIcon />
+              </IconButton>
+              <Button
+                size="small"
+                id="basic-button"
+                aria-haspopup="true"
+                //endIcon={<TodayIcon />}
+                aria-controls="basic-menu"
+                onClick={handleOpenDateSelector}
+                aria-expanded={openDateSelector ? 'true' : undefined}
+              >
+                {format(selectedDate, mode === 'month' ? 'MMMM-yyyy' : 'PPP')}
+              </Button>
+              <IconButton
+                sx={{ ml: .2 }}
+                {...commonIconButtonProps}
+                onClick={() => handleChangeDate(add)}
+              >
+                <ChevronRightIcon />
+              </IconButton>
+            </Hidden>
+            <Hidden smUp>
+              <IconButton
+                sx={{ml: 0, "aria-label":"menu"}}
+                {...commonIconButtonProps}
+                size="small"
+                onClick={handleOpenDateSelector}
+              >
+                <TodayIcon />
+              </IconButton>
+            </Hidden>
+            <Menu
+              id="date-menu"
+              anchorEl={anchorDateEl}
+              open={openDateSelector}
+              onClose={handleCloseDateSelector}
+              MenuListProps={{'aria-labelledby': 'basic-button'}}
             >
-              <ChevronLeftIcon />
-            </IconButton>
-            <Button
-              size="medium"
-              id="basic-button"
-              aria-haspopup="true"
-              endIcon={<TodayIcon />}
-              aria-controls="basic-menu"
-              onClick={handleOpenDateSelector}
-              aria-expanded={openDateSelector ? 'true' : undefined}
-            >
-              {format(selectedDate, mode === 'month' ? 'MMMM-yyyy' : 'PPP')}
-            </Button>
-            <IconButton
-              sx={{ ml: .5 }}
-              {...commonIconButtonProps}
-              onClick={() => handleChangeDate(add)}
-            >
-              <ChevronRightIcon />
-            </IconButton>
-          </Hidden>
-          <Hidden smUp>
-            <IconButton{...commonIconButtonProps} onClick={handleOpenDateSelector}>
-              <TodayIcon />
-            </IconButton>
-          </Hidden>
-          <Menu
-            id="date-menu"
-            anchorEl={anchorDateEl}
-            open={openDateSelector}
-            onClose={handleCloseDateSelector}
-            MenuListProps={{'aria-labelledby': 'basic-button'}}
-          >
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <StaticDatePicker
-                displayStaticWrapperAs="desktop"
-                value={selectedDate}
-                onChange={(newValue) => {
-                  setDaysInMonth(getDaysInMonth(newValue))
-                  setSelectedDate(newValue)
-                  handleCloseDateSelector()
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
-          </Menu>
-        </Typography>}
-        <Typography
-          component="div"
-          sx={{display: 'inline-flex', alignItems: 'center'}}
-        >
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <StaticDatePicker
+                  displayStaticWrapperAs="desktop"
+                  value={selectedDate}
+                  onChange={(newValue) => {
+                    setDaysInMonth(getDaysInMonth(newValue))
+                    setSelectedDate(newValue)
+                    handleCloseDateSelector()
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+            </Menu>
+          </Typography>}
+        </Grid>
+        <Grid item xs sm md sx={{textAlign: 'right'}}>
           {toolbarProps?.showSearchBar &&
           <ToolbarSearchbar
             events={events}
@@ -221,68 +225,85 @@ function SchedulerToolbar (props) {
               setSearchResult(newValue)
             }}
           />}
-          {toolbarProps?.showSwitchModeButtons &&
-          <ToggleButtonGroup
-            exclusive
-            value={mode}
-            size="small"
-            color="primary"
-            aria-label="text button group"
-            onChange={(e, newMode) => { setMode(newMode) }}
-          >
-            {['month', 'week', 'day', 'timeline'].map(tb => (
-              <ToggleButton key={tb} value={tb}>{tb}</ToggleButton>
-            ))}
-          </ToggleButtonGroup>}
+        </Grid>
+        <Grid item xs={1} sm={1} md sx={{textAlign: 'right'}}>
+          <Hidden mdUp>
+            <IconButton
+              sx={{mr: 0, "aria-label":"menu"}}
+              {...commonIconButtonProps}
+              size="small"
+              onClick={handleOpenDateSelector}
+            >
+              <GridViewIcon />
+            </IconButton>
+          </Hidden>
+          <Hidden mdDown>
+            {toolbarProps?.showSwitchModeButtons &&
+            <ToggleButtonGroup
+              exclusive
+              value={mode}
+              size="small"
+              color="primary"
+              sx={{mr: 1.3}}
+              aria-label="text button group"
+              onChange={(e, newMode) => { setMode(newMode) }}
+            >
+              {['month', 'week', 'day', 'timeline'].map(tb => (
+                <ToggleButton key={tb} value={tb}>{tb}</ToggleButton>
+              ))}
+            </ToggleButtonGroup>}
+          </Hidden>
           {/*toolbarProps?.showOptions &&
           <IconButton sx={{ ml: 1 }} onClick={handleOpenMenu}{...commonIconButtonProps}>
             <MoreVertIcon />
           </IconButton>*/}
-        </Typography>
-      </Typography>
-      <Menu
-        id="menu-menu"
-        open={openMenu}
-        anchorEl={anchorMenuEl}
-        onClose={handleCloseMenu}
-        onClick={handleCloseMenu}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      >
-        {menus.map((menu, index) => (
-          <MenuItem key={menu.label}>
-            <ListItemIcon>{menu.icon}</ListItemIcon>
-            <Typography variant="body2">{menu.label}</Typography>
-          </MenuItem>
-        ))}
-        <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <SettingsIcon fontSize="small" />
-          </ListItemIcon>
-          <Typography variant="body2">Settings</Typography>
-        </MenuItem>
-      </Menu>
-      <Collapse in={alertProps?.open}>
-        <Alert
-          color={alertProps?.color}
-          severity={alertProps?.severity}
-          sx={{borderRadius: 0, mb: 0}}
-          action={
-            alertProps?.showActionButton ?
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={handleCloseAlert}
-              >
-                <CloseIcon fontSize="inherit" />
-              </IconButton> : null
-          }
-        >
-          {alertProps?.message}
-        </Alert>
-      </Collapse>
+        </Grid>
+        <Grid item xs={12} sx={{mb: .5}}>
+          <Menu
+            id="menu-menu"
+            open={openMenu}
+            anchorEl={anchorMenuEl}
+            onClose={handleCloseMenu}
+            onClick={handleCloseMenu}
+            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+          >
+            {menus.map((menu, index) => (
+              <MenuItem key={menu.label}>
+                <ListItemIcon>{menu.icon}</ListItemIcon>
+                <Typography variant="body2">{menu.label}</Typography>
+              </MenuItem>
+            ))}
+            <Divider />
+            <MenuItem>
+              <ListItemIcon>
+                <SettingsIcon fontSize="small" />
+              </ListItemIcon>
+              <Typography variant="body2">Settings</Typography>
+            </MenuItem>
+          </Menu>
+          <Collapse in={alertProps?.open}>
+            <Alert
+              color={alertProps?.color}
+              severity={alertProps?.severity}
+              sx={{borderRadius: 0, mb: 0}}
+              action={
+                alertProps?.showActionButton ?
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={handleCloseAlert}
+                  >
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton> : null
+              }
+            >
+              {alertProps?.message}
+            </Alert>
+          </Collapse>
+        </Grid>
+      </Grid>
     </Toolbar>
   )
 }

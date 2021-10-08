@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@babel/runtime/helpers/defineProperty'), require('@babel/runtime/helpers/asyncToGenerator'), require('@babel/runtime/helpers/slicedToArray'), require('@babel/runtime/regenerator'), require('react'), require('prop-types'), require('@mui/material'), require('@mui/system'), require('@mui/material/styles'), require('date-fns'), require('@babel/runtime/helpers/extends'), require('@mui/lab/AdapterDateFns'), require('@mui/lab/LocalizationProvider'), require('@mui/lab/StaticDatePicker'), require('@mui/icons-material/Close'), require('@mui/icons-material/ChevronLeft'), require('@mui/icons-material/ChevronRight'), require('@mui/icons-material/MoreVert'), require('@mui/icons-material/Today'), require('@mui/icons-material/Settings'), require('@mui/icons-material/Archive'), require('@mui/icons-material/Autorenew'), require('@mui/icons-material/LocalPrintshop'), require('@mui/icons-material/PlayCircleOutline'), require('@mui/icons-material/EventNoteRounded'), require('@mui/lab/Timeline'), require('@mui/lab/TimelineItem'), require('@mui/lab/TimelineSeparator'), require('@mui/lab/TimelineConnector'), require('@mui/lab/TimelineContent'), require('@mui/lab/TimelineOppositeContent'), require('@mui/lab/TimelineDot'), require('@mui/icons-material/Schedule')) :
-  typeof define === 'function' && define.amd ? define(['@babel/runtime/helpers/defineProperty', '@babel/runtime/helpers/asyncToGenerator', '@babel/runtime/helpers/slicedToArray', '@babel/runtime/regenerator', 'react', 'prop-types', '@mui/material', '@mui/system', '@mui/material/styles', 'date-fns', '@babel/runtime/helpers/extends', '@mui/lab/AdapterDateFns', '@mui/lab/LocalizationProvider', '@mui/lab/StaticDatePicker', '@mui/icons-material/Close', '@mui/icons-material/ChevronLeft', '@mui/icons-material/ChevronRight', '@mui/icons-material/MoreVert', '@mui/icons-material/Today', '@mui/icons-material/Settings', '@mui/icons-material/Archive', '@mui/icons-material/Autorenew', '@mui/icons-material/LocalPrintshop', '@mui/icons-material/PlayCircleOutline', '@mui/icons-material/EventNoteRounded', '@mui/lab/Timeline', '@mui/lab/TimelineItem', '@mui/lab/TimelineSeparator', '@mui/lab/TimelineConnector', '@mui/lab/TimelineContent', '@mui/lab/TimelineOppositeContent', '@mui/lab/TimelineDot', '@mui/icons-material/Schedule'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global["react-material-scheduler"] = factory(global._defineProperty, global._asyncToGenerator, global._slicedToArray, global._regeneratorRuntime, global.React, global.PropTypes, global.material, global.system, global.styles, global.dateFns, global._extends, global.AdapterDateFns, global.LocalizationProvider, global.StaticDatePicker, global.CloseIcon, global.ChevronLeftIcon, global.ChevronRightIcon, null, global.TodayIcon, global.SettingsIcon, global.ArchiveIcon, global.AutorenewIcon, global.LocalPrintshopIcon, global.PlayCircleOutlineIcon, global.EventNoteRoundedIcon, global.Timeline, global.TimelineItem, global.TimelineSeparator, global.TimelineConnector, global.TimelineContent, global.TimelineOppositeContent, global.TimelineDot, global.ScheduleIcon));
-})(this, (function (_defineProperty, _asyncToGenerator, _slicedToArray, _regeneratorRuntime, React, PropTypes, material, system, styles, dateFns, _extends, AdapterDateFns, LocalizationProvider, StaticDatePicker, CloseIcon, ChevronLeftIcon, ChevronRightIcon, MoreVert, TodayIcon, SettingsIcon, ArchiveIcon, AutorenewIcon, LocalPrintshopIcon, PlayCircleOutlineIcon, EventNoteRoundedIcon, Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineOppositeContent, TimelineDot, ScheduleIcon) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@babel/runtime/helpers/defineProperty'), require('@babel/runtime/helpers/asyncToGenerator'), require('@babel/runtime/helpers/slicedToArray'), require('@babel/runtime/regenerator'), require('react'), require('prop-types'), require('@mui/material'), require('@mui/system'), require('@mui/material/styles'), require('date-fns'), require('@babel/runtime/helpers/extends'), require('@mui/lab/AdapterDateFns'), require('@mui/lab/LocalizationProvider'), require('@mui/lab/StaticDatePicker'), require('@mui/icons-material/Close'), require('@mui/icons-material/ChevronLeft'), require('@mui/icons-material/ChevronRight'), require('@mui/icons-material/MoreVert'), require('@mui/icons-material/Today'), require('@mui/icons-material/Settings'), require('@mui/icons-material/Archive'), require('@mui/icons-material/Autorenew'), require('@mui/icons-material/LocalPrintshop'), require('@mui/icons-material/PlayCircleOutline'), require('@mui/icons-material/GridView'), require('@mui/icons-material/EventNoteRounded'), require('@mui/lab/Timeline'), require('@mui/lab/TimelineItem'), require('@mui/lab/TimelineSeparator'), require('@mui/lab/TimelineConnector'), require('@mui/lab/TimelineContent'), require('@mui/lab/TimelineOppositeContent'), require('@mui/lab/TimelineDot'), require('@mui/icons-material/Schedule')) :
+  typeof define === 'function' && define.amd ? define(['@babel/runtime/helpers/defineProperty', '@babel/runtime/helpers/asyncToGenerator', '@babel/runtime/helpers/slicedToArray', '@babel/runtime/regenerator', 'react', 'prop-types', '@mui/material', '@mui/system', '@mui/material/styles', 'date-fns', '@babel/runtime/helpers/extends', '@mui/lab/AdapterDateFns', '@mui/lab/LocalizationProvider', '@mui/lab/StaticDatePicker', '@mui/icons-material/Close', '@mui/icons-material/ChevronLeft', '@mui/icons-material/ChevronRight', '@mui/icons-material/MoreVert', '@mui/icons-material/Today', '@mui/icons-material/Settings', '@mui/icons-material/Archive', '@mui/icons-material/Autorenew', '@mui/icons-material/LocalPrintshop', '@mui/icons-material/PlayCircleOutline', '@mui/icons-material/GridView', '@mui/icons-material/EventNoteRounded', '@mui/lab/Timeline', '@mui/lab/TimelineItem', '@mui/lab/TimelineSeparator', '@mui/lab/TimelineConnector', '@mui/lab/TimelineContent', '@mui/lab/TimelineOppositeContent', '@mui/lab/TimelineDot', '@mui/icons-material/Schedule'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global["react-material-scheduler"] = factory(global._defineProperty, global._asyncToGenerator, global._slicedToArray, global._regeneratorRuntime, global.React, global.PropTypes, global.material, global.system, global.styles, global.dateFns, global._extends, global.AdapterDateFns, global.LocalizationProvider, global.StaticDatePicker, global.CloseIcon, global.ChevronLeftIcon, global.ChevronRightIcon, null, global.TodayIcon, global.SettingsIcon, global.ArchiveIcon, global.AutorenewIcon, global.LocalPrintshopIcon, global.PlayCircleOutlineIcon, global.GridViewIcon, global.EventNoteRoundedIcon, global.Timeline, global.TimelineItem, global.TimelineSeparator, global.TimelineConnector, global.TimelineContent, global.TimelineOppositeContent, global.TimelineDot, global.ScheduleIcon));
+})(this, (function (_defineProperty, _asyncToGenerator, _slicedToArray, _regeneratorRuntime, React, PropTypes, material, system, styles, dateFns, _extends, AdapterDateFns, LocalizationProvider, StaticDatePicker, CloseIcon, ChevronLeftIcon, ChevronRightIcon, MoreVert, TodayIcon, SettingsIcon, ArchiveIcon, AutorenewIcon, LocalPrintshopIcon, PlayCircleOutlineIcon, GridViewIcon, EventNoteRoundedIcon, Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineOppositeContent, TimelineDot, ScheduleIcon) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -25,6 +25,7 @@
   var AutorenewIcon__default = /*#__PURE__*/_interopDefaultLegacy(AutorenewIcon);
   var LocalPrintshopIcon__default = /*#__PURE__*/_interopDefaultLegacy(LocalPrintshopIcon);
   var PlayCircleOutlineIcon__default = /*#__PURE__*/_interopDefaultLegacy(PlayCircleOutlineIcon);
+  var GridViewIcon__default = /*#__PURE__*/_interopDefaultLegacy(GridViewIcon);
   var EventNoteRoundedIcon__default = /*#__PURE__*/_interopDefaultLegacy(EventNoteRoundedIcon);
   var Timeline__default = /*#__PURE__*/_interopDefaultLegacy(Timeline);
   var TimelineItem__default = /*#__PURE__*/_interopDefaultLegacy(TimelineItem);
@@ -39,16 +40,23 @@
 
   function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(Object(source), true).forEach(function (key) { _defineProperty__default["default"](target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
   var StyledAutoComplete = styles.styled(material.Autocomplete)(function (_ref) {
+    var _ref2;
+
     var theme = _ref.theme;
-    return _defineProperty__default["default"]({
+    return _ref2 = {
       color: 'inherit',
-      minWidth: '20ch',
+      width: '94%',
       display: 'inline-flex',
       margin: theme.spacing(.5, 1.5),
       transition: theme.transitions.create('width')
-    }, theme.breakpoints.up('sm'), {
-      width: '30ch'
-    });
+    }, _defineProperty__default["default"](_ref2, theme.breakpoints.up('sm'), {
+      //minWidth: '20ch',
+      width: '100%'
+    }), _defineProperty__default["default"](_ref2, theme.breakpoints.up('md'), {
+      width: '25ch'
+    }), _defineProperty__default["default"](_ref2, theme.breakpoints.up('lg'), {
+      width: '25ch'
+    }), _ref2;
   });
 
   function ToolbarSearchbar(props) {
@@ -280,42 +288,46 @@
     return /*#__PURE__*/React__default["default"].createElement(material.Toolbar, {
       variant: "dense",
       sx: {
-        display: 'contents',
-        alignItems: 'center'
+        px: '0px !important',
+        display: 'block'
       }
-    }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
-      component: "div",
-      sx: {
-        m: .5,
-        display: 'flex',
-        alignItems: 'center'
-      }
+    }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
+      container: true,
+      spacing: 0,
+      alignItems: "center",
+      justifyContent: "flex-end"
+    }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
+      item: true,
+      xs: 1,
+      sm: true,
+      md: true
     }, toolbarProps.showDatePicker && /*#__PURE__*/React__default["default"].createElement(material.Typography, {
       component: "div",
       sx: {
-        flexGrow: 1
+        display: 'flex'
       }
     }, /*#__PURE__*/React__default["default"].createElement(material.Hidden, {
       smDown: true
     }, /*#__PURE__*/React__default["default"].createElement(material.IconButton, _extends__default["default"]({
       sx: {
-        ml: 0
+        ml: 0,
+        mr: -.1
       }
     }, commonIconButtonProps, {
       onClick: function onClick() {
         return handleChangeDate(dateFns.sub);
       }
     }), /*#__PURE__*/React__default["default"].createElement(ChevronLeftIcon__default["default"], null)), /*#__PURE__*/React__default["default"].createElement(material.Button, {
-      size: "medium",
+      size: "small",
       id: "basic-button",
-      "aria-haspopup": "true",
-      endIcon: /*#__PURE__*/React__default["default"].createElement(TodayIcon__default["default"], null),
+      "aria-haspopup": "true" //endIcon={<TodayIcon />}
+      ,
       "aria-controls": "basic-menu",
       onClick: handleOpenDateSelector,
       "aria-expanded": openDateSelector ? 'true' : undefined
     }, dateFns.format(selectedDate, mode === 'month' ? 'MMMM-yyyy' : 'PPP')), /*#__PURE__*/React__default["default"].createElement(material.IconButton, _extends__default["default"]({
       sx: {
-        ml: .5
+        ml: .2
       }
     }, commonIconButtonProps, {
       onClick: function onClick() {
@@ -323,7 +335,13 @@
       }
     }), /*#__PURE__*/React__default["default"].createElement(ChevronRightIcon__default["default"], null))), /*#__PURE__*/React__default["default"].createElement(material.Hidden, {
       smUp: true
-    }, /*#__PURE__*/React__default["default"].createElement(material.IconButton, _extends__default["default"]({}, commonIconButtonProps, {
+    }, /*#__PURE__*/React__default["default"].createElement(material.IconButton, _extends__default["default"]({
+      sx: {
+        ml: 0,
+        "aria-label": "menu"
+      }
+    }, commonIconButtonProps, {
+      size: "small",
       onClick: handleOpenDateSelector
     }), /*#__PURE__*/React__default["default"].createElement(TodayIcon__default["default"], null))), /*#__PURE__*/React__default["default"].createElement(material.Menu, {
       id: "date-menu",
@@ -346,11 +364,13 @@
       renderInput: function renderInput(params) {
         return /*#__PURE__*/React__default["default"].createElement(material.TextField, params);
       }
-    })))), /*#__PURE__*/React__default["default"].createElement(material.Typography, {
-      component: "div",
+    }))))), /*#__PURE__*/React__default["default"].createElement(material.Grid, {
+      item: true,
+      xs: true,
+      sm: true,
+      md: true,
       sx: {
-        display: 'inline-flex',
-        alignItems: 'center'
+        textAlign: 'right'
       }
     }, (toolbarProps === null || toolbarProps === void 0 ? void 0 : toolbarProps.showSearchBar) && /*#__PURE__*/React__default["default"].createElement(ToolbarSearchbar, {
       events: events,
@@ -360,11 +380,34 @@
         setSelectedDate(newDate);
         setSearchResult(newValue);
       }
-    }), (toolbarProps === null || toolbarProps === void 0 ? void 0 : toolbarProps.showSwitchModeButtons) && /*#__PURE__*/React__default["default"].createElement(material.ToggleButtonGroup, {
+    })), /*#__PURE__*/React__default["default"].createElement(material.Grid, {
+      item: true,
+      xs: 1,
+      sm: 1,
+      md: true,
+      sx: {
+        textAlign: 'right'
+      }
+    }, /*#__PURE__*/React__default["default"].createElement(material.Hidden, {
+      mdUp: true
+    }, /*#__PURE__*/React__default["default"].createElement(material.IconButton, _extends__default["default"]({
+      sx: {
+        mr: 0,
+        "aria-label": "menu"
+      }
+    }, commonIconButtonProps, {
+      size: "small",
+      onClick: handleOpenDateSelector
+    }), /*#__PURE__*/React__default["default"].createElement(GridViewIcon__default["default"], null))), /*#__PURE__*/React__default["default"].createElement(material.Hidden, {
+      mdDown: true
+    }, (toolbarProps === null || toolbarProps === void 0 ? void 0 : toolbarProps.showSwitchModeButtons) && /*#__PURE__*/React__default["default"].createElement(material.ToggleButtonGroup, {
       exclusive: true,
       value: mode,
       size: "small",
       color: "primary",
+      sx: {
+        mr: 1.3
+      },
       "aria-label": "text button group",
       onChange: function onChange(e, newMode) {
         setMode(newMode);
@@ -374,7 +417,13 @@
         key: tb,
         value: tb
       }, tb);
-    })))), /*#__PURE__*/React__default["default"].createElement(material.Menu, {
+    })))), /*#__PURE__*/React__default["default"].createElement(material.Grid, {
+      item: true,
+      xs: 12,
+      sx: {
+        mb: .5
+      }
+    }, /*#__PURE__*/React__default["default"].createElement(material.Menu, {
       id: "menu-menu",
       open: openMenu,
       anchorEl: anchorMenuEl,
@@ -415,7 +464,7 @@
       }, /*#__PURE__*/React__default["default"].createElement(CloseIcon__default["default"], {
         fontSize: "inherit"
       })) : null
-    }, alertProps === null || alertProps === void 0 ? void 0 : alertProps.message)));
+    }, alertProps === null || alertProps === void 0 ? void 0 : alertProps.message)))));
   }
 
   SchedulerToolbar.propTypes = {
@@ -443,6 +492,48 @@
       showDatePicker: true,
       showOptions: false
     }
+  };
+
+  function EventItem(props) {
+    var event = props.event,
+        rowId = props.rowId,
+        sx = props.sx,
+        boxSx = props.boxSx,
+        elevation = props.elevation,
+        isMonthMode = props.isMonthMode,
+        onClick = props.onClick,
+        onDragStart = props.onDragStart;
+    return /*#__PURE__*/React__default["default"].createElement(material.Paper, {
+      sx: sx,
+      draggable: true,
+      onClick: onClick,
+      onDragStart: onDragStart,
+      elevation: elevation || 0,
+      key: "item-d-".concat(event === null || event === void 0 ? void 0 : event.id, "-").concat(rowId)
+    }, /*#__PURE__*/React__default["default"].createElement(material.Box, {
+      sx: boxSx
+    }, isMonthMode && /*#__PURE__*/React__default["default"].createElement(material.Typography, {
+      variant: "caption",
+      sx: {
+        fontSize: 10
+      }
+    }, event === null || event === void 0 ? void 0 : event.startHour), /*#__PURE__*/React__default["default"].createElement(material.Typography, {
+      variant: "body2",
+      sx: {
+        fontSize: 11
+      }
+    }, event === null || event === void 0 ? void 0 : event.label)));
+  }
+
+  EventItem.propTypes = {
+    sx: PropTypes__default["default"].object,
+    boxSx: PropTypes__default["default"].object,
+    event: PropTypes__default["default"].object.isRequired,
+    rowId: PropTypes__default["default"].number,
+    isMonthMode: PropTypes__default["default"].bool,
+    onClick: PropTypes__default["default"].func,
+    handleTaskClick: PropTypes__default["default"].func,
+    onCellDragStart: PropTypes__default["default"].func
   };
 
   function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
@@ -653,13 +744,22 @@
       var tasks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
       var rowId = arguments.length > 1 ? arguments[1] : undefined;
       return tasks === null || tasks === void 0 ? void 0 : tasks.map(function (task, index) {
-        return (searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult) && /*#__PURE__*/React__default["default"].createElement(material.Paper, {
-          draggable: true,
+        var condition = searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult;
+        return condition && /*#__PURE__*/React__default["default"].createElement(EventItem, {
+          isMonthMode: true,
+          event: task,
+          rowId: rowId,
+          elevation: 0,
+          boxSx: {
+            px: 0.5
+          },
+          key: "item-d-".concat(task === null || task === void 0 ? void 0 : task.id, "-").concat(rowId),
           onClick: function onClick(e) {
             return handleTaskClick(e, task);
           },
-          key: "item-d-".concat(task === null || task === void 0 ? void 0 : task.id, "-").concat(rowId),
-          elevation: 0,
+          onDragStart: function onDragStart(e) {
+            return onCellDragStart(e, task, rowId);
+          },
           sx: {
             width: "100%",
             py: 0,
@@ -667,17 +767,8 @@
             color: "#fff",
             display: 'inline-flex',
             backgroundColor: (task === null || task === void 0 ? void 0 : task.color) || theme.palette.primary.light
-          },
-          onDragStart: function onDragStart(e) {
-            return onCellDragStart(e, task, rowId);
           }
-        }, /*#__PURE__*/React__default["default"].createElement(material.Box, {
-          sx: {
-            px: 0.5
-          }
-        }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
-          variant: "caption"
-        }, task === null || task === void 0 ? void 0 : task.label)));
+        });
       });
     };
     /**
@@ -1007,9 +1098,13 @@
 
     var renderTask = function renderTask(tasks, rowLabel, rowIndex, dayIndex) {
       return tasks === null || tasks === void 0 ? void 0 : tasks.map(function (task, itemIndex) {
-        return (searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult) && /*#__PURE__*/React__default["default"].createElement(material.Paper, {
-          draggable: true,
+        var condition = searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult;
+        return condition && /*#__PURE__*/React__default["default"].createElement(EventItem, {
+          event: task,
           elevation: 0,
+          boxSx: {
+            px: 0.3
+          },
           onClick: function onClick(e) {
             return handleTaskClick(e, task);
           },
@@ -1025,14 +1120,7 @@
             color: "#fff",
             backgroundColor: (task === null || task === void 0 ? void 0 : task.color) || theme.palette.primary.light
           }
-        }, /*#__PURE__*/React__default["default"].createElement(material.Box, {
-          sx: {
-            px: 0.3
-          }
-        }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
-          variant: "caption",
-          noWrap: true
-        }, task === null || task === void 0 ? void 0 : task.label)));
+        });
       });
     };
     /**
@@ -1384,9 +1472,14 @@
 
     var renderTask = function renderTask(tasks, rowLabel, rowIndex, dayIndex) {
       return tasks === null || tasks === void 0 ? void 0 : tasks.map(function (task, itemIndex) {
-        return (searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult) && /*#__PURE__*/React__default["default"].createElement(material.Paper, {
+        var condition = searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult;
+        return condition && /*#__PURE__*/React__default["default"].createElement(EventItem, {
           draggable: true,
+          event: task,
           elevation: 0,
+          boxSx: {
+            px: 0.3
+          },
           onClick: function onClick(e) {
             return handleTaskClick(e, task);
           },
@@ -1402,14 +1495,7 @@
             color: "#fff",
             backgroundColor: (task === null || task === void 0 ? void 0 : task.color) || theme.palette.primary.light
           }
-        }, /*#__PURE__*/React__default["default"].createElement(material.Box, {
-          sx: {
-            px: 0.3
-          }
-        }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
-          variant: "caption",
-          noWrap: true
-        }, task === null || task === void 0 ? void 0 : task.label)));
+        });
       });
     };
     /**
@@ -1569,9 +1655,9 @@
     };
 
     var fileredEvents = rows === null || rows === void 0 ? void 0 : rows.sort(function (a, b) {
-      var _b$groupLabel;
+      var _b$startHour;
 
-      return -(b === null || b === void 0 ? void 0 : (_b$groupLabel = b.groupLabel) === null || _b$groupLabel === void 0 ? void 0 : _b$groupLabel.localeCompare(a === null || a === void 0 ? void 0 : a.groupLabel));
+      return -(b === null || b === void 0 ? void 0 : (_b$startHour = b.startHour) === null || _b$startHour === void 0 ? void 0 : _b$startHour.localeCompare(a === null || a === void 0 ? void 0 : a.startHour));
     });
 
     if (searchResult) {
@@ -1620,7 +1706,7 @@
           px: 2
         }
       }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
-        variant: "h6",
+        variant: "body1",
         component: "span"
       }, task === null || task === void 0 ? void 0 : task.label), /*#__PURE__*/React__default["default"].createElement(material.Typography, null, task === null || task === void 0 ? void 0 : task.groupLabel)));
     }))));
@@ -2131,7 +2217,7 @@
       container: true,
       spacing: 0,
       alignItems: "center",
-      justifyContent: "center"
+      justifyContent: "start"
     }, mode === 'month' && /*#__PURE__*/React__default["default"].createElement(TransitionMode, {
       in: true
     }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
@@ -2179,8 +2265,12 @@
       searchResult: searchResult,
       onDateChange: handleDateChange,
       onEventsChange: handleEventsChange
-    }))), mode === 'timeline' && /*#__PURE__*/React__default["default"].createElement(TransitionMode, {
+    })))), mode === 'timeline' && /*#__PURE__*/React__default["default"].createElement(TransitionMode, {
       in: true
+    }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
+      container: true,
+      spacing: 2,
+      alignItems: "start"
     }, /*#__PURE__*/React__default["default"].createElement(material.Grid, {
       item: true,
       xs: 12

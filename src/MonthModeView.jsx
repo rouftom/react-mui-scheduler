@@ -5,9 +5,10 @@ import {styled} from "@mui/system"
 import { useTheme } from '@mui/material/styles'
 import {
   Paper, Typography, Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, tableCellClasses, Box
+  TableHead, TableRow, tableCellClasses
 } from "@mui/material"
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded'
+import EventItem from "./EventItem.jsx"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -164,19 +165,27 @@ function MonthModeView (props) {
    * @return {unknown[] | undefined}
    */
   const renderTask = (tasks = [], rowId) => {
-    return tasks?.map((task, index) => (
-      (
+    return tasks?.map((task, index) => {
+      let condition = (
         (
           searchResult &&
-          (task?.groupLabel === searchResult?.groupLabel || task?.user === searchResult?.user)
+          (
+            task?.groupLabel === searchResult?.groupLabel ||
+            task?.user === searchResult?.user
+          )
         ) || !searchResult
-      ) &&
-      (
-        <Paper
-          draggable
-          onClick={(e) => handleTaskClick(e, task)}
-          key={`item-d-${task?.id}-${rowId}`}
+      )
+      return (
+        condition &&
+        <EventItem
+          isMonthMode
+          event={task}
+          rowId={rowId}
           elevation={0}
+          boxSx={{px: 0.5}}
+          key={`item-d-${task?.id}-${rowId}`}
+          onClick={e => handleTaskClick(e, task)}
+          onDragStart={e => onCellDragStart(e, task, rowId)}
           sx={{
             width: "100%",
             py: 0,
@@ -185,14 +194,9 @@ function MonthModeView (props) {
             display: 'inline-flex',
             backgroundColor: task?.color || theme.palette.primary.light
           }}
-          onDragStart={e => onCellDragStart(e, task, rowId)}
-        >
-          <Box sx={{px: 0.5}}>
-            <Typography variant="caption">{task?.label}</Typography>
-          </Box>
-        </Paper>
+        />
       )
-    ))
+    })
   }
   
   /**

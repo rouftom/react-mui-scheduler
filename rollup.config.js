@@ -6,11 +6,7 @@ const autoprefixer = require('autoprefixer')
 const input = 'src/index.js'
 
 //
-let MODE = [
-  //{ fomart: 'cjs' },
-  { fomart: 'esm' },
-  { fomart: 'umd' }
-]
+let MODE = [{ fomart: 'esm' }, { fomart: 'umd' }]
 
 let config = []
 

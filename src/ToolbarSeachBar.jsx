@@ -6,13 +6,20 @@ import { TextField, Autocomplete, Box } from "@mui/material"
 
 const StyledAutoComplete = styled(Autocomplete)(({ theme }) => ({
   color: 'inherit',
-  minWidth: '20ch',
+  width: '94%',
   display: 'inline-flex',
   margin: theme.spacing(.5, 1.5),
   transition: theme.transitions.create('width'),
   [theme.breakpoints.up('sm')]: {
-    width: '30ch'
-  }
+    //minWidth: '20ch',
+    width: '100%'
+  },
+  [theme.breakpoints.up('md')]: {
+    width: '25ch'
+  },
+  [theme.breakpoints.up('lg')]: {
+    width: '25ch'
+  },
 }))
 
 function ToolbarSearchbar (props) {

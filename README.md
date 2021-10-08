@@ -1,3 +1,6 @@
+<p align="center"><a href="" target="_blank"><img align="center" src="public/month-mode-preview.png"></a></p>
+
+<!-- ![month-mode-preview.png](public/month-mode-preview.png "Month mode preview") -->
 
 <h1 align="center">📅 React Material Scheduler</h1>
 <p align="center">developed with <a target="_blank" href="https://mui.com">@mui v5</a> </p>
@@ -6,13 +9,13 @@
   <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue.svg">
   <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/rouftom/react-mui-scheduler">
   <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/rouftom/react-mui-scheduler">
-  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/rouftom/react-mui-scheduler">
   <img alt="Snyk Vulnerabilities for GitHub Repo" src="https://img.shields.io/snyk/vulnerabilities/github/rouftom/react-mui-scheduler">
 </p>
 
 ---
 
 React mui scheduler is a react component based on @mui v5 that allows you to manage data in a calendar.
+
 
 ## 🚀 Installation
 ```nodejs
@@ -30,7 +33,7 @@ function App() {
     options: {
       transitionMode: "zoom", // or fade
       startWeekOn: "Mon",     // or Sun
-      defaultMode: "week",    // or month
+      defaultMode: "month",    // or week | day | timeline
       minWidth: 540,
       maxWidth: 540,
       minHeight: 540,
@@ -42,7 +45,7 @@ function App() {
       severity: "info",       // info | success | warning | error
       message: "🚀 Let's start with awesome react-mui-scheduler 🔥 🔥 🔥" ,
       showActionButton: true,
-       showNotification: true,
+      showNotification: true,
       delay: 1500
     },
     toolbarProps: {
@@ -83,8 +86,8 @@ function App() {
       groupLabel: "Dr Menlendez Hary",
       user: "Dr Menlendez Hary",
       color: "#263686",
-      startHour: "13 AM",
-      endHour: "14 AM",
+      startHour: "13 PM",
+      endHour: "14 PM",
       date: "2021-09-30",
       createdAt: new Date(),
       createdBy: "Kristina Mayer"
@@ -107,7 +110,7 @@ function App() {
     // Do something...
   }
   
-  const handleEventClick = (event, task) => {
+  const handleEventClick = (event, item) => {
     // Do something...
   }
   
@@ -134,8 +137,69 @@ function App() {
 }
 
 ReactDOM.render(<App />, document.querySelector('#yourComponentRootId'))
+
 ```
 
+## Data structure
+
+| Name 	|  Type 	|   Required	|  Details 	|  
+|------	|---	|---	|---	|
+|    id  	|  `string` 	|  `true` 	|  unique id for every event 	|
+|    label  	|  `string` 	|  `true` 	|   	| 
+|    color  	|  `string` 	|  `true` 	|  If not set, the primary color of the theme will be applied 	| 
+|    groupLabel  	|  `string` 	|  `true` 	|   	|
+|    startHour  	|  `string` 	|  `true` 	|  Hour string format with `HH:mm aaa` 	|  
+|    endHour  	|  `string` 	|  `true` 	|  Hour string format with `HH:mm aaa` 	| 
+|    date  	|  `string` 	|  `true` 	|  Date string, must be formatted with `yyyy-MM-dd` date format 	| 
+
+
+For more details about date formats, see [date-fns docs](https://date-fns.org/v2.24.0/docs/)
+
+
+## Options
+
+| Name 	|  Type 	|   Default	|  Description 	|  Values 	|
+|------	|---	|---	|---	|---	|
+|    transitionMode  	|  string 	|  `zoom` 	|  This option is used to define the type of scheduler transition 	|  `zoom`, `fade` 	|
+|   startWeekOn   	|   string	|  `Mon` 	|   This option is used to set the start of the calendar week to Monday or Sunday	|  `Mon`, `Sun` 	|
+|    defaultMode  	|  string 	|  `week` 	|  This option allows you to define the type of view to display 	|  `month`, `week`, `day`, `timeline` 	|
+|    minWidth  	|  number 	|  `540` 	|  This option allows you to define the minimum width of the container 	|  `number` 	|
+|    maxWidth  	|  number 	|  `540` 	|  This option allows you to define the maximum width of the container 	|  `number` 	|
+|    minHeight  	|  number 	|  `540` 	|  This option allows you to define the minimum height of the container 	|  `number` 	|
+|    maxHeigh  	|  number 	|  `540` 	|  This option allows you to define the maximum height of the container 	|  `number` 	|
+
+
+
+## alertProps
+
+| Name 	|  Type 	|   Default	|  Description 	|  Values 	|
+|------	|---	|---	|---	|---	|
+|    open  	|  boolean 	|  `true` 	|  This option opens the notification Alert component 	|  `true`, `false` 	|
+|   color   	|   string	|  `info` 	|   Alert notification color	|  `info`, `success`, `warning`, `error` 	|
+|    severity  	|  string 	|  `info` 	|  Alert notification severity 	|  `info`, `success`, `warning`, `error` 	|
+|    message  	|  string 	|  `🚀 Let's start with awesome react-mui-scheduler 🔥 🔥 🔥` 	|  Alert notification message to display 	|  `string` 	|
+|    showActionButton  	|  boolean 	|  `true` 	|  This option displays or not the action button on the Alert 	|  `boolean` 	|
+|    showNotification  	|  boolean 	|  `true` 	|  This option allows to display or not a notification when data change 	|  `boolean` 	|
+|    delay  	|  number 	|  `1500` 	|  This option allows you to define the display delay in milliseconds of the Alert	|  `number` 	|
+
+
+## toolbarProps
+
+| Name 	|  Type 	|   Default	|  Description 	|  Values 	|
+|------	|---	|---	|---	|---	|
+|    showSearchBar  	|  boolean 	|  `true` 	|  Show or hide the search bar 	|  `true`, `false` 	|
+|    showSwitchModeButtons  	|  boolean 	|  `true` 	|   Show or hide the view mode button group switcher	|  `true`, `false` 	|
+|    showDatePicker  	|  boolean 	|  `true` 	|  Show or hide the date picker buttons 	|  `true`, `false` 	|
+
+
+## Methods
+
+| Method 	|  Params 	|  Type 	|  Description 	|  
+|------	|---	|---	|---	|
+|  `handleCellClick(event: Event, row: object, day: object)`    	|  `event: Event`, `row: object`, `day: object` 	|  Event 	|  Triggered when you click on a cell 	|
+|  `handleEventClick(event: Event, item: object)`    	|  `event: Event`, `item: object` 	|  Event 	|  Triggered when you click on an event 	|
+|  `handleEventsChange(item: object)`    	|  `item: object` 	|  Event 	|  Triggers when a data update occurs 	|
+|  `handleAlertCloseButtonClicked(item: object)`    	|  `item: object` 	|  Event 	|  Triggers when clicking on the close button of the notification alert 	|
 
 ## 😁 Authors
 
@@ -152,7 +216,7 @@ ReactDOM.render(<App />, document.querySelector('#yourComponentRootId'))
 
 ## 🙇‍♂️ Extra
 
-    Do you like this library ? Buy me a coffee
+    Do you like this library ? Buy me a coffee or support me with a star on Github
 
 * Btc address: `bc1qettgagenn9nc8ks7ghntjfme96yvvkfhntk774`
 
@@ -162,8 +226,8 @@ ReactDOM.render(<App />, document.querySelector('#yourComponentRootId'))
 ## 🔥 Some features to add in next releases
 
 - ✅ Week, day and timeline mode switch view
-  
-- 👉 Option menu 
+
+- 👉 Option menu
 
 - 👉 Export events as PDF and CSV
 
