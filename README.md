@@ -201,6 +201,8 @@ For more details about date formats, see [date-fns docs](https://date-fns.org/v2
 |  `handleEventsChange(item: object)`    	|  `item: object` 	|  Event 	|  Triggers when a data update occurs 	|
 |  `handleAlertCloseButtonClicked(item: object)`    	|  `item: object` 	|  Event 	|  Triggers when clicking on the close button of the notification alert 	|
 
+
+
 ## 😁 Authors
 
 - Muller Roufaou ([rouftom](http://github.com/rouftom))
