@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@babel/runtime/helpers/defineProperty'), require('@babel/runtime/helpers/asyncToGenerator'), require('@babel/runtime/helpers/slicedToArray'), require('@babel/runtime/regenerator'), require('react'), require('prop-types'), require('@mui/material'), require('@mui/system'), require('@mui/material/styles'), require('date-fns'), require('@babel/runtime/helpers/extends'), require('@mui/lab/AdapterDateFns'), require('@mui/lab/LocalizationProvider'), require('@mui/lab/StaticDatePicker'), require('@mui/icons-material/Close'), require('@mui/icons-material/ChevronLeft'), require('@mui/icons-material/ChevronRight'), require('@mui/icons-material/MoreVert'), require('@mui/icons-material/Today'), require('@mui/icons-material/Settings'), require('@mui/icons-material/Archive'), require('@mui/icons-material/Autorenew'), require('@mui/icons-material/LocalPrintshop'), require('@mui/icons-material/PlayCircleOutline'), require('@mui/icons-material/GridView'), require('@mui/icons-material/EventNoteRounded'), require('@mui/lab/Timeline'), require('@mui/lab/TimelineItem'), require('@mui/lab/TimelineSeparator'), require('@mui/lab/TimelineConnector'), require('@mui/lab/TimelineContent'), require('@mui/lab/TimelineOppositeContent'), require('@mui/lab/TimelineDot'), require('@mui/icons-material/Schedule')) :
-  typeof define === 'function' && define.amd ? define(['@babel/runtime/helpers/defineProperty', '@babel/runtime/helpers/asyncToGenerator', '@babel/runtime/helpers/slicedToArray', '@babel/runtime/regenerator', 'react', 'prop-types', '@mui/material', '@mui/system', '@mui/material/styles', 'date-fns', '@babel/runtime/helpers/extends', '@mui/lab/AdapterDateFns', '@mui/lab/LocalizationProvider', '@mui/lab/StaticDatePicker', '@mui/icons-material/Close', '@mui/icons-material/ChevronLeft', '@mui/icons-material/ChevronRight', '@mui/icons-material/MoreVert', '@mui/icons-material/Today', '@mui/icons-material/Settings', '@mui/icons-material/Archive', '@mui/icons-material/Autorenew', '@mui/icons-material/LocalPrintshop', '@mui/icons-material/PlayCircleOutline', '@mui/icons-material/GridView', '@mui/icons-material/EventNoteRounded', '@mui/lab/Timeline', '@mui/lab/TimelineItem', '@mui/lab/TimelineSeparator', '@mui/lab/TimelineConnector', '@mui/lab/TimelineContent', '@mui/lab/TimelineOppositeContent', '@mui/lab/TimelineDot', '@mui/icons-material/Schedule'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global["react-material-scheduler"] = factory(global._defineProperty, global._asyncToGenerator, global._slicedToArray, global._regeneratorRuntime, global.React, global.PropTypes, global.material, global.system, global.styles, global.dateFns, global._extends, global.AdapterDateFns, global.LocalizationProvider, global.StaticDatePicker, global.CloseIcon, global.ChevronLeftIcon, global.ChevronRightIcon, null, global.TodayIcon, global.SettingsIcon, global.ArchiveIcon, global.AutorenewIcon, global.LocalPrintshopIcon, global.PlayCircleOutlineIcon, global.GridViewIcon, global.EventNoteRoundedIcon, global.Timeline, global.TimelineItem, global.TimelineSeparator, global.TimelineConnector, global.TimelineContent, global.TimelineOppositeContent, global.TimelineDot, global.ScheduleIcon));
-})(this, (function (_defineProperty, _asyncToGenerator, _slicedToArray, _regeneratorRuntime, React, PropTypes, material, system, styles, dateFns, _extends, AdapterDateFns, LocalizationProvider, StaticDatePicker, CloseIcon, ChevronLeftIcon, ChevronRightIcon, MoreVert, TodayIcon, SettingsIcon, ArchiveIcon, AutorenewIcon, LocalPrintshopIcon, PlayCircleOutlineIcon, GridViewIcon, EventNoteRoundedIcon, Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineOppositeContent, TimelineDot, ScheduleIcon) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@babel/runtime/helpers/defineProperty'), require('@babel/runtime/helpers/asyncToGenerator'), require('@babel/runtime/helpers/slicedToArray'), require('@babel/runtime/regenerator'), require('react'), require('prop-types'), require('@mui/material'), require('@mui/material/styles'), require('date-fns'), require('@babel/runtime/helpers/extends'), require('@mui/lab/AdapterDateFns'), require('@mui/lab/LocalizationProvider'), require('@mui/lab/StaticDatePicker'), require('@mui/icons-material/Close'), require('@mui/icons-material/ChevronLeft'), require('@mui/icons-material/ChevronRight'), require('@mui/icons-material/Today'), require('@mui/icons-material/Settings'), require('@mui/icons-material/Archive'), require('@mui/icons-material/Autorenew'), require('@mui/icons-material/LocalPrintshop'), require('@mui/icons-material/PlayCircleOutline'), require('@mui/icons-material/GridView'), require('@mui/icons-material/EventNoteRounded'), require('@mui/system'), require('@mui/lab/Timeline'), require('@mui/lab/TimelineItem'), require('@mui/lab/TimelineSeparator'), require('@mui/lab/TimelineConnector'), require('@mui/lab/TimelineContent'), require('@mui/lab/TimelineOppositeContent'), require('@mui/lab/TimelineDot'), require('@mui/icons-material/Schedule')) :
+  typeof define === 'function' && define.amd ? define(['@babel/runtime/helpers/defineProperty', '@babel/runtime/helpers/asyncToGenerator', '@babel/runtime/helpers/slicedToArray', '@babel/runtime/regenerator', 'react', 'prop-types', '@mui/material', '@mui/material/styles', 'date-fns', '@babel/runtime/helpers/extends', '@mui/lab/AdapterDateFns', '@mui/lab/LocalizationProvider', '@mui/lab/StaticDatePicker', '@mui/icons-material/Close', '@mui/icons-material/ChevronLeft', '@mui/icons-material/ChevronRight', '@mui/icons-material/Today', '@mui/icons-material/Settings', '@mui/icons-material/Archive', '@mui/icons-material/Autorenew', '@mui/icons-material/LocalPrintshop', '@mui/icons-material/PlayCircleOutline', '@mui/icons-material/GridView', '@mui/icons-material/EventNoteRounded', '@mui/system', '@mui/lab/Timeline', '@mui/lab/TimelineItem', '@mui/lab/TimelineSeparator', '@mui/lab/TimelineConnector', '@mui/lab/TimelineContent', '@mui/lab/TimelineOppositeContent', '@mui/lab/TimelineDot', '@mui/icons-material/Schedule'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global["react-material-scheduler"] = factory(global._defineProperty, global._asyncToGenerator, global._slicedToArray, global._regeneratorRuntime, global.React, global.PropTypes, global.material, global.styles, global.dateFns, global._extends, global.AdapterDateFns, global.LocalizationProvider, global.StaticDatePicker, global.CloseIcon, global.ChevronLeftIcon, global.ChevronRightIcon, global.TodayIcon, global.SettingsIcon, global.ArchiveIcon, global.AutorenewIcon, global.LocalPrintshopIcon, global.PlayCircleOutlineIcon, global.GridViewIcon, null, global.system, global.Timeline, global.TimelineItem, global.TimelineSeparator, global.TimelineConnector, global.TimelineContent, global.TimelineOppositeContent, global.TimelineDot, global.ScheduleIcon));
+})(this, (function (_defineProperty, _asyncToGenerator, _slicedToArray, _regeneratorRuntime, React, PropTypes, material, styles, dateFns, _extends, AdapterDateFns, LocalizationProvider, StaticDatePicker, CloseIcon, ChevronLeftIcon, ChevronRightIcon, TodayIcon, SettingsIcon, ArchiveIcon, AutorenewIcon, LocalPrintshopIcon, PlayCircleOutlineIcon, GridViewIcon, EventNoteRounded, system, Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineOppositeContent, TimelineDot, ScheduleIcon) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -26,7 +26,6 @@
   var LocalPrintshopIcon__default = /*#__PURE__*/_interopDefaultLegacy(LocalPrintshopIcon);
   var PlayCircleOutlineIcon__default = /*#__PURE__*/_interopDefaultLegacy(PlayCircleOutlineIcon);
   var GridViewIcon__default = /*#__PURE__*/_interopDefaultLegacy(GridViewIcon);
-  var EventNoteRoundedIcon__default = /*#__PURE__*/_interopDefaultLegacy(EventNoteRoundedIcon);
   var Timeline__default = /*#__PURE__*/_interopDefaultLegacy(Timeline);
   var TimelineItem__default = /*#__PURE__*/_interopDefaultLegacy(TimelineItem);
   var TimelineSeparator__default = /*#__PURE__*/_interopDefaultLegacy(TimelineSeparator);
@@ -36,9 +35,9 @@
   var TimelineDot__default = /*#__PURE__*/_interopDefaultLegacy(TimelineDot);
   var ScheduleIcon__default = /*#__PURE__*/_interopDefaultLegacy(ScheduleIcon);
 
-  function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(Object(source), true).forEach(function (key) { _defineProperty__default["default"](target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$4(Object(source), !0).forEach(function (key) { _defineProperty__default["default"](target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   var StyledAutoComplete = styles.styled(material.Autocomplete)(function (_ref) {
     var _ref2;
 
@@ -50,7 +49,6 @@
       margin: theme.spacing(.5, 1.5),
       transition: theme.transitions.create('width')
     }, _defineProperty__default["default"](_ref2, theme.breakpoints.up('sm'), {
-      //minWidth: '20ch',
       width: '100%'
     }), _defineProperty__default["default"](_ref2, theme.breakpoints.up('md'), {
       width: '25ch'
@@ -75,7 +73,7 @@
 
     var handleOnChange = function handleOnChange(event, newValue) {
       setValue(newValue);
-      _onInputChange && _onInputChange(newValue);
+      if (_onInputChange) _onInputChange(newValue);
     };
 
     return /*#__PURE__*/React__default["default"].createElement(StyledAutoComplete, {
@@ -90,7 +88,7 @@
         return -b.groupLabel.localeCompare(a.groupLabel);
       }),
       groupBy: function groupBy(option) {
-        return option === null || option === void 0 ? void 0 : option.groupLabel;
+        return option ? option === null || option === void 0 ? void 0 : option.groupLabel : null;
       }
       /*
       (
@@ -111,9 +109,7 @@
        */
       ,
       getOptionLabel: function getOptionLabel(option) {
-        var _option$startHour, _option$endHour;
-
-        return option && "".concat(option === null || option === void 0 ? void 0 : option.groupLabel, " | (").concat((_option$startHour = option === null || option === void 0 ? void 0 : option.startHour) !== null && _option$startHour !== void 0 ? _option$startHour : '', " - ").concat((_option$endHour = option === null || option === void 0 ? void 0 : option.endHour) !== null && _option$endHour !== void 0 ? _option$endHour : '', ")");
+        return option ? "".concat(option.groupLabel || '', " | (").concat(option.startHour || '', " - ").concat(option.endHour || '', ")") : '';
       },
       onInputChange: function onInputChange(event, newInputValue) {
         setInputValue(newInputValue);
@@ -121,14 +117,12 @@
         _onInputChange(newInputValue);
       },
       renderOption: function renderOption(props, option) {
-        var _option$startHour2, _option$endHour2;
-
         return /*#__PURE__*/React__default["default"].createElement(material.Box, _extends__default["default"]({
           component: "li",
           sx: {
             fontSize: 12
           }
-        }, props), dateFns.format(dateFns.parse(option === null || option === void 0 ? void 0 : option.date, 'yyyy-MM-dd', new Date()), 'dd-MMMM-yyyy'), "(", (_option$startHour2 = option === null || option === void 0 ? void 0 : option.startHour) !== null && _option$startHour2 !== void 0 ? _option$startHour2 : '', " - ", (_option$endHour2 = option === null || option === void 0 ? void 0 : option.endHour) !== null && _option$endHour2 !== void 0 ? _option$endHour2 : '', ")");
+        }, props), dateFns.format(dateFns.parse(option === null || option === void 0 ? void 0 : option.date, 'yyyy-MM-dd', new Date()), 'dd-MMMM-yyyy'), "(", (option === null || option === void 0 ? void 0 : option.startHour) || '', " - ", (option === null || option === void 0 ? void 0 : option.endHour) || '', ")");
       },
       renderInput: function renderInput(params) {
         return /*#__PURE__*/React__default["default"].createElement(material.TextField, _extends__default["default"]({}, params, {
@@ -215,13 +209,15 @@
       icon: /*#__PURE__*/React__default["default"].createElement(LocalPrintshopIcon__default["default"], {
         fontSize: "small"
       })
-    }];
+    }]; //const handleOpenMenu = (event) => {
+    //  setAnchorMenuEl(event.currentTarget)
+    //}
+
     /**
      * @name handleCloseMenu
      * @description
      * @return void
      */
-
 
     var handleCloseMenu = function handleCloseMenu() {
       setAnchorMenuEl(null);
@@ -256,14 +252,26 @@
 
 
     var handleChangeDate = function handleChangeDate(method) {
-      if (typeof method !== 'function') return;
-      var options = mode === 'month' ? {
+      if (typeof method !== 'function') {
+        return;
+      }
+
+      var options = {
         months: 1
-      } : mode === 'week' ? {
-        weeks: 1
-      } : {
-        days: 1
       };
+
+      if (mode === 'week') {
+        options = {
+          weeks: 1
+        };
+      }
+
+      if (mode === 'day') {
+        options = {
+          days: 1
+        };
+      }
+
       var newDate = method(selectedDate, options);
       setDaysInMonth(dateFns.getDaysInMonth(newDate));
       setSelectedDate(newDate);
@@ -324,6 +332,9 @@
       ,
       "aria-controls": "basic-menu",
       onClick: handleOpenDateSelector,
+      sx: {
+        color: 'text.primary'
+      },
       "aria-expanded": openDateSelector ? 'true' : undefined
     }, dateFns.format(selectedDate, mode === 'month' ? 'MMMM-yyyy' : 'PPP')), /*#__PURE__*/React__default["default"].createElement(material.IconButton, _extends__default["default"]({
       sx: {
@@ -375,7 +386,12 @@
     }, (toolbarProps === null || toolbarProps === void 0 ? void 0 : toolbarProps.showSearchBar) && /*#__PURE__*/React__default["default"].createElement(ToolbarSearchbar, {
       events: events,
       onInputChange: function onInputChange(newValue) {
-        var newDate = newValue !== null && newValue !== void 0 && newValue.date ? dateFns.parse(newValue === null || newValue === void 0 ? void 0 : newValue.date, 'yyyy-MM-dd', today) : new Date();
+        var newDate = new Date();
+
+        if (newValue.date) {
+          newDate = dateFns.parse(newValue.date, 'yyyy-MM-dd', today);
+        }
+
         setDaysInMonth(dateFns.getDaysInMonth(newDate));
         setSelectedDate(newDate);
         setSearchResult(newValue);
@@ -405,10 +421,10 @@
       value: mode,
       size: "small",
       color: "primary",
+      "aria-label": "text button group",
       sx: {
         mr: 1.3
       },
-      "aria-label": "text button group",
       onChange: function onChange(e, newMode) {
         setMode(newMode);
       }
@@ -536,48 +552,38 @@
     onCellDragStart: PropTypes__default["default"].func
   };
 
-  function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { _defineProperty__default["default"](target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  var StyledTableCell$2 = system.styled(material.TableCell)(function (_ref) {
-    var _ref2;
+  function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$3(Object(source), !0).forEach(function (key) { _defineProperty__default["default"](target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  var StyledTableCell$2 = styles.styled(material.TableCell)(function (_ref) {
+    var _$concat2, _ref2;
 
-    var theme = _ref.theme;
-    return _ref2 = {}, _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.head), {
-      //backgroundColor: theme.palette.common.black,
+    _ref.theme;
+    return _ref2 = {}, _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.head), _defineProperty__default["default"]({
       borderTop: "1px solid #ccc !important",
       borderBottom: "1px solid #ccc !important",
-      borderLeft: "1px solid #ccc !important",
-      '&:nth-of-type(1)': {
-        borderLeft: "0px !important"
-      }
-    }), _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.body), {
-      fontSize: 14,
+      borderLeft: "1px solid #ccc !important"
+    }, '&:nth-of-type(1)', {
+      borderLeft: "0px !important"
+    })), _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.body), (_$concat2 = {
+      fontSize: 12,
       height: 96,
       width: 64,
       maxWidth: 64,
       cursor: 'pointer',
-      borderLeft: "1px solid #ccc",
-      '&:nth-of-type(7n+1)': {
-        borderLeft: 0
-      },
-      '&:nth-of-type(even)': {
-        backgroundColor: theme.palette.action.hover
-      }
-    }), _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.body, ":hover"), {
-      backgroundColor: "#eee"
+      verticalAlign: "top",
+      borderLeft: "1px solid #ccc"
+    }, _defineProperty__default["default"](_$concat2, '&:nth-of-type(7n+1)', {
+      borderLeft: 0
+    }), _defineProperty__default["default"](_$concat2, '&:nth-of-type(even)', {//backgroundColor: theme.palette.action.hover
+    }), _$concat2)), _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.body, ":hover"), {//backgroundColor: "#eee"
     }), _ref2;
   });
-  var StyledTableRow$2 = system.styled(material.TableRow)(function (_ref3) {
+  var StyledTableRow$2 = styles.styled(material.TableRow)(function (_ref3) {
     _ref3.theme;
-    return {
-      '&:nth-of-type(odd)': {//backgroundColor: theme.palette.action.hover,
-      },
-      // hide last border
-      '&:last-child td, &:last-child th': {
-        border: 0
-      }
-    };
+    return _defineProperty__default["default"]({}, '&:last-child td, &:last-child th', {
+      border: 0
+    });
   });
 
   function MonthModeView(props) {
@@ -651,11 +657,11 @@
 
     var onCellDragEnd = function onCellDragEnd(e) {
       e.preventDefault();
-      if (!(state !== null && state !== void 0 && state.itemTransfert) && !(state !== null && state !== void 0 && state.transfertTarget)) return;
+      if (!state.itemTransfert && !state.transfertTarget) return;
       var transfert = state.itemTransfert;
       var transfertTarget = state.transfertTarget;
       var rowsCopy = Array.from(rows);
-      var rowInd = rowsCopy === null || rowsCopy === void 0 ? void 0 : rowsCopy.findIndex(function (d) {
+      var rowInd = rowsCopy.findIndex(function (d) {
         return d.id === transfertTarget.rowIndex;
       });
 
@@ -744,7 +750,7 @@
       var tasks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
       var rowId = arguments.length > 1 ? arguments[1] : undefined;
       return tasks === null || tasks === void 0 ? void 0 : tasks.map(function (task, index) {
-        var condition = searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult;
+        var condition = searchResult ? (task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user) : !searchResult;
         return condition && /*#__PURE__*/React__default["default"].createElement(EventItem, {
           isMonthMode: true,
           event: task,
@@ -834,11 +840,8 @@
             return handleCellClick(event, row, day);
           }
         }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
-          variant: "body1"
-        }, day.day), (day === null || day === void 0 ? void 0 : (_day$data2 = day.data) === null || _day$data2 === void 0 ? void 0 : _day$data2.length) > 0 && renderTask(day === null || day === void 0 ? void 0 : day.data, row.id) || /*#__PURE__*/React__default["default"].createElement(EventNoteRoundedIcon__default["default"], {
-          fontSize: "large",
-          htmlColor: "#ccc"
-        }));
+          variant: "body2"
+        }, day.day), (day === null || day === void 0 ? void 0 : (_day$data2 = day.data) === null || _day$data2 === void 0 ? void 0 : _day$data2.length) > 0 && renderTask(day === null || day === void 0 ? void 0 : day.data, row.id));
       }));
     }))));
   }
@@ -857,73 +860,60 @@
     rows: []
   };
 
-  function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { _defineProperty__default["default"](target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-  var StyledTableCell$1 = system.styled(material.TableCell)(function (_ref) {
-    var _ref2;
+  function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$2(Object(source), !0).forEach(function (key) { _defineProperty__default["default"](target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+  var StyledTableCell$1 = styles.styled(material.TableCell)(function (_ref) {
+    var _$concat2, _ref2;
 
     _ref.theme;
-    return _ref2 = {}, _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.head), {
+    return _ref2 = {}, _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.head), _defineProperty__default["default"]({
       paddingLeft: 4,
       paddingRight: 4,
       borderTop: "1px solid #ccc !important",
       borderBottom: "1px solid #ccc !important",
-      borderLeft: "1px solid #ccc !important",
-      "&:nth-of-type(1)": {
-        borderLeft: "0px !important"
-      }
-    }), _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.body), {
+      borderLeft: "1px solid #ccc !important"
+    }, '&:nth-of-type(1)', {
+      borderLeft: "0px !important"
+    })), _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.body), (_$concat2 = {
       fontSize: 12,
       height: 16,
       width: 128,
       maxWidth: 128,
       cursor: 'pointer',
-      borderLeft: "1px solid #ccc",
-      "&:nth-of-type(1)": {
-        width: 80,
-        maxWidth: 80
-      },
-      "&:nth-of-type(8n+1)": {
-        borderLeft: 0
-      },
-      "&:nth-of-type(even)": {//backgroundColor: theme.palette.action.hover
-      }
-    }), _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.body, ":hover"), {
+      borderLeft: "1px solid #ccc"
+    }, _defineProperty__default["default"](_$concat2, '&:nth-of-type(1)', {
+      width: 80,
+      maxWidth: 80
+    }), _defineProperty__default["default"](_$concat2, '&:nth-of-type(8n+1)', {
+      borderLeft: 0
+    }), _$concat2)), _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.body, ":hover"), {
       backgroundColor: "#eee"
     }), _ref2;
   });
-  var StyledTableRow$1 = system.styled(material.TableRow)(function (_ref3) {
+  var StyledTableRow$1 = styles.styled(material.TableRow)(function (_ref3) {
     _ref3.theme;
-    return {
-      '&:nth-of-type(odd)': {//backgroundColor: theme.palette.action.hover,
-      },
-      // hide last border
-      '&:last-child td, &:last-child th': {
-        border: 0
-      }
-    };
+    return _defineProperty__default["default"]({}, '&:last-child td, &:last-child th', {
+      border: 0
+    });
   });
-  var StyledTableContainer$1 = system.styled(material.TableContainer)(function (_ref4) {
-    _ref4.theme;
-    return {
-      "&::-webkit-scrollbar": {
-        width: 7,
-        height: 6
-      },
-      "&::-webkit-scrollbar-track": {
-        WebkitBoxShadow: "inset 0 0 6px rgb(125, 161, 196, 0.5)"
-      },
-      "&::-webkit-scrollbar-thumb": {
-        WebkitBorderRadius: 4,
-        borderRadius: 4,
-        background: "rgba(0, 172, 193, .5)",
-        WebkitBoxShadow: "inset 0 0 6px rgba(25, 118, 210, .5)"
-      },
-      "&::-webkit-scrollbar-thumb:window-inactive": {
-        background: "rgba(125, 161, 196, 0.5)"
-      }
-    };
+  var StyledTableContainer$1 = styles.styled(material.TableContainer)(function (_ref5) {
+    var _ref6;
+
+    _ref5.theme;
+    return _ref6 = {}, _defineProperty__default["default"](_ref6, '&::-webkit-scrollbar', {
+      width: 7,
+      height: 6
+    }), _defineProperty__default["default"](_ref6, '&::-webkit-scrollbar-track', {
+      WebkitBoxShadow: "inset 0 0 6px rgb(125, 161, 196, 0.5)"
+    }), _defineProperty__default["default"](_ref6, '&::-webkit-scrollbar-thumb', {
+      WebkitBorderRadius: 4,
+      borderRadius: 4,
+      background: "rgba(0, 172, 193, .5)",
+      WebkitBoxShadow: "inset 0 0 6px rgba(25, 118, 210, .5)"
+    }), _defineProperty__default["default"](_ref6, '&::-webkit-scrollbar-thumb:window-inactive', {
+      background: "rgba(125, 161, 196, 0.5)"
+    }), _ref6;
   });
 
   function WeekModeView(props) {
@@ -1009,23 +999,21 @@
 
       e.preventDefault();
 
-      if (!(state !== null && state !== void 0 && state.itemTransfert) || !(state !== null && state !== void 0 && state.transfertTarget)) {
+      if (!state.itemTransfert || !state.transfertTarget) {
         return;
       }
 
       var transfert = state.itemTransfert;
       var transfertTarget = state.transfertTarget;
       var rowsData = Array.from(rows);
-      var day = (_rowsData$transfertTa = rowsData[transfertTarget === null || transfertTarget === void 0 ? void 0 : transfertTarget.rowIndex]) === null || _rowsData$transfertTa === void 0 ? void 0 : _rowsData$transfertTa.days[transfertTarget === null || transfertTarget === void 0 ? void 0 : transfertTarget.dayIndex];
+      var day = (_rowsData$transfertTa = rowsData[transfertTarget.rowIndex]) === null || _rowsData$transfertTa === void 0 ? void 0 : _rowsData$transfertTa.days[transfertTarget.dayIndex];
 
       if (day) {
-        var _transfertTarget$rowL, _prevEventCell$data, _transfert$item3;
+        var _transfertTarget$rowL, _prevEventCell$data;
 
         var hourRegExp = /[0-9]{2}:[0-9]{2}/;
         var foundEventIndex = day.data.findIndex(function (e) {
-          var _transfert$item, _transfert$item2;
-
-          return e.id === transfert.item.id && e.startHour === (transfert === null || transfert === void 0 ? void 0 : (_transfert$item = transfert.item) === null || _transfert$item === void 0 ? void 0 : _transfert$item.startHour) && e.endHour === (transfert === null || transfert === void 0 ? void 0 : (_transfert$item2 = transfert.item) === null || _transfert$item2 === void 0 ? void 0 : _transfert$item2.endHour);
+          return e.id === transfert.item.id && e.startHour === transfert.item.startHour && e.endHour === transfert.item.endHour;
         }); // Task already exists in the data array of the chosen cell
 
         if (foundEventIndex !== -1) {
@@ -1033,40 +1021,40 @@
         } // Event cell item to transfert
 
 
-        var prevEventCell = rowsData[transfert === null || transfert === void 0 ? void 0 : transfert.rowIndex].days[transfert === null || transfert === void 0 ? void 0 : transfert.dayIndex]; // Timeline label (00:00 am, 01:00 am, etc.)
+        var prevEventCell = rowsData[transfert.rowIndex].days[transfert.dayIndex]; // Timeline label (00:00 am, 01:00 am, etc.)
 
         var label = (_transfertTarget$rowL = transfertTarget.rowLabel) === null || _transfertTarget$rowL === void 0 ? void 0 : _transfertTarget$rowL.toUpperCase();
         var hourLabel = hourRegExp.exec(label)[0]; // Event's end hour
 
         var endHour = hourRegExp.exec(transfert.item.endHour)[0];
-        var endHourDate = dateFns.parse(endHour, 'HH:mm', day === null || day === void 0 ? void 0 : day.date); // Event start hour
+        var endHourDate = dateFns.parse(endHour, 'HH:mm', day.date); // Event start hour
 
         var startHour = hourRegExp.exec(transfert.item.startHour)[0];
-        var startHourDate = dateFns.parse(startHour, 'HH:mm', day === null || day === void 0 ? void 0 : day.date); // Minutes difference between end and start event hours
+        var startHourDate = dateFns.parse(startHour, 'HH:mm', day.date); // Minutes difference between end and start event hours
 
         var minutesDiff = dateFns.differenceInMinutes(endHourDate, startHourDate); // New event end hour according to it new cell
 
-        var newEndHour = dateFns.add(dateFns.parse(hourLabel, 'HH:mm', day === null || day === void 0 ? void 0 : day.date), {
+        var newEndHour = dateFns.add(dateFns.parse(hourLabel, 'HH:mm', day.date), {
           minutes: minutesDiff
         });
 
         if (!dateFns.isValid(startHourDate)) {
-          startHourDate = day === null || day === void 0 ? void 0 : day.date;
+          startHourDate = day.date;
           minutesDiff = dateFns.differenceInMinutes(endHourDate, startHourDate);
-          newEndHour = dateFns.add(dateFns.parse(hourLabel, 'HH:mm', day === null || day === void 0 ? void 0 : day.date), {
+          newEndHour = dateFns.add(dateFns.parse(hourLabel, 'HH:mm', day.date), {
             minutes: minutesDiff
           });
         }
 
-        prevEventCell === null || prevEventCell === void 0 ? void 0 : (_prevEventCell$data = prevEventCell.data) === null || _prevEventCell$data === void 0 ? void 0 : _prevEventCell$data.splice(transfert === null || transfert === void 0 ? void 0 : (_transfert$item3 = transfert.item) === null || _transfert$item3 === void 0 ? void 0 : _transfert$item3.itemIndex, 1);
+        prevEventCell === null || prevEventCell === void 0 ? void 0 : (_prevEventCell$data = prevEventCell.data) === null || _prevEventCell$data === void 0 ? void 0 : _prevEventCell$data.splice(transfert.item.itemIndex, 1);
         transfert.item.startHour = label;
         transfert.item.endHour = dateFns.format(newEndHour, 'HH:mm aaa');
-        transfert.item.date = dateFns.format(day === null || day === void 0 ? void 0 : day.date, 'yyyy-MM-dd');
+        transfert.item.date = dateFns.format(day.date, 'yyyy-MM-dd');
         day.data.push(transfert.item);
         setState(_objectSpread$2(_objectSpread$2({}, state), {}, {
           rows: rowsData
         }));
-        onEventsChange && onEventsChange(transfert === null || transfert === void 0 ? void 0 : transfert.item);
+        onEventsChange && onEventsChange(transfert.item);
       }
     };
     /**
@@ -1098,7 +1086,7 @@
 
     var renderTask = function renderTask(tasks, rowLabel, rowIndex, dayIndex) {
       return tasks === null || tasks === void 0 ? void 0 : tasks.map(function (task, itemIndex) {
-        var condition = searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult;
+        var condition = searchResult ? (task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user) : !searchResult;
         return condition && /*#__PURE__*/React__default["default"].createElement(EventItem, {
           event: task,
           elevation: 0,
@@ -1237,67 +1225,57 @@
   };
   WeekModeView.defaultProps = {};
 
-  function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { _defineProperty__default["default"](target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$1(Object(source), !0).forEach(function (key) { _defineProperty__default["default"](target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   var StyledTableCell = system.styled(material.TableCell)(function (_ref) {
     var _ref2;
 
     _ref.theme;
-    return _ref2 = {}, _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.head), {
+    return _ref2 = {}, _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.head), _defineProperty__default["default"]({
       paddingLeft: 4,
       paddingRight: 4,
       borderTop: "1px solid #ccc !important",
       borderBottom: "1px solid #ccc !important",
-      borderLeft: "1px solid #ccc !important",
-      "&:nth-of-type(1)": {
-        borderLeft: "0px !important"
-      }
-    }), _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.body), {
+      borderLeft: "1px solid #ccc !important"
+    }, '&:nth-of-type(1)', {
+      borderLeft: "0px !important"
+    })), _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.body), _defineProperty__default["default"]({
       fontSize: 12,
       height: 16,
       width: 128,
       maxWidth: 128,
       cursor: 'pointer',
-      borderLeft: "1px solid #ccc",
-      "&:nth-of-type(1)": {
-        borderLeft: 0
-      }
-    }), _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.body, ":hover"), {
+      borderLeft: "1px solid #ccc"
+    }, '&:nth-of-type(1)', {
+      borderLeft: 0
+    })), _defineProperty__default["default"](_ref2, "&.".concat(material.tableCellClasses.body, ":hover"), {
       backgroundColor: "#eee"
     }), _ref2;
   });
   var StyledTableRow = system.styled(material.TableRow)(function (_ref3) {
     _ref3.theme;
-    return {
-      '&:nth-of-type(odd)': {//backgroundColor: theme.palette.action.hover,
-      },
-      // hide last border
-      '&:last-child td, &:last-child th': {
-        border: 0
-      }
-    };
+    return _defineProperty__default["default"]({}, '&:last-child td, &:last-child th', {
+      border: 0
+    });
   });
-  var StyledTableContainer = system.styled(material.TableContainer)(function (_ref4) {
-    _ref4.theme;
-    return {
-      "&::-webkit-scrollbar": {
-        width: 7,
-        height: 6
-      },
-      "&::-webkit-scrollbar-track": {
-        WebkitBoxShadow: "inset 0 0 6px rgb(125, 161, 196, 0.5)"
-      },
-      "&::-webkit-scrollbar-thumb": {
-        WebkitBorderRadius: 4,
-        borderRadius: 4,
-        background: "rgba(0, 172, 193, .5)",
-        WebkitBoxShadow: "inset 0 0 6px rgba(25, 118, 210, .5)"
-      },
-      "&::-webkit-scrollbar-thumb:window-inactive": {
-        background: "rgba(125, 161, 196, 0.5)"
-      }
-    };
+  var StyledTableContainer = system.styled(material.TableContainer)(function (_ref5) {
+    var _ref6;
+
+    _ref5.theme;
+    return _ref6 = {}, _defineProperty__default["default"](_ref6, '&::-webkit-scrollbar', {
+      width: 7,
+      height: 6
+    }), _defineProperty__default["default"](_ref6, '&::-webkit-scrollbar-track', {
+      WebkitBoxShadow: "inset 0 0 6px rgb(125, 161, 196, 0.5)"
+    }), _defineProperty__default["default"](_ref6, '&::-webkit-scrollbar-thumb', {
+      WebkitBorderRadius: 4,
+      borderRadius: 4,
+      background: "rgba(0, 172, 193, .5)",
+      WebkitBoxShadow: "inset 0 0 6px rgba(25, 118, 210, .5)"
+    }), _defineProperty__default["default"](_ref6, '&::-webkit-scrollbar-thumb:window-inactive', {
+      background: "rgba(125, 161, 196, 0.5)"
+    }), _ref6;
   });
 
   function DayModeView(props) {
@@ -1383,23 +1361,21 @@
 
       e.preventDefault();
 
-      if (!(state !== null && state !== void 0 && state.itemTransfert) || !(state !== null && state !== void 0 && state.transfertTarget)) {
+      if (!state.itemTransfert || !state.transfertTarget) {
         return;
       }
 
       var transfert = state.itemTransfert;
       var transfertTarget = state.transfertTarget;
       var rowsData = Array.from(rows);
-      var day = (_rowsData$transfertTa = rowsData[transfertTarget === null || transfertTarget === void 0 ? void 0 : transfertTarget.rowIndex]) === null || _rowsData$transfertTa === void 0 ? void 0 : _rowsData$transfertTa.days[transfertTarget === null || transfertTarget === void 0 ? void 0 : transfertTarget.dayIndex];
+      var day = (_rowsData$transfertTa = rowsData[transfertTarget.rowIndex]) === null || _rowsData$transfertTa === void 0 ? void 0 : _rowsData$transfertTa.days[transfertTarget.dayIndex];
 
       if (day) {
-        var _transfertTarget$rowL, _prevEventCell$data, _transfert$item3;
+        var _transfertTarget$rowL, _prevEventCell$data, _transfert$item;
 
         var hourRegExp = /[0-9]{2}:[0-9]{2}/;
         var foundEventIndex = day.data.findIndex(function (e) {
-          var _transfert$item, _transfert$item2;
-
-          return e.id === transfert.item.id && e.startHour === (transfert === null || transfert === void 0 ? void 0 : (_transfert$item = transfert.item) === null || _transfert$item === void 0 ? void 0 : _transfert$item.startHour) && e.endHour === (transfert === null || transfert === void 0 ? void 0 : (_transfert$item2 = transfert.item) === null || _transfert$item2 === void 0 ? void 0 : _transfert$item2.endHour);
+          return e.id === transfert.item.id && e.startHour === transfert.item.startHour && e.endHour === transfert.item.endHour;
         }); // Task already exists in the data array of the chosen cell
 
         if (foundEventIndex !== -1) {
@@ -1407,40 +1383,40 @@
         } // Event cell item to transfert
 
 
-        var prevEventCell = rowsData[transfert === null || transfert === void 0 ? void 0 : transfert.rowIndex].days[transfert === null || transfert === void 0 ? void 0 : transfert.dayIndex]; // Timeline label (00:00 am, 01:00 am, etc.)
+        var prevEventCell = rowsData[transfert.rowIndex].days[transfert.dayIndex]; // Timeline label (00:00 am, 01:00 am, etc.)
 
         var label = (_transfertTarget$rowL = transfertTarget.rowLabel) === null || _transfertTarget$rowL === void 0 ? void 0 : _transfertTarget$rowL.toUpperCase();
         var hourLabel = hourRegExp.exec(label)[0]; // Event's end hour
 
         var endHour = hourRegExp.exec(transfert.item.endHour)[0];
-        var endHourDate = dateFns.parse(endHour, 'HH:mm', day === null || day === void 0 ? void 0 : day.date); // Event start hour
+        var endHourDate = dateFns.parse(endHour, 'HH:mm', day.date); // Event start hour
 
         var startHour = hourRegExp.exec(transfert.item.startHour)[0];
-        var startHourDate = dateFns.parse(startHour, 'HH:mm', day === null || day === void 0 ? void 0 : day.date); // Minutes difference between end and start event hours
+        var startHourDate = dateFns.parse(startHour, 'HH:mm', day.date); // Minutes difference between end and start event hours
 
         var minutesDiff = dateFns.differenceInMinutes(endHourDate, startHourDate); // New event end hour according to it new cell
 
-        var newEndHour = dateFns.add(dateFns.parse(hourLabel, 'HH:mm', day === null || day === void 0 ? void 0 : day.date), {
+        var newEndHour = dateFns.add(dateFns.parse(hourLabel, 'HH:mm', day.date), {
           minutes: minutesDiff
         });
 
         if (!dateFns.isValid(startHourDate)) {
-          startHourDate = day === null || day === void 0 ? void 0 : day.date;
+          startHourDate = day.date;
           minutesDiff = dateFns.differenceInMinutes(endHourDate, startHourDate);
-          newEndHour = dateFns.add(dateFns.parse(hourLabel, 'HH:mm', day === null || day === void 0 ? void 0 : day.date), {
+          newEndHour = dateFns.add(dateFns.parse(hourLabel, 'HH:mm', day.date), {
             minutes: minutesDiff
           });
         }
 
-        prevEventCell === null || prevEventCell === void 0 ? void 0 : (_prevEventCell$data = prevEventCell.data) === null || _prevEventCell$data === void 0 ? void 0 : _prevEventCell$data.splice(transfert === null || transfert === void 0 ? void 0 : (_transfert$item3 = transfert.item) === null || _transfert$item3 === void 0 ? void 0 : _transfert$item3.itemIndex, 1);
+        prevEventCell === null || prevEventCell === void 0 ? void 0 : (_prevEventCell$data = prevEventCell.data) === null || _prevEventCell$data === void 0 ? void 0 : _prevEventCell$data.splice(transfert === null || transfert === void 0 ? void 0 : (_transfert$item = transfert.item) === null || _transfert$item === void 0 ? void 0 : _transfert$item.itemIndex, 1);
         transfert.item.startHour = label;
         transfert.item.endHour = dateFns.format(newEndHour, 'HH:mm aaa');
-        transfert.item.date = dateFns.format(day === null || day === void 0 ? void 0 : day.date, 'yyyy-MM-dd');
+        transfert.item.date = dateFns.format(day.date, 'yyyy-MM-dd');
         day.data.push(transfert.item);
         setState(_objectSpread$1(_objectSpread$1({}, state), {}, {
           rows: rowsData
         }));
-        onEventsChange && onEventsChange(transfert === null || transfert === void 0 ? void 0 : transfert.item);
+        onEventsChange && onEventsChange(transfert.item);
       }
     };
     /**
@@ -1472,7 +1448,7 @@
 
     var renderTask = function renderTask(tasks, rowLabel, rowIndex, dayIndex) {
       return tasks === null || tasks === void 0 ? void 0 : tasks.map(function (task, itemIndex) {
-        var condition = searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult;
+        var condition = searchResult ? (task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user) : !searchResult;
         return condition && /*#__PURE__*/React__default["default"].createElement(EventItem, {
           draggable: true,
           event: task,
@@ -1611,26 +1587,23 @@
   };
   DayModeView.defaultProps = {};
 
-  var StyledContainer = system.styled(material.Typography)(function (_ref) {
+  var StyledContainer = styles.styled(material.Typography)(function (_ref) {
+    var _ref2;
+
     _ref.theme;
-    return {
-      "&::-webkit-scrollbar": {
-        width: 7,
-        height: 6
-      },
-      "&::-webkit-scrollbar-track": {
-        WebkitBoxShadow: "inset 0 0 6px rgb(125, 161, 196, 0.5)"
-      },
-      "&::-webkit-scrollbar-thumb": {
-        WebkitBorderRadius: 4,
-        borderRadius: 4,
-        background: "rgba(0, 172, 193, .5)",
-        WebkitBoxShadow: "inset 0 0 6px rgba(25, 118, 210, .5)"
-      },
-      "&::-webkit-scrollbar-thumb:window-inactive": {
-        background: "rgba(125, 161, 196, 0.5)"
-      }
-    };
+    return _ref2 = {}, _defineProperty__default["default"](_ref2, '&::-webkit-scrollbar', {
+      width: 7,
+      height: 6
+    }), _defineProperty__default["default"](_ref2, '&::-webkit-scrollbar-track', {
+      WebkitBoxShadow: "inset 0 0 6px rgb(125, 161, 196, 0.5)"
+    }), _defineProperty__default["default"](_ref2, '&::-webkit-scrollbar-thumb', {
+      WebkitBorderRadius: 4,
+      borderRadius: 4,
+      background: "rgba(0, 172, 193, .5)",
+      WebkitBoxShadow: "inset 0 0 6px rgba(25, 118, 210, .5)"
+    }), _defineProperty__default["default"](_ref2, '&::-webkit-scrollbar-thumb:window-inactive', {
+      background: "rgba(125, 161, 196, 0.5)"
+    }), _ref2;
   });
 
   function TimeLineModeView(props) {
@@ -1677,7 +1650,7 @@
       }
     }, /*#__PURE__*/React__default["default"].createElement(Timeline__default["default"], {
       position: "alternate"
-    }, fileredEvents && ((_fileredEvents2 = fileredEvents) === null || _fileredEvents2 === void 0 ? void 0 : _fileredEvents2.map(function (task, index) {
+    }, (_fileredEvents2 = fileredEvents) === null || _fileredEvents2 === void 0 ? void 0 : _fileredEvents2.map(function (task, index) {
       return /*#__PURE__*/React__default["default"].createElement(TimelineItem__default["default"], {
         key: "timeline-".concat(index),
         sx: {
@@ -1709,7 +1682,7 @@
         variant: "body1",
         component: "span"
       }, task === null || task === void 0 ? void 0 : task.label), /*#__PURE__*/React__default["default"].createElement(material.Typography, null, task === null || task === void 0 ? void 0 : task.groupLabel)));
-    }))));
+    })));
   }
 
   TimeLineModeView.propTypes = {
@@ -1726,9 +1699,9 @@
   };
   TimeLineModeView.defaultProps = {};
 
-  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty__default["default"](target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty__default["default"](target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
   /**
    * @name Scheduler
    * @description
@@ -1746,7 +1719,7 @@
         onAlertCloseButtonClicked = props.onAlertCloseButtonClicked,
         toolbarProps = props.toolbarProps;
     var today = new Date();
-    var theme = styles.useTheme();
+    styles.useTheme();
     var TransitionMode = (options === null || options === void 0 ? void 0 : options.transitionMode) === 'zoom' ? material.Zoom : material.Fade;
 
     var _useState = React.useState({}),
@@ -1800,7 +1773,7 @@
         weekDays[6] = 'Mon';
       }
 
-      return weekDays === null || weekDays === void 0 ? void 0 : weekDays.map(function (day, i) {
+      return weekDays.map(function (day, i) {
         return {
           id: "row-day-header-".concat(i + 1),
           flex: 1,
@@ -1840,7 +1813,7 @@
         return startOnSunday ? v <= monthStartDay : v < monthStartDay;
       };
 
-      if (monthStartDay > 1) {
+      if (monthStartDay >= 1) {
         var _loop = function _loop(i) {
           var subDate = dateFns.sub(monthStartDate, {
             days: monthStartDay - i + (startOnSunday ? 1 : 0)
@@ -1863,9 +1836,29 @@
         for (var i = 1; checkCondition(i); i++) {
           _loop(i);
         }
+      } else {
+        var _loop2 = function _loop2(_i) {
+          var subDate = dateFns.sub(monthStartDate, {
+            days: _i
+          });
+          var day = parseInt(dateFns.format(subDate, 'dd'));
+          var data = events.filter(function (event) {
+            return dateFns.isSameDay(subDate, dateFns.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()));
+          });
+          daysBefore.push({
+            id: "day_-".concat(day),
+            day: day,
+            date: subDate,
+            data: data
+          });
+        };
+
+        for (var _i = 6; _i > 0; _i--) {
+          _loop2(_i);
+        }
       }
 
-      if ((daysBefore === null || daysBefore === void 0 ? void 0 : daysBefore.length) > 0) {
+      if (daysBefore.length > 0) {
         rows.push({
           id: 0,
           days: daysBefore
@@ -1873,10 +1866,10 @@
       } // Add days and events data
 
 
-      for (var _i = 0; _i < iteration; _i++) {
+      for (var _i2 = 0; _i2 < iteration; _i2++) {
         var obj = [];
 
-        var _loop2 = function _loop2(j) {
+        var _loop3 = function _loop3(j) {
           var date = dateFns.parse("".concat(dateDay, "-").concat(selectedDate), 'dd-MMMM-yyyy', new Date());
           var data = events.filter(function (event) {
             return dateFns.isSameDay(date, dateFns.parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()));
@@ -1884,27 +1877,27 @@
           obj.push({
             id: "day_-".concat(dateDay),
             date: date,
-            day: dateDay,
-            data: data
+            data: data,
+            day: dateDay
           });
           dateDay++;
         };
 
-        for (var j = 0; // This condition ensure that days will not exceed 30
+        for (var j = 0; // This condition ensure that days will not exceed 31
         // i === 0 ? 7 - daysBefore?.length means that we substract inserted days
         // in the first line to 7
-        j < (_i === 0 ? 7 - (daysBefore === null || daysBefore === void 0 ? void 0 : daysBefore.length) : 7) && dateDay <= daysInMonth; j++) {
-          _loop2(j);
+        j < (_i2 === 0 ? 7 - daysBefore.length : 7) && dateDay <= daysInMonth; j++) {
+          _loop3(j);
         }
 
-        if (_i === 0 && (daysBefore === null || daysBefore === void 0 ? void 0 : daysBefore.length) > 0) {
+        if (_i2 === 0 && daysBefore.length > 0) {
           rows[0].days = rows[0].days.concat(obj);
           continue;
         }
 
         if (obj.length > 0) {
           rows.push({
-            id: _i,
+            id: _i2,
             days: obj
           });
         }
@@ -1922,7 +1915,7 @@
           var day = lastRow.days[(lastRow === null || lastRow === void 0 ? void 0 : (_lastRow$days2 = lastRow.days) === null || _lastRow$days2 === void 0 ? void 0 : _lastRow$days2.length) - 1];
           var addDate = day.date;
 
-          for (var _i2 = dateDay; _i2 < dateDay + lastRowDaysdiff; _i2++) {
+          for (var _i3 = dateDay; _i3 < dateDay + lastRowDaysdiff; _i3++) {
             addDate = dateFns.add(addDate, {
               days: 1
             });
@@ -1979,7 +1972,7 @@
       var data = [];
       var dayStartHour = dateFns.startOfDay(selectedDay);
 
-      var _loop3 = function _loop3(i) {
+      var _loop4 = function _loop4(i) {
         var id = "line_".concat(i);
         var label = dateFns.format(dayStartHour, 'HH:mm aaa'); //TODO Add everyday event capability
         //if (i === 0) {
@@ -2023,7 +2016,7 @@
       };
 
       for (var i = 0; i <= HOURS; i++) {
-        _loop3(i);
+        _loop4(i);
       }
 
       return data;
@@ -2043,7 +2036,7 @@
       var data = [];
       var dayStartHour = dateFns.startOfDay(selectedDay);
 
-      var _loop4 = function _loop4(i) {
+      var _loop5 = function _loop5(i) {
         var id = "line_".concat(i);
         var label = dateFns.format(dayStartHour, 'HH:mm aaa');
 
@@ -2074,7 +2067,7 @@
       };
 
       for (var i = 0; i <= HOURS; i++) {
-        _loop4(i);
+        _loop5(i);
       }
 
       return data;
@@ -2195,9 +2188,7 @@
       } // eslint-disable-next-line
 
     }, [daysInMonth, selectedDay, selectedDate, mode]);
-    return /*#__PURE__*/React__default["default"].createElement(system.ThemeProvider, {
-      theme: theme
-    }, /*#__PURE__*/React__default["default"].createElement(material.Paper, {
+    return /*#__PURE__*/React__default["default"].createElement(material.Paper, {
       variant: "outlined",
       elevation: 0,
       sx: {
@@ -2285,7 +2276,7 @@
       searchResult: searchResult,
       onDateChange: handleDateChange,
       onEventsChange: onEventsChange
-    }))))));
+    })))));
   }
 
   Scheduler.propTypes = {

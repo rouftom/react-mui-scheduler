@@ -5,7 +5,6 @@ import _regeneratorRuntime from '@babel/runtime/regenerator';
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Autocomplete, Box, TextField, Toolbar, Grid, Typography, Hidden, IconButton, Button, Menu, ToggleButtonGroup, ToggleButton, MenuItem, ListItemIcon, Divider, Collapse, Alert, Paper, TableCell, tableCellClasses, TableRow, TableContainer, Table, TableHead, TableBody, Tooltip, Zoom, Fade } from '@mui/material';
-import { styled as styled$1, ThemeProvider } from '@mui/system';
 import { styled, useTheme } from '@mui/material/styles';
 import { format, parse, getDaysInMonth, sub, add, differenceInMinutes, isValid, isSameDay, getWeeksInMonth, startOfMonth, getDay, startOfWeek, startOfDay } from 'date-fns';
 import _extends from '@babel/runtime/helpers/extends';
@@ -15,7 +14,6 @@ import StaticDatePicker from '@mui/lab/StaticDatePicker';
 import CloseIcon from '@mui/icons-material/Close';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import '@mui/icons-material/MoreVert';
 import TodayIcon from '@mui/icons-material/Today';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ArchiveIcon from '@mui/icons-material/Archive';
@@ -23,7 +21,8 @@ import AutorenewIcon from '@mui/icons-material/Autorenew';
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import GridViewIcon from '@mui/icons-material/GridView';
-import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
+import '@mui/icons-material/EventNoteRounded';
+import { styled as styled$1 } from '@mui/system';
 import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
@@ -33,9 +32,9 @@ import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 
-function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$4(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var StyledAutoComplete = styled(Autocomplete)(function (_ref) {
   var _ref2;
 
@@ -47,7 +46,6 @@ var StyledAutoComplete = styled(Autocomplete)(function (_ref) {
     margin: theme.spacing(.5, 1.5),
     transition: theme.transitions.create('width')
   }, _defineProperty(_ref2, theme.breakpoints.up('sm'), {
-    //minWidth: '20ch',
     width: '100%'
   }), _defineProperty(_ref2, theme.breakpoints.up('md'), {
     width: '25ch'
@@ -72,7 +70,7 @@ function ToolbarSearchbar(props) {
 
   var handleOnChange = function handleOnChange(event, newValue) {
     setValue(newValue);
-    _onInputChange && _onInputChange(newValue);
+    if (_onInputChange) _onInputChange(newValue);
   };
 
   return /*#__PURE__*/React.createElement(StyledAutoComplete, {
@@ -87,7 +85,7 @@ function ToolbarSearchbar(props) {
       return -b.groupLabel.localeCompare(a.groupLabel);
     }),
     groupBy: function groupBy(option) {
-      return option === null || option === void 0 ? void 0 : option.groupLabel;
+      return option ? option === null || option === void 0 ? void 0 : option.groupLabel : null;
     }
     /*
     (
@@ -108,9 +106,7 @@ function ToolbarSearchbar(props) {
      */
     ,
     getOptionLabel: function getOptionLabel(option) {
-      var _option$startHour, _option$endHour;
-
-      return option && "".concat(option === null || option === void 0 ? void 0 : option.groupLabel, " | (").concat((_option$startHour = option === null || option === void 0 ? void 0 : option.startHour) !== null && _option$startHour !== void 0 ? _option$startHour : '', " - ").concat((_option$endHour = option === null || option === void 0 ? void 0 : option.endHour) !== null && _option$endHour !== void 0 ? _option$endHour : '', ")");
+      return option ? "".concat(option.groupLabel || '', " | (").concat(option.startHour || '', " - ").concat(option.endHour || '', ")") : '';
     },
     onInputChange: function onInputChange(event, newInputValue) {
       setInputValue(newInputValue);
@@ -118,14 +114,12 @@ function ToolbarSearchbar(props) {
       _onInputChange(newInputValue);
     },
     renderOption: function renderOption(props, option) {
-      var _option$startHour2, _option$endHour2;
-
       return /*#__PURE__*/React.createElement(Box, _extends({
         component: "li",
         sx: {
           fontSize: 12
         }
-      }, props), format(parse(option === null || option === void 0 ? void 0 : option.date, 'yyyy-MM-dd', new Date()), 'dd-MMMM-yyyy'), "(", (_option$startHour2 = option === null || option === void 0 ? void 0 : option.startHour) !== null && _option$startHour2 !== void 0 ? _option$startHour2 : '', " - ", (_option$endHour2 = option === null || option === void 0 ? void 0 : option.endHour) !== null && _option$endHour2 !== void 0 ? _option$endHour2 : '', ")");
+      }, props), format(parse(option === null || option === void 0 ? void 0 : option.date, 'yyyy-MM-dd', new Date()), 'dd-MMMM-yyyy'), "(", (option === null || option === void 0 ? void 0 : option.startHour) || '', " - ", (option === null || option === void 0 ? void 0 : option.endHour) || '', ")");
     },
     renderInput: function renderInput(params) {
       return /*#__PURE__*/React.createElement(TextField, _extends({}, params, {
@@ -212,13 +206,15 @@ function SchedulerToolbar(props) {
     icon: /*#__PURE__*/React.createElement(LocalPrintshopIcon, {
       fontSize: "small"
     })
-  }];
+  }]; //const handleOpenMenu = (event) => {
+  //  setAnchorMenuEl(event.currentTarget)
+  //}
+
   /**
    * @name handleCloseMenu
    * @description
    * @return void
    */
-
 
   var handleCloseMenu = function handleCloseMenu() {
     setAnchorMenuEl(null);
@@ -253,14 +249,26 @@ function SchedulerToolbar(props) {
 
 
   var handleChangeDate = function handleChangeDate(method) {
-    if (typeof method !== 'function') return;
-    var options = mode === 'month' ? {
+    if (typeof method !== 'function') {
+      return;
+    }
+
+    var options = {
       months: 1
-    } : mode === 'week' ? {
-      weeks: 1
-    } : {
-      days: 1
     };
+
+    if (mode === 'week') {
+      options = {
+        weeks: 1
+      };
+    }
+
+    if (mode === 'day') {
+      options = {
+        days: 1
+      };
+    }
+
     var newDate = method(selectedDate, options);
     setDaysInMonth(getDaysInMonth(newDate));
     setSelectedDate(newDate);
@@ -321,6 +329,9 @@ function SchedulerToolbar(props) {
     ,
     "aria-controls": "basic-menu",
     onClick: handleOpenDateSelector,
+    sx: {
+      color: 'text.primary'
+    },
     "aria-expanded": openDateSelector ? 'true' : undefined
   }, format(selectedDate, mode === 'month' ? 'MMMM-yyyy' : 'PPP')), /*#__PURE__*/React.createElement(IconButton, _extends({
     sx: {
@@ -372,7 +383,12 @@ function SchedulerToolbar(props) {
   }, (toolbarProps === null || toolbarProps === void 0 ? void 0 : toolbarProps.showSearchBar) && /*#__PURE__*/React.createElement(ToolbarSearchbar, {
     events: events,
     onInputChange: function onInputChange(newValue) {
-      var newDate = newValue !== null && newValue !== void 0 && newValue.date ? parse(newValue === null || newValue === void 0 ? void 0 : newValue.date, 'yyyy-MM-dd', today) : new Date();
+      var newDate = new Date();
+
+      if (newValue.date) {
+        newDate = parse(newValue.date, 'yyyy-MM-dd', today);
+      }
+
       setDaysInMonth(getDaysInMonth(newDate));
       setSelectedDate(newDate);
       setSearchResult(newValue);
@@ -402,10 +418,10 @@ function SchedulerToolbar(props) {
     value: mode,
     size: "small",
     color: "primary",
+    "aria-label": "text button group",
     sx: {
       mr: 1.3
     },
-    "aria-label": "text button group",
     onChange: function onChange(e, newMode) {
       setMode(newMode);
     }
@@ -533,48 +549,38 @@ EventItem.propTypes = {
   onCellDragStart: PropTypes.func
 };
 
-function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-var StyledTableCell$2 = styled$1(TableCell)(function (_ref) {
-  var _ref2;
+function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$3(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+var StyledTableCell$2 = styled(TableCell)(function (_ref) {
+  var _$concat2, _ref2;
 
-  var theme = _ref.theme;
-  return _ref2 = {}, _defineProperty(_ref2, "&.".concat(tableCellClasses.head), {
-    //backgroundColor: theme.palette.common.black,
+  _ref.theme;
+  return _ref2 = {}, _defineProperty(_ref2, "&.".concat(tableCellClasses.head), _defineProperty({
     borderTop: "1px solid #ccc !important",
     borderBottom: "1px solid #ccc !important",
-    borderLeft: "1px solid #ccc !important",
-    '&:nth-of-type(1)': {
-      borderLeft: "0px !important"
-    }
-  }), _defineProperty(_ref2, "&.".concat(tableCellClasses.body), {
-    fontSize: 14,
+    borderLeft: "1px solid #ccc !important"
+  }, '&:nth-of-type(1)', {
+    borderLeft: "0px !important"
+  })), _defineProperty(_ref2, "&.".concat(tableCellClasses.body), (_$concat2 = {
+    fontSize: 12,
     height: 96,
     width: 64,
     maxWidth: 64,
     cursor: 'pointer',
-    borderLeft: "1px solid #ccc",
-    '&:nth-of-type(7n+1)': {
-      borderLeft: 0
-    },
-    '&:nth-of-type(even)': {
-      backgroundColor: theme.palette.action.hover
-    }
-  }), _defineProperty(_ref2, "&.".concat(tableCellClasses.body, ":hover"), {
-    backgroundColor: "#eee"
+    verticalAlign: "top",
+    borderLeft: "1px solid #ccc"
+  }, _defineProperty(_$concat2, '&:nth-of-type(7n+1)', {
+    borderLeft: 0
+  }), _defineProperty(_$concat2, '&:nth-of-type(even)', {//backgroundColor: theme.palette.action.hover
+  }), _$concat2)), _defineProperty(_ref2, "&.".concat(tableCellClasses.body, ":hover"), {//backgroundColor: "#eee"
   }), _ref2;
 });
-var StyledTableRow$2 = styled$1(TableRow)(function (_ref3) {
+var StyledTableRow$2 = styled(TableRow)(function (_ref3) {
   _ref3.theme;
-  return {
-    '&:nth-of-type(odd)': {//backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-      border: 0
-    }
-  };
+  return _defineProperty({}, '&:last-child td, &:last-child th', {
+    border: 0
+  });
 });
 
 function MonthModeView(props) {
@@ -648,11 +654,11 @@ function MonthModeView(props) {
 
   var onCellDragEnd = function onCellDragEnd(e) {
     e.preventDefault();
-    if (!(state !== null && state !== void 0 && state.itemTransfert) && !(state !== null && state !== void 0 && state.transfertTarget)) return;
+    if (!state.itemTransfert && !state.transfertTarget) return;
     var transfert = state.itemTransfert;
     var transfertTarget = state.transfertTarget;
     var rowsCopy = Array.from(rows);
-    var rowInd = rowsCopy === null || rowsCopy === void 0 ? void 0 : rowsCopy.findIndex(function (d) {
+    var rowInd = rowsCopy.findIndex(function (d) {
       return d.id === transfertTarget.rowIndex;
     });
 
@@ -741,7 +747,7 @@ function MonthModeView(props) {
     var tasks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var rowId = arguments.length > 1 ? arguments[1] : undefined;
     return tasks === null || tasks === void 0 ? void 0 : tasks.map(function (task, index) {
-      var condition = searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult;
+      var condition = searchResult ? (task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user) : !searchResult;
       return condition && /*#__PURE__*/React.createElement(EventItem, {
         isMonthMode: true,
         event: task,
@@ -831,11 +837,8 @@ function MonthModeView(props) {
           return handleCellClick(event, row, day);
         }
       }, /*#__PURE__*/React.createElement(Typography, {
-        variant: "body1"
-      }, day.day), (day === null || day === void 0 ? void 0 : (_day$data2 = day.data) === null || _day$data2 === void 0 ? void 0 : _day$data2.length) > 0 && renderTask(day === null || day === void 0 ? void 0 : day.data, row.id) || /*#__PURE__*/React.createElement(EventNoteRoundedIcon, {
-        fontSize: "large",
-        htmlColor: "#ccc"
-      }));
+        variant: "body2"
+      }, day.day), (day === null || day === void 0 ? void 0 : (_day$data2 = day.data) === null || _day$data2 === void 0 ? void 0 : _day$data2.length) > 0 && renderTask(day === null || day === void 0 ? void 0 : day.data, row.id));
     }));
   }))));
 }
@@ -854,73 +857,60 @@ MonthModeView.defaultProps = {
   rows: []
 };
 
-function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-var StyledTableCell$1 = styled$1(TableCell)(function (_ref) {
-  var _ref2;
+function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$2(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+var StyledTableCell$1 = styled(TableCell)(function (_ref) {
+  var _$concat2, _ref2;
 
   _ref.theme;
-  return _ref2 = {}, _defineProperty(_ref2, "&.".concat(tableCellClasses.head), {
+  return _ref2 = {}, _defineProperty(_ref2, "&.".concat(tableCellClasses.head), _defineProperty({
     paddingLeft: 4,
     paddingRight: 4,
     borderTop: "1px solid #ccc !important",
     borderBottom: "1px solid #ccc !important",
-    borderLeft: "1px solid #ccc !important",
-    "&:nth-of-type(1)": {
-      borderLeft: "0px !important"
-    }
-  }), _defineProperty(_ref2, "&.".concat(tableCellClasses.body), {
+    borderLeft: "1px solid #ccc !important"
+  }, '&:nth-of-type(1)', {
+    borderLeft: "0px !important"
+  })), _defineProperty(_ref2, "&.".concat(tableCellClasses.body), (_$concat2 = {
     fontSize: 12,
     height: 16,
     width: 128,
     maxWidth: 128,
     cursor: 'pointer',
-    borderLeft: "1px solid #ccc",
-    "&:nth-of-type(1)": {
-      width: 80,
-      maxWidth: 80
-    },
-    "&:nth-of-type(8n+1)": {
-      borderLeft: 0
-    },
-    "&:nth-of-type(even)": {//backgroundColor: theme.palette.action.hover
-    }
-  }), _defineProperty(_ref2, "&.".concat(tableCellClasses.body, ":hover"), {
+    borderLeft: "1px solid #ccc"
+  }, _defineProperty(_$concat2, '&:nth-of-type(1)', {
+    width: 80,
+    maxWidth: 80
+  }), _defineProperty(_$concat2, '&:nth-of-type(8n+1)', {
+    borderLeft: 0
+  }), _$concat2)), _defineProperty(_ref2, "&.".concat(tableCellClasses.body, ":hover"), {
     backgroundColor: "#eee"
   }), _ref2;
 });
-var StyledTableRow$1 = styled$1(TableRow)(function (_ref3) {
+var StyledTableRow$1 = styled(TableRow)(function (_ref3) {
   _ref3.theme;
-  return {
-    '&:nth-of-type(odd)': {//backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-      border: 0
-    }
-  };
+  return _defineProperty({}, '&:last-child td, &:last-child th', {
+    border: 0
+  });
 });
-var StyledTableContainer$1 = styled$1(TableContainer)(function (_ref4) {
-  _ref4.theme;
-  return {
-    "&::-webkit-scrollbar": {
-      width: 7,
-      height: 6
-    },
-    "&::-webkit-scrollbar-track": {
-      WebkitBoxShadow: "inset 0 0 6px rgb(125, 161, 196, 0.5)"
-    },
-    "&::-webkit-scrollbar-thumb": {
-      WebkitBorderRadius: 4,
-      borderRadius: 4,
-      background: "rgba(0, 172, 193, .5)",
-      WebkitBoxShadow: "inset 0 0 6px rgba(25, 118, 210, .5)"
-    },
-    "&::-webkit-scrollbar-thumb:window-inactive": {
-      background: "rgba(125, 161, 196, 0.5)"
-    }
-  };
+var StyledTableContainer$1 = styled(TableContainer)(function (_ref5) {
+  var _ref6;
+
+  _ref5.theme;
+  return _ref6 = {}, _defineProperty(_ref6, '&::-webkit-scrollbar', {
+    width: 7,
+    height: 6
+  }), _defineProperty(_ref6, '&::-webkit-scrollbar-track', {
+    WebkitBoxShadow: "inset 0 0 6px rgb(125, 161, 196, 0.5)"
+  }), _defineProperty(_ref6, '&::-webkit-scrollbar-thumb', {
+    WebkitBorderRadius: 4,
+    borderRadius: 4,
+    background: "rgba(0, 172, 193, .5)",
+    WebkitBoxShadow: "inset 0 0 6px rgba(25, 118, 210, .5)"
+  }), _defineProperty(_ref6, '&::-webkit-scrollbar-thumb:window-inactive', {
+    background: "rgba(125, 161, 196, 0.5)"
+  }), _ref6;
 });
 
 function WeekModeView(props) {
@@ -1006,23 +996,21 @@ function WeekModeView(props) {
 
     e.preventDefault();
 
-    if (!(state !== null && state !== void 0 && state.itemTransfert) || !(state !== null && state !== void 0 && state.transfertTarget)) {
+    if (!state.itemTransfert || !state.transfertTarget) {
       return;
     }
 
     var transfert = state.itemTransfert;
     var transfertTarget = state.transfertTarget;
     var rowsData = Array.from(rows);
-    var day = (_rowsData$transfertTa = rowsData[transfertTarget === null || transfertTarget === void 0 ? void 0 : transfertTarget.rowIndex]) === null || _rowsData$transfertTa === void 0 ? void 0 : _rowsData$transfertTa.days[transfertTarget === null || transfertTarget === void 0 ? void 0 : transfertTarget.dayIndex];
+    var day = (_rowsData$transfertTa = rowsData[transfertTarget.rowIndex]) === null || _rowsData$transfertTa === void 0 ? void 0 : _rowsData$transfertTa.days[transfertTarget.dayIndex];
 
     if (day) {
-      var _transfertTarget$rowL, _prevEventCell$data, _transfert$item3;
+      var _transfertTarget$rowL, _prevEventCell$data;
 
       var hourRegExp = /[0-9]{2}:[0-9]{2}/;
       var foundEventIndex = day.data.findIndex(function (e) {
-        var _transfert$item, _transfert$item2;
-
-        return e.id === transfert.item.id && e.startHour === (transfert === null || transfert === void 0 ? void 0 : (_transfert$item = transfert.item) === null || _transfert$item === void 0 ? void 0 : _transfert$item.startHour) && e.endHour === (transfert === null || transfert === void 0 ? void 0 : (_transfert$item2 = transfert.item) === null || _transfert$item2 === void 0 ? void 0 : _transfert$item2.endHour);
+        return e.id === transfert.item.id && e.startHour === transfert.item.startHour && e.endHour === transfert.item.endHour;
       }); // Task already exists in the data array of the chosen cell
 
       if (foundEventIndex !== -1) {
@@ -1030,40 +1018,40 @@ function WeekModeView(props) {
       } // Event cell item to transfert
 
 
-      var prevEventCell = rowsData[transfert === null || transfert === void 0 ? void 0 : transfert.rowIndex].days[transfert === null || transfert === void 0 ? void 0 : transfert.dayIndex]; // Timeline label (00:00 am, 01:00 am, etc.)
+      var prevEventCell = rowsData[transfert.rowIndex].days[transfert.dayIndex]; // Timeline label (00:00 am, 01:00 am, etc.)
 
       var label = (_transfertTarget$rowL = transfertTarget.rowLabel) === null || _transfertTarget$rowL === void 0 ? void 0 : _transfertTarget$rowL.toUpperCase();
       var hourLabel = hourRegExp.exec(label)[0]; // Event's end hour
 
       var endHour = hourRegExp.exec(transfert.item.endHour)[0];
-      var endHourDate = parse(endHour, 'HH:mm', day === null || day === void 0 ? void 0 : day.date); // Event start hour
+      var endHourDate = parse(endHour, 'HH:mm', day.date); // Event start hour
 
       var startHour = hourRegExp.exec(transfert.item.startHour)[0];
-      var startHourDate = parse(startHour, 'HH:mm', day === null || day === void 0 ? void 0 : day.date); // Minutes difference between end and start event hours
+      var startHourDate = parse(startHour, 'HH:mm', day.date); // Minutes difference between end and start event hours
 
       var minutesDiff = differenceInMinutes(endHourDate, startHourDate); // New event end hour according to it new cell
 
-      var newEndHour = add(parse(hourLabel, 'HH:mm', day === null || day === void 0 ? void 0 : day.date), {
+      var newEndHour = add(parse(hourLabel, 'HH:mm', day.date), {
         minutes: minutesDiff
       });
 
       if (!isValid(startHourDate)) {
-        startHourDate = day === null || day === void 0 ? void 0 : day.date;
+        startHourDate = day.date;
         minutesDiff = differenceInMinutes(endHourDate, startHourDate);
-        newEndHour = add(parse(hourLabel, 'HH:mm', day === null || day === void 0 ? void 0 : day.date), {
+        newEndHour = add(parse(hourLabel, 'HH:mm', day.date), {
           minutes: minutesDiff
         });
       }
 
-      prevEventCell === null || prevEventCell === void 0 ? void 0 : (_prevEventCell$data = prevEventCell.data) === null || _prevEventCell$data === void 0 ? void 0 : _prevEventCell$data.splice(transfert === null || transfert === void 0 ? void 0 : (_transfert$item3 = transfert.item) === null || _transfert$item3 === void 0 ? void 0 : _transfert$item3.itemIndex, 1);
+      prevEventCell === null || prevEventCell === void 0 ? void 0 : (_prevEventCell$data = prevEventCell.data) === null || _prevEventCell$data === void 0 ? void 0 : _prevEventCell$data.splice(transfert.item.itemIndex, 1);
       transfert.item.startHour = label;
       transfert.item.endHour = format(newEndHour, 'HH:mm aaa');
-      transfert.item.date = format(day === null || day === void 0 ? void 0 : day.date, 'yyyy-MM-dd');
+      transfert.item.date = format(day.date, 'yyyy-MM-dd');
       day.data.push(transfert.item);
       setState(_objectSpread$2(_objectSpread$2({}, state), {}, {
         rows: rowsData
       }));
-      onEventsChange && onEventsChange(transfert === null || transfert === void 0 ? void 0 : transfert.item);
+      onEventsChange && onEventsChange(transfert.item);
     }
   };
   /**
@@ -1095,7 +1083,7 @@ function WeekModeView(props) {
 
   var renderTask = function renderTask(tasks, rowLabel, rowIndex, dayIndex) {
     return tasks === null || tasks === void 0 ? void 0 : tasks.map(function (task, itemIndex) {
-      var condition = searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult;
+      var condition = searchResult ? (task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user) : !searchResult;
       return condition && /*#__PURE__*/React.createElement(EventItem, {
         event: task,
         elevation: 0,
@@ -1234,67 +1222,57 @@ WeekModeView.propTypes = {
 };
 WeekModeView.defaultProps = {};
 
-function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$1(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var StyledTableCell = styled$1(TableCell)(function (_ref) {
   var _ref2;
 
   _ref.theme;
-  return _ref2 = {}, _defineProperty(_ref2, "&.".concat(tableCellClasses.head), {
+  return _ref2 = {}, _defineProperty(_ref2, "&.".concat(tableCellClasses.head), _defineProperty({
     paddingLeft: 4,
     paddingRight: 4,
     borderTop: "1px solid #ccc !important",
     borderBottom: "1px solid #ccc !important",
-    borderLeft: "1px solid #ccc !important",
-    "&:nth-of-type(1)": {
-      borderLeft: "0px !important"
-    }
-  }), _defineProperty(_ref2, "&.".concat(tableCellClasses.body), {
+    borderLeft: "1px solid #ccc !important"
+  }, '&:nth-of-type(1)', {
+    borderLeft: "0px !important"
+  })), _defineProperty(_ref2, "&.".concat(tableCellClasses.body), _defineProperty({
     fontSize: 12,
     height: 16,
     width: 128,
     maxWidth: 128,
     cursor: 'pointer',
-    borderLeft: "1px solid #ccc",
-    "&:nth-of-type(1)": {
-      borderLeft: 0
-    }
-  }), _defineProperty(_ref2, "&.".concat(tableCellClasses.body, ":hover"), {
+    borderLeft: "1px solid #ccc"
+  }, '&:nth-of-type(1)', {
+    borderLeft: 0
+  })), _defineProperty(_ref2, "&.".concat(tableCellClasses.body, ":hover"), {
     backgroundColor: "#eee"
   }), _ref2;
 });
 var StyledTableRow = styled$1(TableRow)(function (_ref3) {
   _ref3.theme;
-  return {
-    '&:nth-of-type(odd)': {//backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-      border: 0
-    }
-  };
+  return _defineProperty({}, '&:last-child td, &:last-child th', {
+    border: 0
+  });
 });
-var StyledTableContainer = styled$1(TableContainer)(function (_ref4) {
-  _ref4.theme;
-  return {
-    "&::-webkit-scrollbar": {
-      width: 7,
-      height: 6
-    },
-    "&::-webkit-scrollbar-track": {
-      WebkitBoxShadow: "inset 0 0 6px rgb(125, 161, 196, 0.5)"
-    },
-    "&::-webkit-scrollbar-thumb": {
-      WebkitBorderRadius: 4,
-      borderRadius: 4,
-      background: "rgba(0, 172, 193, .5)",
-      WebkitBoxShadow: "inset 0 0 6px rgba(25, 118, 210, .5)"
-    },
-    "&::-webkit-scrollbar-thumb:window-inactive": {
-      background: "rgba(125, 161, 196, 0.5)"
-    }
-  };
+var StyledTableContainer = styled$1(TableContainer)(function (_ref5) {
+  var _ref6;
+
+  _ref5.theme;
+  return _ref6 = {}, _defineProperty(_ref6, '&::-webkit-scrollbar', {
+    width: 7,
+    height: 6
+  }), _defineProperty(_ref6, '&::-webkit-scrollbar-track', {
+    WebkitBoxShadow: "inset 0 0 6px rgb(125, 161, 196, 0.5)"
+  }), _defineProperty(_ref6, '&::-webkit-scrollbar-thumb', {
+    WebkitBorderRadius: 4,
+    borderRadius: 4,
+    background: "rgba(0, 172, 193, .5)",
+    WebkitBoxShadow: "inset 0 0 6px rgba(25, 118, 210, .5)"
+  }), _defineProperty(_ref6, '&::-webkit-scrollbar-thumb:window-inactive', {
+    background: "rgba(125, 161, 196, 0.5)"
+  }), _ref6;
 });
 
 function DayModeView(props) {
@@ -1380,23 +1358,21 @@ function DayModeView(props) {
 
     e.preventDefault();
 
-    if (!(state !== null && state !== void 0 && state.itemTransfert) || !(state !== null && state !== void 0 && state.transfertTarget)) {
+    if (!state.itemTransfert || !state.transfertTarget) {
       return;
     }
 
     var transfert = state.itemTransfert;
     var transfertTarget = state.transfertTarget;
     var rowsData = Array.from(rows);
-    var day = (_rowsData$transfertTa = rowsData[transfertTarget === null || transfertTarget === void 0 ? void 0 : transfertTarget.rowIndex]) === null || _rowsData$transfertTa === void 0 ? void 0 : _rowsData$transfertTa.days[transfertTarget === null || transfertTarget === void 0 ? void 0 : transfertTarget.dayIndex];
+    var day = (_rowsData$transfertTa = rowsData[transfertTarget.rowIndex]) === null || _rowsData$transfertTa === void 0 ? void 0 : _rowsData$transfertTa.days[transfertTarget.dayIndex];
 
     if (day) {
-      var _transfertTarget$rowL, _prevEventCell$data, _transfert$item3;
+      var _transfertTarget$rowL, _prevEventCell$data, _transfert$item;
 
       var hourRegExp = /[0-9]{2}:[0-9]{2}/;
       var foundEventIndex = day.data.findIndex(function (e) {
-        var _transfert$item, _transfert$item2;
-
-        return e.id === transfert.item.id && e.startHour === (transfert === null || transfert === void 0 ? void 0 : (_transfert$item = transfert.item) === null || _transfert$item === void 0 ? void 0 : _transfert$item.startHour) && e.endHour === (transfert === null || transfert === void 0 ? void 0 : (_transfert$item2 = transfert.item) === null || _transfert$item2 === void 0 ? void 0 : _transfert$item2.endHour);
+        return e.id === transfert.item.id && e.startHour === transfert.item.startHour && e.endHour === transfert.item.endHour;
       }); // Task already exists in the data array of the chosen cell
 
       if (foundEventIndex !== -1) {
@@ -1404,40 +1380,40 @@ function DayModeView(props) {
       } // Event cell item to transfert
 
 
-      var prevEventCell = rowsData[transfert === null || transfert === void 0 ? void 0 : transfert.rowIndex].days[transfert === null || transfert === void 0 ? void 0 : transfert.dayIndex]; // Timeline label (00:00 am, 01:00 am, etc.)
+      var prevEventCell = rowsData[transfert.rowIndex].days[transfert.dayIndex]; // Timeline label (00:00 am, 01:00 am, etc.)
 
       var label = (_transfertTarget$rowL = transfertTarget.rowLabel) === null || _transfertTarget$rowL === void 0 ? void 0 : _transfertTarget$rowL.toUpperCase();
       var hourLabel = hourRegExp.exec(label)[0]; // Event's end hour
 
       var endHour = hourRegExp.exec(transfert.item.endHour)[0];
-      var endHourDate = parse(endHour, 'HH:mm', day === null || day === void 0 ? void 0 : day.date); // Event start hour
+      var endHourDate = parse(endHour, 'HH:mm', day.date); // Event start hour
 
       var startHour = hourRegExp.exec(transfert.item.startHour)[0];
-      var startHourDate = parse(startHour, 'HH:mm', day === null || day === void 0 ? void 0 : day.date); // Minutes difference between end and start event hours
+      var startHourDate = parse(startHour, 'HH:mm', day.date); // Minutes difference between end and start event hours
 
       var minutesDiff = differenceInMinutes(endHourDate, startHourDate); // New event end hour according to it new cell
 
-      var newEndHour = add(parse(hourLabel, 'HH:mm', day === null || day === void 0 ? void 0 : day.date), {
+      var newEndHour = add(parse(hourLabel, 'HH:mm', day.date), {
         minutes: minutesDiff
       });
 
       if (!isValid(startHourDate)) {
-        startHourDate = day === null || day === void 0 ? void 0 : day.date;
+        startHourDate = day.date;
         minutesDiff = differenceInMinutes(endHourDate, startHourDate);
-        newEndHour = add(parse(hourLabel, 'HH:mm', day === null || day === void 0 ? void 0 : day.date), {
+        newEndHour = add(parse(hourLabel, 'HH:mm', day.date), {
           minutes: minutesDiff
         });
       }
 
-      prevEventCell === null || prevEventCell === void 0 ? void 0 : (_prevEventCell$data = prevEventCell.data) === null || _prevEventCell$data === void 0 ? void 0 : _prevEventCell$data.splice(transfert === null || transfert === void 0 ? void 0 : (_transfert$item3 = transfert.item) === null || _transfert$item3 === void 0 ? void 0 : _transfert$item3.itemIndex, 1);
+      prevEventCell === null || prevEventCell === void 0 ? void 0 : (_prevEventCell$data = prevEventCell.data) === null || _prevEventCell$data === void 0 ? void 0 : _prevEventCell$data.splice(transfert === null || transfert === void 0 ? void 0 : (_transfert$item = transfert.item) === null || _transfert$item === void 0 ? void 0 : _transfert$item.itemIndex, 1);
       transfert.item.startHour = label;
       transfert.item.endHour = format(newEndHour, 'HH:mm aaa');
-      transfert.item.date = format(day === null || day === void 0 ? void 0 : day.date, 'yyyy-MM-dd');
+      transfert.item.date = format(day.date, 'yyyy-MM-dd');
       day.data.push(transfert.item);
       setState(_objectSpread$1(_objectSpread$1({}, state), {}, {
         rows: rowsData
       }));
-      onEventsChange && onEventsChange(transfert === null || transfert === void 0 ? void 0 : transfert.item);
+      onEventsChange && onEventsChange(transfert.item);
     }
   };
   /**
@@ -1469,7 +1445,7 @@ function DayModeView(props) {
 
   var renderTask = function renderTask(tasks, rowLabel, rowIndex, dayIndex) {
     return tasks === null || tasks === void 0 ? void 0 : tasks.map(function (task, itemIndex) {
-      var condition = searchResult && ((task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user)) || !searchResult;
+      var condition = searchResult ? (task === null || task === void 0 ? void 0 : task.groupLabel) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.groupLabel) || (task === null || task === void 0 ? void 0 : task.user) === (searchResult === null || searchResult === void 0 ? void 0 : searchResult.user) : !searchResult;
       return condition && /*#__PURE__*/React.createElement(EventItem, {
         draggable: true,
         event: task,
@@ -1608,26 +1584,23 @@ DayModeView.propTypes = {
 };
 DayModeView.defaultProps = {};
 
-var StyledContainer = styled$1(Typography)(function (_ref) {
+var StyledContainer = styled(Typography)(function (_ref) {
+  var _ref2;
+
   _ref.theme;
-  return {
-    "&::-webkit-scrollbar": {
-      width: 7,
-      height: 6
-    },
-    "&::-webkit-scrollbar-track": {
-      WebkitBoxShadow: "inset 0 0 6px rgb(125, 161, 196, 0.5)"
-    },
-    "&::-webkit-scrollbar-thumb": {
-      WebkitBorderRadius: 4,
-      borderRadius: 4,
-      background: "rgba(0, 172, 193, .5)",
-      WebkitBoxShadow: "inset 0 0 6px rgba(25, 118, 210, .5)"
-    },
-    "&::-webkit-scrollbar-thumb:window-inactive": {
-      background: "rgba(125, 161, 196, 0.5)"
-    }
-  };
+  return _ref2 = {}, _defineProperty(_ref2, '&::-webkit-scrollbar', {
+    width: 7,
+    height: 6
+  }), _defineProperty(_ref2, '&::-webkit-scrollbar-track', {
+    WebkitBoxShadow: "inset 0 0 6px rgb(125, 161, 196, 0.5)"
+  }), _defineProperty(_ref2, '&::-webkit-scrollbar-thumb', {
+    WebkitBorderRadius: 4,
+    borderRadius: 4,
+    background: "rgba(0, 172, 193, .5)",
+    WebkitBoxShadow: "inset 0 0 6px rgba(25, 118, 210, .5)"
+  }), _defineProperty(_ref2, '&::-webkit-scrollbar-thumb:window-inactive', {
+    background: "rgba(125, 161, 196, 0.5)"
+  }), _ref2;
 });
 
 function TimeLineModeView(props) {
@@ -1674,7 +1647,7 @@ function TimeLineModeView(props) {
     }
   }, /*#__PURE__*/React.createElement(Timeline, {
     position: "alternate"
-  }, fileredEvents && ((_fileredEvents2 = fileredEvents) === null || _fileredEvents2 === void 0 ? void 0 : _fileredEvents2.map(function (task, index) {
+  }, (_fileredEvents2 = fileredEvents) === null || _fileredEvents2 === void 0 ? void 0 : _fileredEvents2.map(function (task, index) {
     return /*#__PURE__*/React.createElement(TimelineItem, {
       key: "timeline-".concat(index),
       sx: {
@@ -1706,7 +1679,7 @@ function TimeLineModeView(props) {
       variant: "body1",
       component: "span"
     }, task === null || task === void 0 ? void 0 : task.label), /*#__PURE__*/React.createElement(Typography, null, task === null || task === void 0 ? void 0 : task.groupLabel)));
-  }))));
+  })));
 }
 
 TimeLineModeView.propTypes = {
@@ -1723,9 +1696,9 @@ TimeLineModeView.propTypes = {
 };
 TimeLineModeView.defaultProps = {};
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 /**
  * @name Scheduler
  * @description
@@ -1743,7 +1716,7 @@ function Scheduler(props) {
       onAlertCloseButtonClicked = props.onAlertCloseButtonClicked,
       toolbarProps = props.toolbarProps;
   var today = new Date();
-  var theme = useTheme();
+  useTheme();
   var TransitionMode = (options === null || options === void 0 ? void 0 : options.transitionMode) === 'zoom' ? Zoom : Fade;
 
   var _useState = useState({}),
@@ -1797,7 +1770,7 @@ function Scheduler(props) {
       weekDays[6] = 'Mon';
     }
 
-    return weekDays === null || weekDays === void 0 ? void 0 : weekDays.map(function (day, i) {
+    return weekDays.map(function (day, i) {
       return {
         id: "row-day-header-".concat(i + 1),
         flex: 1,
@@ -1837,7 +1810,7 @@ function Scheduler(props) {
       return startOnSunday ? v <= monthStartDay : v < monthStartDay;
     };
 
-    if (monthStartDay > 1) {
+    if (monthStartDay >= 1) {
       var _loop = function _loop(i) {
         var subDate = sub(monthStartDate, {
           days: monthStartDay - i + (startOnSunday ? 1 : 0)
@@ -1860,9 +1833,29 @@ function Scheduler(props) {
       for (var i = 1; checkCondition(i); i++) {
         _loop(i);
       }
+    } else {
+      var _loop2 = function _loop2(_i) {
+        var subDate = sub(monthStartDate, {
+          days: _i
+        });
+        var day = parseInt(format(subDate, 'dd'));
+        var data = events.filter(function (event) {
+          return isSameDay(subDate, parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()));
+        });
+        daysBefore.push({
+          id: "day_-".concat(day),
+          day: day,
+          date: subDate,
+          data: data
+        });
+      };
+
+      for (var _i = 6; _i > 0; _i--) {
+        _loop2(_i);
+      }
     }
 
-    if ((daysBefore === null || daysBefore === void 0 ? void 0 : daysBefore.length) > 0) {
+    if (daysBefore.length > 0) {
       rows.push({
         id: 0,
         days: daysBefore
@@ -1870,10 +1863,10 @@ function Scheduler(props) {
     } // Add days and events data
 
 
-    for (var _i = 0; _i < iteration; _i++) {
+    for (var _i2 = 0; _i2 < iteration; _i2++) {
       var obj = [];
 
-      var _loop2 = function _loop2(j) {
+      var _loop3 = function _loop3(j) {
         var date = parse("".concat(dateDay, "-").concat(selectedDate), 'dd-MMMM-yyyy', new Date());
         var data = events.filter(function (event) {
           return isSameDay(date, parse(event === null || event === void 0 ? void 0 : event.date, 'yyyy-MM-dd', new Date()));
@@ -1881,27 +1874,27 @@ function Scheduler(props) {
         obj.push({
           id: "day_-".concat(dateDay),
           date: date,
-          day: dateDay,
-          data: data
+          data: data,
+          day: dateDay
         });
         dateDay++;
       };
 
-      for (var j = 0; // This condition ensure that days will not exceed 30
+      for (var j = 0; // This condition ensure that days will not exceed 31
       // i === 0 ? 7 - daysBefore?.length means that we substract inserted days
       // in the first line to 7
-      j < (_i === 0 ? 7 - (daysBefore === null || daysBefore === void 0 ? void 0 : daysBefore.length) : 7) && dateDay <= daysInMonth; j++) {
-        _loop2(j);
+      j < (_i2 === 0 ? 7 - daysBefore.length : 7) && dateDay <= daysInMonth; j++) {
+        _loop3(j);
       }
 
-      if (_i === 0 && (daysBefore === null || daysBefore === void 0 ? void 0 : daysBefore.length) > 0) {
+      if (_i2 === 0 && daysBefore.length > 0) {
         rows[0].days = rows[0].days.concat(obj);
         continue;
       }
 
       if (obj.length > 0) {
         rows.push({
-          id: _i,
+          id: _i2,
           days: obj
         });
       }
@@ -1919,7 +1912,7 @@ function Scheduler(props) {
         var day = lastRow.days[(lastRow === null || lastRow === void 0 ? void 0 : (_lastRow$days2 = lastRow.days) === null || _lastRow$days2 === void 0 ? void 0 : _lastRow$days2.length) - 1];
         var addDate = day.date;
 
-        for (var _i2 = dateDay; _i2 < dateDay + lastRowDaysdiff; _i2++) {
+        for (var _i3 = dateDay; _i3 < dateDay + lastRowDaysdiff; _i3++) {
           addDate = add(addDate, {
             days: 1
           });
@@ -1976,7 +1969,7 @@ function Scheduler(props) {
     var data = [];
     var dayStartHour = startOfDay(selectedDay);
 
-    var _loop3 = function _loop3(i) {
+    var _loop4 = function _loop4(i) {
       var id = "line_".concat(i);
       var label = format(dayStartHour, 'HH:mm aaa'); //TODO Add everyday event capability
       //if (i === 0) {
@@ -2020,7 +2013,7 @@ function Scheduler(props) {
     };
 
     for (var i = 0; i <= HOURS; i++) {
-      _loop3(i);
+      _loop4(i);
     }
 
     return data;
@@ -2040,7 +2033,7 @@ function Scheduler(props) {
     var data = [];
     var dayStartHour = startOfDay(selectedDay);
 
-    var _loop4 = function _loop4(i) {
+    var _loop5 = function _loop5(i) {
       var id = "line_".concat(i);
       var label = format(dayStartHour, 'HH:mm aaa');
 
@@ -2071,7 +2064,7 @@ function Scheduler(props) {
     };
 
     for (var i = 0; i <= HOURS; i++) {
-      _loop4(i);
+      _loop5(i);
     }
 
     return data;
@@ -2192,9 +2185,7 @@ function Scheduler(props) {
     } // eslint-disable-next-line
 
   }, [daysInMonth, selectedDay, selectedDate, mode]);
-  return /*#__PURE__*/React.createElement(ThemeProvider, {
-    theme: theme
-  }, /*#__PURE__*/React.createElement(Paper, {
+  return /*#__PURE__*/React.createElement(Paper, {
     variant: "outlined",
     elevation: 0,
     sx: {
@@ -2282,7 +2273,7 @@ function Scheduler(props) {
     searchResult: searchResult,
     onDateChange: handleDateChange,
     onEventsChange: onEventsChange
-  }))))));
+  })))));
 }
 
 Scheduler.propTypes = {

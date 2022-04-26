@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.6] - 2022-04-26
+
+### Added
+
+### Changed
+
+- 📢 Update denpencies versions.
+
+### Fixed
+
+- Fix #3 Correct rendering of months that start on a Sunday and update of dependencies
+
 
 ## [1.2.0] - 2021-10-02
 
