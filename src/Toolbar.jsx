@@ -12,8 +12,7 @@ import StaticDatePicker from '@mui/lab/StaticDatePicker'
 import CloseIcon from '@mui/icons-material/Close'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
-// eslint-disable-next-line
-import MoreVertIcon from '@mui/icons-material/MoreVert'
+//import MoreVertIcon from '@mui/icons-material/MoreVert'
 import TodayIcon from '@mui/icons-material/Today'
 import SettingsIcon from '@mui/icons-material/Settings'
 import ArchiveIcon from '@mui/icons-material/Archive'
@@ -72,16 +71,9 @@ function SchedulerToolbar (props) {
     },
   ]
   
-  /**
-   * @name handleOpenMenu
-   * @description
-   * @param event
-   * @return void
-   */
-  // eslint-disable-next-line
-  const handleOpenMenu = (event) => {
-    setAnchorMenuEl(event.currentTarget)
-  }
+  //const handleOpenMenu = (event) => {
+  //  setAnchorMenuEl(event.currentTarget)
+  //}
   
   /**
    * @name handleCloseMenu
@@ -118,8 +110,16 @@ function SchedulerToolbar (props) {
    * @return void
    */
   const handleChangeDate = (method) => {
-    if (typeof method !== 'function') return
-    let options = mode === 'month' ? {months: 1} : mode === 'week' ? {weeks: 1} : {days: 1}
+    if (typeof method !== 'function') {
+      return
+    }
+    let options = { months: 1 }
+    if (mode === 'week') { 
+      options = { weeks: 1 } 
+    }
+    if (mode === 'day') { 
+      options = { days: 1 }  
+    }
     let newDate = method(selectedDate, options)
     setDaysInMonth(getDaysInMonth(newDate))
     setSelectedDate(newDate)
@@ -170,6 +170,7 @@ function SchedulerToolbar (props) {
                 //endIcon={<TodayIcon />}
                 aria-controls="basic-menu"
                 onClick={handleOpenDateSelector}
+                sx={{ color: 'text.primary'}}
                 aria-expanded={openDateSelector ? 'true' : undefined}
               >
                 {format(selectedDate, mode === 'month' ? 'MMMM-yyyy' : 'PPP')}
@@ -219,7 +220,10 @@ function SchedulerToolbar (props) {
           <ToolbarSearchbar
             events={events}
             onInputChange={(newValue) => {
-              let newDate = newValue?.date ? parse(newValue?.date, 'yyyy-MM-dd', today) : new Date()
+              let newDate = new Date()
+              if (newValue.date) {
+                newDate = parse(newValue.date, 'yyyy-MM-dd', today)
+              }
               setDaysInMonth(getDaysInMonth(newDate))
               setSelectedDate(newDate)
               setSearchResult(newValue)
@@ -244,8 +248,8 @@ function SchedulerToolbar (props) {
               value={mode}
               size="small"
               color="primary"
-              sx={{mr: 1.3}}
               aria-label="text button group"
+              sx={{ mr: 1.3 }}
               onChange={(e, newMode) => { setMode(newMode) }}
             >
               {['month', 'week', 'day', 'timeline'].map(tb => (

@@ -11,7 +11,6 @@ const StyledAutoComplete = styled(Autocomplete)(({ theme }) => ({
   margin: theme.spacing(.5, 1.5),
   transition: theme.transitions.create('width'),
   [theme.breakpoints.up('sm')]: {
-    //minWidth: '20ch',
     width: '100%'
   },
   [theme.breakpoints.up('md')]: {
@@ -30,7 +29,7 @@ function ToolbarSearchbar (props) {
   
   const handleOnChange = (event, newValue) => {
     setValue(newValue)
-    onInputChange && onInputChange(newValue)
+    if (onInputChange) onInputChange(newValue)
   }
   
   return (
@@ -41,7 +40,7 @@ function ToolbarSearchbar (props) {
       sx={{display: 'inline-flex'}}
       onChange={handleOnChange}
       options={events?.sort((a, b) => -b.groupLabel.localeCompare(a.groupLabel))}
-      groupBy={(option) => option?.groupLabel}
+      groupBy={(option) => option ? option?.groupLabel : null}
       /*
       (
           <Box sx={{display: "flex", alignItems: "center"}}>
@@ -60,8 +59,8 @@ function ToolbarSearchbar (props) {
         )
        */
       getOptionLabel={(option) => (
-        option &&
-        `${option?.groupLabel} | (${option?.startHour ?? ''} - ${option?.endHour ?? ''})`
+        option ?
+        `${option.groupLabel || ''} | (${option.startHour || ''} - ${option.endHour || ''})` : ''
       )}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue)
@@ -69,8 +68,11 @@ function ToolbarSearchbar (props) {
       }}
       renderOption={(props, option) => (
         <Box component="li" sx={{fontSize: 12}} {...props}>
-          {format(parse(option?.date, 'yyyy-MM-dd', new Date()), 'dd-MMMM-yyyy')}
-          ({option?.startHour ?? ''} - {option?.endHour ?? ''})
+          {format(
+            parse(option?.date, 'yyyy-MM-dd', new Date()),
+            'dd-MMMM-yyyy'
+          )}
+          ({option?.startHour || ''} - {option?.endHour || ''})
         </Box>
       )}
       renderInput={(params) => (

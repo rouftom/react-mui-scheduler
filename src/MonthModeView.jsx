@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import { format } from 'date-fns'
-import {styled} from "@mui/system"
-import { useTheme } from '@mui/material/styles'
+import { useTheme, styled } from '@mui/material/styles'
 import {
   Paper, Typography, Table, TableBody, TableCell, TableContainer,
   TableHead, TableRow, tableCellClasses
@@ -12,46 +11,48 @@ import EventItem from "./EventItem.jsx"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    //backgroundColor: theme.palette.common.black,
     borderTop: `1px solid #ccc !important`,
     borderBottom: `1px solid #ccc !important`,
     borderLeft: `1px solid #ccc !important`,
-    '&:nth-of-type(1)': {
+    ['&:nth-of-type(1)']: {
       borderLeft: `0px !important`
     }
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 12,
     height: 96,
     width: 64,
     maxWidth: 64,
     cursor: 'pointer',
+    verticalAlign: "top",
     borderLeft: `1px solid #ccc`,
-    '&:nth-of-type(7n+1)': {
+    ['&:nth-of-type(7n+1)']: {
       borderLeft: 0
     },
-    '&:nth-of-type(even)': {
-      backgroundColor: theme.palette.action.hover
+    ['&:nth-of-type(even)']: {
+      //backgroundColor: theme.palette.action.hover
     },
   },
   [`&.${tableCellClasses.body}:hover`]: {
-    backgroundColor: "#eee"
+    //backgroundColor: "#eee"
   }
 }))
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    //backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
+  ['&:last-child td, &:last-child th']: {
     border: 0
   }
 }))
 
 function MonthModeView (props) {
   const {
-    options, columns, rows, searchResult, onTaskClick, onCellClick, onEventsChange
+    options, 
+    columns,
+    rows, 
+    searchResult, 
+    onTaskClick, 
+    onCellClick, 
+    onEventsChange
   } = props
   const theme = useTheme()
   const [state, setState] = useState({})
@@ -98,11 +99,11 @@ function MonthModeView (props) {
    */
   const onCellDragEnd = (e) => {
     e.preventDefault()
-    if (!state?.itemTransfert && !state?.transfertTarget) return
+    if (!state.itemTransfert && !state.transfertTarget) return
     let transfert = state.itemTransfert
     let transfertTarget = state.transfertTarget
     let rowsCopy = Array.from(rows)
-    let rowInd = rowsCopy?.findIndex(d => d.id === transfertTarget.rowIndex)
+    let rowInd = rowsCopy.findIndex(d => d.id === transfertTarget.rowIndex)
     
     if (rowInd !== -1) {
       let dayInd = rowsCopy[rowInd]?.days?.findIndex(d => d.id === transfertTarget.elementId)
@@ -167,13 +168,11 @@ function MonthModeView (props) {
   const renderTask = (tasks = [], rowId) => {
     return tasks?.map((task, index) => {
       let condition = (
-        (
-          searchResult &&
+        searchResult ?
           (
             task?.groupLabel === searchResult?.groupLabel ||
             task?.user === searchResult?.user
-          )
-        ) || !searchResult
+          ) : !searchResult
       )
       return (
         condition &&
@@ -221,46 +220,41 @@ function MonthModeView (props) {
       >
         <TableHead sx={{height: 24}}>
           <StyledTableRow>
-            {
-              columns?.map((column, index) => (
-                <StyledTableCell align="center" key={column?.headerName+ '-' +index}>
+            {columns?.map((column, index) => (
+                <StyledTableCell 
+                  align="center" 
+                  key={column?.headerName+ '-' +index}
+                >
                   {column?.headerName}
                 </StyledTableCell>
-              ))
-            }
+              ))}
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {
-            rows?.map((row, index) => (
+          {rows?.map((row, index) => (
               <StyledTableRow
                 key={`row-${row.id}-${index}`}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                {
-                  row?.days?.map((day) => (
-                    <StyledTableCell
-                      scope="row"
-                      align="center"
-                      component="th"
-                      sx={{px: 1}}
-                      key={`day-${day.id}`}
-                      onDragEnd={onCellDragEnd}
-                      onDragOver={onCellDragOver}
-                      onDragEnter={e => onCellDragEnter(e, day.id, row.id)}
-                      onClick={(event) => handleCellClick(event, row, day)}
-                    >
-                      <Typography variant="body1">{day.day}</Typography>
-                      {
-                        (day?.data?.length > 0 && renderTask(day?.data, row.id)) ||
-                        <EventNoteRoundedIcon fontSize="large" htmlColor="#ccc" />
-                      }
-                    </StyledTableCell>
-                  ))
-                }
+                {row?.days?.map((day) => (
+                  <StyledTableCell
+                    scope="row"
+                    align="center"
+                    component="th"
+                    sx={{ px: 1 }}
+                    key={`day-${day.id}`}
+                    onDragEnd={onCellDragEnd}
+                    onDragOver={onCellDragOver}
+                    onDragEnter={e => onCellDragEnter(e, day.id, row.id)}
+                    onClick={(event) => handleCellClick(event, row, day)}
+                  >
+                    <Typography variant="body2">{day.day}</Typography>
+                    {(day?.data?.length > 0 && renderTask(day?.data, row.id))}
+                    {/*<EventNoteRoundedIcon fontSize="large" htmlColor="#ccc" />*/}
+                  </StyledTableCell>
+                ))}
               </StyledTableRow>
-            ))
-          }
+            ))}
         </TableBody>
       </Table>
     </TableContainer>

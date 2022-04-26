@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import PropTypes from "prop-types"
-import { Grid, Paper, Fade, Zoom } from "@mui/material"
-import {ThemeProvider} from "@mui/system"
-import { useTheme } from '@mui/material/styles'
+import { 
+  Grid, Paper, Fade, Zoom, 
+ } from "@mui/material"
+import { useTheme } from "@mui/material/styles"
 import {
   format, getDaysInMonth, getDay, sub, startOfMonth, parse,
   add, startOfDay, startOfWeek, getWeeksInMonth, isSameDay
@@ -54,7 +55,7 @@ function Scheduler(props) {
       weekDays[0] = 'Sun'
       weekDays[6] = 'Mon'
     }
-    return weekDays?.map((day, i) => ({
+    return weekDays.map((day, i) => ({
       id: `row-day-header-${i+1}`,
       flex: 1,
       sortable: false,
@@ -80,9 +81,11 @@ function Scheduler(props) {
     let monthStartDay = getDay(monthStartDate)            // Index of the day in week
     let dateDay = parseInt(format(monthStartDate, 'dd'))  // Month start day
     // Condition check helper
-    const checkCondition = (v) => (startOnSunday ? v <= monthStartDay : v < monthStartDay)
+    const checkCondition = (v) => (
+      startOnSunday ? v <= monthStartDay : v < monthStartDay
+    )
     
-    if (monthStartDay > 1) {
+    if (monthStartDay >= 1) {
       // Add days of precedent month
       // If Sunday is the first day of week, apply b <= monthStartDay
       // and days: (monthStartDay-b) + 1
@@ -93,9 +96,25 @@ function Scheduler(props) {
         )
         let day = parseInt(format(subDate, 'dd'))
         let data = events.filter((event) => (
+          isSameDay(
+            subDate, 
+            parse(event?.date, 'yyyy-MM-dd', new Date())
+          )
+        ))
+        daysBefore.push({
+          id: `day_-${day}`,
+          day: day,
+          date: subDate,
+          data: data
+        })
+      }
+    } else {
+      for (let i = 6; i > 0; i--) {
+        let subDate = sub(monthStartDate, {days: i})
+        let day = parseInt(format(subDate, 'dd'))
+        let data = events.filter((event) => (
           isSameDay(subDate, parse(event?.date, 'yyyy-MM-dd', new Date()))
         ))
-        
         daysBefore.push({
           id: `day_-${day}`,
           day: day,
@@ -105,7 +124,7 @@ function Scheduler(props) {
       }
     }
   
-    if (daysBefore?.length > 0) {
+    if (daysBefore.length > 0) {
       rows.push({ id: 0, days: daysBefore })
     }
     
@@ -115,22 +134,33 @@ function Scheduler(props) {
       
       for (
         let j = 0;
-        // This condition ensure that days will not exceed 30
+        // This condition ensure that days will not exceed 31
         // i === 0 ? 7 - daysBefore?.length means that we substract inserted days
         // in the first line to 7
-        j < (i === 0 ? 7 - daysBefore?.length : 7) && (dateDay <= daysInMonth);
+        j < (i === 0 ? 7 - daysBefore.length : 7) && (dateDay <= daysInMonth);
         j++
       ) {
-        let date = parse(`${dateDay}-${selectedDate}`, 'dd-MMMM-yyyy', new Date())
+        let date = parse(
+          `${dateDay}-${selectedDate}`, 
+          'dd-MMMM-yyyy', 
+          new Date()
+        )
         let data = events.filter((event) => (
-          isSameDay(date, parse(event?.date, 'yyyy-MM-dd', new Date()))
+          isSameDay(
+            date,
+             parse(event?.date, 'yyyy-MM-dd', new Date())
+          )
         ))
-        
-        obj.push({ id: `day_-${dateDay}`, date: date, day: dateDay, data: data })
+        obj.push({
+          id: `day_-${dateDay}`,
+          date, 
+          data,
+          day: dateDay
+        })
         dateDay++
       }
       
-      if (i === 0 && daysBefore?.length > 0) {
+      if (i === 0 && daysBefore.length > 0) {
         rows[0].days = rows[0].days.concat(obj)
         continue
       }
@@ -153,9 +183,17 @@ function Scheduler(props) {
         let d = format(addDate, 'dd')
         // eslint-disable-next-line
         let data = events.filter((event) => (
-          isSameDay(addDate, parse(event?.date, 'yyyy-MM-dd', new Date()))
+          isSameDay(
+            addDate, 
+            parse(event?.date, 'yyyy-MM-dd', new Date())
+          )
         ))
-        lastDaysData.push({ id: `day_-${d}`, date: addDate, day: d, data: data })
+        lastDaysData.push({ 
+          id: `day_-${d}`, 
+          date: addDate, 
+          day: d, 
+          data
+        })
       }
       rows[iteration-1].days = rows[iteration-1].days.concat(lastDaysData)
     }
@@ -348,8 +386,7 @@ function Scheduler(props) {
   }, [daysInMonth, selectedDay, selectedDate, mode])
   
   return (
-    <ThemeProvider theme={theme}>
-      <Paper variant="outlined" elevation={0} sx={{p: 0}}>
+    <Paper variant="outlined" elevation={0} sx={{p: 0}}>
         <SchedulerToolbar
           today={today}
           events={events}
@@ -438,7 +475,6 @@ function Scheduler(props) {
           </Grid>
         </TransitionMode>}
       </Paper>
-    </ThemeProvider>
   )
 }
 

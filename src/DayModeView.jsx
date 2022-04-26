@@ -16,7 +16,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     borderTop: `1px solid #ccc !important`,
     borderBottom: `1px solid #ccc !important`,
     borderLeft: `1px solid #ccc !important`,
-    "&:nth-of-type(1)": {
+    ['&:nth-of-type(1)']: {
       borderLeft: `0px !important`
     }
   },
@@ -27,7 +27,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     maxWidth: 128,
     cursor: 'pointer',
     borderLeft: `1px solid #ccc`,
-    "&:nth-of-type(1)": { borderLeft: 0 }
+    ['&:nth-of-type(1)']: { borderLeft: 0 }
   },
   [`&.${tableCellClasses.body}:hover`]: {
     backgroundColor: "#eee"
@@ -35,30 +35,26 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }))
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    //backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
+  ['&:last-child td, &:last-child th']: {
     border: 0
   }
 }))
 
 const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
-  "&::-webkit-scrollbar": {
+  ['&::-webkit-scrollbar']: {
     width: 7,
     height: 6
   },
-  "&::-webkit-scrollbar-track": {
+  ['&::-webkit-scrollbar-track']: {
     WebkitBoxShadow: "inset 0 0 6px rgb(125, 161, 196, 0.5)"
   },
-  "&::-webkit-scrollbar-thumb": {
+  ['&::-webkit-scrollbar-thumb']: {
     WebkitBorderRadius: 4,
     borderRadius: 4,
     background: "rgba(0, 172, 193, .5)",
     WebkitBoxShadow: "inset 0 0 6px rgba(25, 118, 210, .5)"
   },
-  "&::-webkit-scrollbar-thumb:window-inactive": {
+  ['&::-webkit-scrollbar-thumb:window-inactive']: {
     background: "rgba(125, 161, 196, 0.5)"
   }
 }))
@@ -118,20 +114,20 @@ function DayModeView (props) {
    */
   const onCellDragEnd = (e) => {
     e.preventDefault()
-    if (!state?.itemTransfert || !state?.transfertTarget) {
+    if (!state.itemTransfert || !state.transfertTarget) {
       return
     }
     let transfert = state.itemTransfert
     let transfertTarget = state.transfertTarget
     let rowsData = Array.from(rows)
-    let day = rowsData[transfertTarget?.rowIndex]?.days[transfertTarget?.dayIndex]
+    let day = rowsData[transfertTarget.rowIndex]?.days[transfertTarget.dayIndex]
     
     if (day) {
       let hourRegExp = /[0-9]{2}:[0-9]{2}/
       let foundEventIndex = day.data.findIndex(e =>
         e.id === transfert.item.id &&
-        e.startHour === transfert?.item?.startHour &&
-        e.endHour === transfert?.item?.endHour
+        e.startHour === transfert.item.startHour &&
+        e.endHour === transfert.item.endHour
       )
       // Task already exists in the data array of the chosen cell
       if (foundEventIndex !== -1) {
@@ -139,38 +135,38 @@ function DayModeView (props) {
       }
   
       // Event cell item to transfert
-      let prevEventCell = rowsData[transfert?.rowIndex].days[transfert?.dayIndex]
+      let prevEventCell = rowsData[transfert.rowIndex].days[transfert.dayIndex]
       // Timeline label (00:00 am, 01:00 am, etc.)
       let label = transfertTarget.rowLabel?.toUpperCase()
       let hourLabel = hourRegExp.exec(label)[0]
       // Event's end hour
       let endHour =  hourRegExp.exec(transfert.item.endHour)[0]
-      let endHourDate = parse(endHour, 'HH:mm', day?.date)
+      let endHourDate = parse(endHour, 'HH:mm', day.date)
       // Event start hour
       let startHour =  hourRegExp.exec(transfert.item.startHour)[0]
-      let startHourDate = parse(startHour, 'HH:mm', day?.date)
+      let startHourDate = parse(startHour, 'HH:mm', day.date)
       // Minutes difference between end and start event hours
       let minutesDiff = differenceInMinutes(endHourDate, startHourDate)
       // New event end hour according to it new cell
       let newEndHour = add(
-        parse(hourLabel, 'HH:mm', day?.date), {minutes: minutesDiff}
+        parse(hourLabel, 'HH:mm', day.date), {minutes: minutesDiff}
       )
   
       if (!isValid(startHourDate)) {
-        startHourDate = day?.date
+        startHourDate = day.date
         minutesDiff = differenceInMinutes(endHourDate, startHourDate)
         newEndHour = add(
-          parse(hourLabel, 'HH:mm', day?.date), {minutes: minutesDiff}
+          parse(hourLabel, 'HH:mm', day.date), {minutes: minutesDiff}
         )
       }
       
       prevEventCell?.data?.splice(transfert?.item?.itemIndex, 1)
       transfert.item.startHour = label
       transfert.item.endHour = format(newEndHour, 'HH:mm aaa')
-      transfert.item.date = format(day?.date, 'yyyy-MM-dd')
+      transfert.item.date = format(day.date, 'yyyy-MM-dd')
       day.data.push(transfert.item)
       setState({...state, rows: rowsData})
-      onEventsChange && onEventsChange(transfert?.item)
+      onEventsChange && onEventsChange(transfert.item)
     }
   }
   
@@ -201,12 +197,12 @@ function DayModeView (props) {
   const renderTask = (tasks, rowLabel, rowIndex, dayIndex) => {
     return tasks?.map((task, itemIndex) => {
       let condition =  (
-        searchResult &&
+        searchResult ?
         (
           task?.groupLabel === searchResult?.groupLabel ||
           task?.user === searchResult?.user
-        )
-      ) || !searchResult
+        ) : !searchResult
+      )
       return (
         condition &&
         <EventItem
