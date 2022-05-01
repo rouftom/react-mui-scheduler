@@ -24,10 +24,10 @@ function EventItem(props) {
       key={`item-d-${event?.id}-${rowId}`}
     >
       <Box sx={boxSx}>
-        {isMonthMode &&
-        <Typography variant="caption" sx={{fontSize: 10}}>
-          {event?.startHour}
-        </Typography>}
+        {/*isMonthMode &&
+        <Typography variant="caption" sx={{fontSize: 8}}>
+          {event?.startHour} - {event?.endHour}
+        </Typography>*/}
         <Typography variant="body2" sx={{fontSize: 11}}>
           {event?.label}
         </Typography>

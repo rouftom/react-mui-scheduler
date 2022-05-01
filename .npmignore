@@ -20,3 +20,4 @@ config.gypi
 package-lock.json
 .idea/
 .travis.yml
+react-mui-scheduler-*

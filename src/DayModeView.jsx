@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import PropTypes from 'prop-types'
 import {styled} from "@mui/system"
 import { useTheme } from '@mui/material/styles'
@@ -8,6 +8,7 @@ import {
 } from "@mui/material"
 import { format, parse, add, differenceInMinutes, isValid } from 'date-fns'
 import EventItem from "./EventItem.jsx"
+import DateFnsLocaleContext from "../locales/dateFnsContext";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -61,7 +62,13 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 
 function DayModeView (props) {
   const {
-    options, columns, rows, searchResult, onTaskClick, onCellClick, onEventsChange
+    options,
+    columns,
+    rows,
+    searchResult,
+    onTaskClick,
+    onCellClick,
+    onEventsChange
   } = props
   const theme = useTheme()
   const [state, setState] = useState({columns, rows})
@@ -159,7 +166,7 @@ function DayModeView (props) {
           parse(hourLabel, 'HH:mm', day.date), {minutes: minutesDiff}
         )
       }
-      
+
       prevEventCell?.data?.splice(transfert?.item?.itemIndex, 1)
       transfert.item.startHour = label
       transfert.item.endHour = format(newEndHour, 'HH:mm aaa')

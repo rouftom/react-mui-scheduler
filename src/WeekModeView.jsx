@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import PropTypes from 'prop-types'
 import { useTheme, styled } from '@mui/material/styles'
 import {
@@ -64,58 +64,36 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 
 function WeekModeView (props) {
   const {
-    options, columns, rows, searchResult, onTaskClick, onCellClick,
+    options,
+    columns,
+    rows,
+    searchResult,
+    onTaskClick,
+    onCellClick,
     onEventsChange
   } = props
   const theme = useTheme()
   const [state, setState] = useState({columns, rows})
-  
-  /**
-   * @name onCellDragOver
-   * @param e
-   * @return void
-   */
+
   const onCellDragOver = (e) => {
     e.preventDefault()
   }
-  
-  /**
-   * @name onCellDragStart
-   * @description
-   * @param e
-   * @param item
-   * @param rowLabel
-   * @param rowIndex
-   * @param dayIndex
-   * @return void
-   */
+
   const onCellDragStart = (e, item, rowLabel, rowIndex, dayIndex) => {
     setState({
       ...state,
-      itemTransfert: {item, rowLabel, rowIndex, dayIndex}}
+      itemTransfert: { item, rowLabel, rowIndex, dayIndex }}
     )
   }
-  
-  /**
-   * @name onCellDragEnter
-   * @description
-   * @param e
-   * @param rowLabel
-   * @param rowIndex
-   * @param dayIndex
-   * @return void
-   */
+
   const onCellDragEnter = (e, rowLabel, rowIndex, dayIndex) => {
     e.preventDefault()
-    setState({...state, transfertTarget: {rowLabel, rowIndex, dayIndex}})
+    setState({
+      ...state,
+      transfertTarget: { rowLabel, rowIndex, dayIndex }
+    })
   }
-  
-  /**
-   * @name onCellDragEnd
-   * @description
-   * @param e
-   * @return void
-   */
+
   const onCellDragEnd = (e) => {
     e.preventDefault()
     if (!state.itemTransfert || !state.transfertTarget) {
@@ -166,22 +144,20 @@ function WeekModeView (props) {
       
       prevEventCell?.data?.splice(transfert.item.itemIndex, 1)
       transfert.item.startHour = label
-      transfert.item.endHour = format(newEndHour, 'HH:mm aaa')
-      transfert.item.date = format(day.date, 'yyyy-MM-dd')
+      transfert.item.endHour = format(
+        newEndHour,
+        'HH:mm aaa'
+      )
+      transfert.item.date = format(
+        day.date,
+        'yyyy-MM-dd'
+      )
       day.data.push(transfert.item)
       setState({...state, rows: rowsData})
       onEventsChange && onEventsChange(transfert.item)
     }
   }
-  
-  /**
-   * @name handleCellClick
-   * @description
-   * @param event
-   * @param row
-   * @param day
-   * @return void
-   */
+
   const handleCellClick = (event, row, day) => {
     event.preventDefault()
     event.stopPropagation()
@@ -241,7 +217,10 @@ function WeekModeView (props) {
   }
   
   return (
-    <StyledTableContainer component={Paper} sx={{ maxHeight: options?.maxHeight || 540 }}>
+    <StyledTableContainer
+      component={Paper}
+      sx={{ maxHeight: options?.maxHeight || 540 }}
+    >
       <Table
         size="small"
         aria-label="simple table"
@@ -250,22 +229,22 @@ function WeekModeView (props) {
         <TableHead sx={{height: 24}}>
           <StyledTableRow>
             <StyledTableCell align="left" />
-            {
-              columns?.map((column, index) => (
-                <StyledTableCell
-                  align="center"
-                  key={`weekday-${column?.day}-${index}`}
-                >
-                  {column?.weekDay} {column?.month}/{column?.day}
-                </StyledTableCell>
-              ))
-            }
+            {columns?.map((column, index) => (
+              <StyledTableCell
+                align="center"
+                key={`weekday-${column?.day}-${index}`}
+              >
+                {column?.weekDay} {column?.month}/{column?.day}
+              </StyledTableCell>
+            ))}
           </StyledTableRow>
         </TableHead>
         <TableBody>
           {
             rows?.map((row, rowIndex) => {
-              let lineTasks = row.days?.reduce((prev, curr) => prev + curr?.data?.length, 0)
+              let lineTasks = row.days?.reduce(
+                (prev, curr) => prev + curr?.data?.length, 0
+              )
               return (
                 <StyledTableRow
                   key={`timeline-${rowIndex}`}
@@ -306,7 +285,13 @@ function WeekModeView (props) {
                           event, {rowIndex, ...row}, {dayIndex, ...day}
                         )}
                       >
-                        {day?.data?.length > 0 && renderTask(day?.data, row?.label, rowIndex, dayIndex)}
+                        {day?.data?.length > 0 &&
+                        renderTask(
+                          day?.data,
+                          row?.label,
+                          rowIndex,
+                          dayIndex
+                        )}
                       </StyledTableCell>
                     )
                   })}

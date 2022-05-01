@@ -43,6 +43,7 @@ bower_components
 build/Release
 
 # Dependency directories
+dist/
 node_modules/
 jspm_packages/
 
@@ -119,3 +120,4 @@ out
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+react-mui-scheduler-*

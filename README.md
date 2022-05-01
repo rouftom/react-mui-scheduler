@@ -1,6 +1,6 @@
-<p align="center"><a href="" target="_blank"><img align="center" src="public/month-mode-preview.png"></a></p>
+<p align="center"><a href="" target="_blank"><img align="center" src="https://user-images.githubusercontent.com/12144793/166131609-62c6fa1d-c8fc-4147-8adc-78260836b94b.gif"></a></p>
 
-<!-- ![month-mode-preview.png](public/month-mode-preview.png "Month mode preview") -->
+<!-- ![month-mode-preview.png](https://user-images.githubusercontent.com/12144793/166131609-62c6fa1d-c8fc-4147-8adc-78260836b94b.gif "Month mode preview") -->
 
 <h1 align="center">📅 React Material Scheduler</h1>
 <p align="center">developed with <a target="_blank" href="https://mui.com">@mui v5</a> </p>
@@ -124,7 +124,9 @@ function App() {
   
   return (
     <Scheduler
+      locale="en"
       events={events}
+      legacyStyle={false}
       options={state?.options}
       alertProps={state?.alertProps}
       toolbarProps={state?.toolbarProps}
@@ -154,6 +156,23 @@ ReactDOM.render(<App />, document.querySelector('#yourComponentRootId'))
 
 
 For more details about date formats, see [date-fns docs](https://date-fns.org/v2.24.0/docs/)
+
+
+## Props
+
+| Name 	|  Type 	|   Default	|  Description 	|  Values 	|
+|------	|---	|---	|---	|---	|
+|    locale  	|  string 	|  `en` 	|  This prop is used to set the locale of the scheduler 	|  `ar`, `de`, `en`, `es`, `fr`, `ja`, `ko`, `zh` 	|
+|   events   	|   object	|   	|   This prop sets event data	|   	|
+|    legacyStyle  	|  boolean 	|  `false` 	|  This prop allows to use the old display style 	|  `false`, `true` 	|
+|    options  	|  object 	|   	|  This prop is used to set scheduler properties 	|   	|
+|    alertProps  	|  object 	|   	|  This prop is used to set scheduler properties 	|    	|
+|    toolbarProps  	|  object 	|   	|  This prop is used to set toolbar properties 	|   	|
+|    onEventsChange  	|  event 	|   	|  This event is fired when the event change occurs 	|   	|
+|    onCellClick  	|  event 	|   	|  This event is fired when a cell is clicked 	|   	|
+|    onTaskClick  	|  event 	|   	|  This event is fired when a task is clicked 	|   	|
+|    onAlertCloseButtonClicked  	|  event 	|   	|  This event is fired when the close button of the alert component 	|   	|
+
 
 
 ## Options
@@ -220,6 +239,8 @@ For more details about date formats, see [date-fns docs](https://date-fns.org/v2
 
     Do you like this library ? Buy me a coffee or support me with a star on Github
 
+<a href="https://www.buymeacoffee.com/Lnp9rkM" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 * Btc address: `bc1qettgagenn9nc8ks7ghntjfme96yvvkfhntk774`
 
 * Eth address: `0xB0413d8D0336E263e289A915c383e152155881E0`
@@ -233,11 +254,11 @@ For more details about date formats, see [date-fns docs](https://date-fns.org/v2
 
 - 👉 Export events as PDF and CSV
 
-- 👉 Internationalization
+- ✅ Internationalization
 
 - 👉 Typescript support
 
-- 👉 Theme customization
+- ✅ Display style customization
 
 
 ## License
@@ -246,7 +267,7 @@ For more details about date formats, see [date-fns docs](https://date-fns.org/v2
 
 MIT License
 
-Copyright (c) 2021 rouftom
+Copyright (c) 2022 rouftom
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

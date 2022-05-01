@@ -1,12 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 import { format, add, sub, getDaysInMonth, parse } from 'date-fns'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import {
   Typography, Toolbar, IconButton, Button, ToggleButton,
   TextField, Hidden, Alert, Collapse, ToggleButtonGroup,
-  Divider, ListItemIcon, Menu, MenuItem, Grid
+  Divider, ListItemIcon, Menu, MenuItem, Grid, Stack
 } from "@mui/material"
+import { useTheme } from "@mui/material/styles"
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import StaticDatePicker from '@mui/lab/StaticDatePicker'
 import CloseIcon from '@mui/icons-material/Close'
@@ -21,10 +23,12 @@ import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline'
 import GridViewIcon from '@mui/icons-material/GridView'
 import ToolbarSearchbar from "./ToolbarSeachBar.jsx"
+import DateFnsLocaleContext from "../locales/dateFnsContext"
 
 
 function SchedulerToolbar (props) {
   const {
+    locale,
     // events data
     events, switchMode, today, toolbarProps,
     // Mode
@@ -34,7 +38,9 @@ function SchedulerToolbar (props) {
     // Date
     onDateChange
   } = props
-  
+
+  const theme = useTheme()
+  const { t } = useTranslation(['common'])
   const [searchResult, setSearchResult] = useState()
   const [mode, setMode] = useState(switchMode)
   const [anchorMenuEl, setAnchorMenuEl] = useState(null)
@@ -44,14 +50,17 @@ function SchedulerToolbar (props) {
   
   const openMenu = Boolean(anchorMenuEl)
   const openDateSelector = Boolean(anchorDateEl)
-  
+  const dateFnsLocale = useContext(DateFnsLocaleContext)
+  const isDayMode = mode?.toLowerCase() === t('day').toLowerCase()
+  const isWeekMode = mode?.toLowerCase() === t('week').toLowerCase()
+  const isMonthMode = mode?.toLowerCase() === t('month').toLowerCase()
+
   const commonIconButtonProps = {
     size: "medium",
     edge: "start",
     color: "inherit",
     "aria-label":"menu"
   }
-  
   const menus = [
     {
       label: "Read events",
@@ -70,35 +79,15 @@ function SchedulerToolbar (props) {
       icon: <LocalPrintshopIcon fontSize="small" />
     },
   ]
-  
-  //const handleOpenMenu = (event) => {
-  //  setAnchorMenuEl(event.currentTarget)
-  //}
-  
-  /**
-   * @name handleCloseMenu
-   * @description
-   * @return void
-   */
+
   const handleCloseMenu = () => {
     setAnchorMenuEl(null)
   }
-  
-  /**
-   * @name handleOpenDateSelector
-   * @description
-   * @param event
-   * @return void
-   */
+
   const handleOpenDateSelector = (event) => {
     setAnchorDateEl(event.currentTarget)
   }
-  
-  /**
-   * @name handleCloseDateSelector
-   * @description
-   * @return void
-   */
+
   const handleCloseDateSelector = () => {
     setAnchorDateEl(null)
   }
@@ -114,10 +103,10 @@ function SchedulerToolbar (props) {
       return
     }
     let options = { months: 1 }
-    if (mode === 'week') { 
+    if (isWeekMode) { 
       options = { weeks: 1 } 
     }
-    if (mode === 'day') { 
+    if (isDayMode) { 
       options = { days: 1 }  
     }
     let newDate = method(selectedDate, options)
@@ -143,9 +132,22 @@ function SchedulerToolbar (props) {
     onSearchResult && onSearchResult(searchResult)
     // eslint-disable-next-line
   }, [searchResult])
+
+  useEffect(() => {
+    if (switchMode !== mode) {
+      setMode(switchMode)
+    }
+  }, [switchMode])
   
   return (
-    <Toolbar variant="dense" sx={{px: '0px !important', display: 'block'}}>
+    <Toolbar 
+      variant="dense" 
+      sx={{
+        px: '0px !important', 
+        display: 'block',
+        borderBottom: `1px ${theme.palette.divider} solid`,
+      }}
+    >
       <Grid
         container
         spacing={0}
@@ -173,7 +175,11 @@ function SchedulerToolbar (props) {
                 sx={{ color: 'text.primary'}}
                 aria-expanded={openDateSelector ? 'true' : undefined}
               >
-                {format(selectedDate, mode === 'month' ? 'MMMM-yyyy' : 'PPP')}
+                {format(
+                  selectedDate, 
+                  isMonthMode ? 'MMMM-yyyy' : 'PPP',
+                  { locale: dateFnsLocale }
+                )}
               </Button>
               <IconButton
                 sx={{ ml: .2 }}
@@ -200,7 +206,10 @@ function SchedulerToolbar (props) {
               onClose={handleCloseDateSelector}
               MenuListProps={{'aria-labelledby': 'basic-button'}}
             >
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <LocalizationProvider
+                locale={dateFnsLocale}
+                dateAdapter={AdapterDateFns}
+              >
                 <StaticDatePicker
                   displayStaticWrapperAs="desktop"
                   value={selectedDate}
@@ -216,53 +225,68 @@ function SchedulerToolbar (props) {
           </Typography>}
         </Grid>
         <Grid item xs sm md sx={{textAlign: 'right'}}>
-          {toolbarProps?.showSearchBar &&
-          <ToolbarSearchbar
-            events={events}
-            onInputChange={(newValue) => {
-              let newDate = new Date()
-              if (newValue.date) {
-                newDate = parse(newValue.date, 'yyyy-MM-dd', today)
-              }
-              setDaysInMonth(getDaysInMonth(newDate))
-              setSelectedDate(newDate)
-              setSearchResult(newValue)
-            }}
-          />}
-        </Grid>
-        <Grid item xs={1} sm={1} md sx={{textAlign: 'right'}}>
-          <Hidden mdUp>
-            <IconButton
-              sx={{mr: 0, "aria-label":"menu"}}
-              {...commonIconButtonProps}
-              size="small"
-              onClick={handleOpenDateSelector}
-            >
-              <GridViewIcon />
-            </IconButton>
-          </Hidden>
-          <Hidden mdDown>
-            {toolbarProps?.showSwitchModeButtons &&
-            <ToggleButtonGroup
-              exclusive
-              value={mode}
-              size="small"
-              color="primary"
-              aria-label="text button group"
-              sx={{ mr: 1.3 }}
-              onChange={(e, newMode) => { setMode(newMode) }}
-            >
-              {['month', 'week', 'day', 'timeline'].map(tb => (
-                <ToggleButton key={tb} value={tb}>{tb}</ToggleButton>
-              ))}
-            </ToggleButtonGroup>}
-          </Hidden>
-          {/*toolbarProps?.showOptions &&
+          <Stack
+            direction="row"
+            sx={{
+              pr: .5,
+              alignItems: 'center',
+              justifyContent: 'flex-end'
+            }}>
+            {toolbarProps?.showSearchBar &&
+            <ToolbarSearchbar
+              events={events}
+              onInputChange={(newValue) => {
+                let newDate = new Date()
+                if (newValue.date) {
+                  newDate = parse(newValue.date, 'yyyy-MM-dd', today)
+                }
+                setDaysInMonth(getDaysInMonth(newDate))
+                setSelectedDate(newDate)
+                setSearchResult(newValue)
+              }}
+            />}
+            <Hidden mdUp>
+              <IconButton
+                sx={{mr: 0, "aria-label":"menu"}}
+                {...commonIconButtonProps}
+                size="small"
+                onClick={handleOpenDateSelector}
+              >
+                <GridViewIcon />
+              </IconButton>
+            </Hidden>
+            <Hidden mdDown>
+              {toolbarProps?.showSwitchModeButtons &&
+              <ToggleButtonGroup
+                exclusive
+                value={mode}
+                size="small"
+                color="primary"
+                aria-label="text button group"
+                sx={{ mt: .2, mr: 1.3, display: 'contents' }}
+                onChange={(e, newMode) => {
+                  setMode(newMode)
+                }}
+              >
+                {[
+                  { label: t('month'), value: 'month' },
+                  { label: t('week'), value: 'week' },
+                  { label: t('day'), value: 'day' },
+                  { label: t('timeline'), value: 'timeline' }
+                ].map(tb => (
+                  <ToggleButton sx={{ mt: .5 }} key={tb.value} value={tb.value}>
+                    {tb.label}
+                  </ToggleButton>
+                ))}
+              </ToggleButtonGroup>}
+            </Hidden>
+            {/*toolbarProps?.showOptions &&
           <IconButton sx={{ ml: 1 }} onClick={handleOpenMenu}{...commonIconButtonProps}>
             <MoreVertIcon />
           </IconButton>*/}
+          </Stack>
         </Grid>
-        <Grid item xs={12} sx={{mb: .5}}>
+        <Grid item xs={12} sx={{}}>
           <Menu
             id="menu-menu"
             open={openMenu}

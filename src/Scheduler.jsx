@@ -1,18 +1,29 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect, useReducer } from 'react'
 import PropTypes from "prop-types"
-import { 
-  Grid, Paper, Fade, Zoom, 
- } from "@mui/material"
+import i18n from '../locales/locale'
+import { useTranslation } from 'react-i18next'
 import { useTheme } from "@mui/material/styles"
+import { Grid, Paper, Fade, Zoom, Slide } from "@mui/material"
 import {
-  format, getDaysInMonth, getDay, sub, startOfMonth, parse,
-  add, startOfDay, startOfWeek, getWeeksInMonth, isSameDay
+  format, 
+  getDaysInMonth, 
+  getDay, 
+  sub, 
+  startOfMonth, 
+  parse,
+  add, 
+  startOfDay, 
+  startOfWeek, 
+  getWeeksInMonth, 
+  isSameDay
 } from 'date-fns'
 import SchedulerToolbar from "./Toolbar.jsx"
 import MonthModeView from "./MonthModeView.jsx"
 import WeekModeView from "./WeekModeView.jsx"
 import DayModeView from "./DayModeView.jsx"
 import TimeLineModeView from "./TimeLineModeView.jsx"
+import DateFnsLocaleContext from '../locales/dateFnsContext'
+import {ar, de, enAU, es, fr, ja, ko, ru, zhCN} from "date-fns/locale"
 
 
 /**
@@ -24,36 +35,63 @@ import TimeLineModeView from "./TimeLineModeView.jsx"
 function Scheduler(props) {
   const {
     events,
+    locale,
     options,
-    onCellClick,
-    onTaskClick,
-    onEventsChange,
     alertProps,
-    onAlertCloseButtonClicked,
-    toolbarProps
+    onCellClick,
+    legacyStyle,
+    onTaskClick,
+    toolbarProps,
+    onEventsChange,
+    onAlertCloseButtonClicked
   } = props
   const today = new Date()
   const theme = useTheme()
-  const TransitionMode = options?.transitionMode === 'zoom' ? Zoom : Fade
-  
+  const { t, i18n } = useTranslation(['common'])
+  const weeks = [
+    t('mon'), t('tue'), t('wed'),
+    t('thu'), t('fri'), t('sat'),
+    t('sun')
+  ]
+
   const [state, setState] = useState({})
-  const [alrtProps, setAlrtProps] = useState(alertProps)
   const [searchResult, setSearchResult] = useState()
-  const [mode, setMode] = useState(options?.defaultMode || 'month')
   const [selectedDay, setSelectedDay] = useState(today)
+  const [alertState, setAlertState] = useState(alertProps)
+  const [mode, setMode] = useState(options?.defaultMode || 'month')
   const [daysInMonth, setDaysInMonth] = useState(getDaysInMonth(today))
+  const [weekDays, updateWeekDays]= useReducer((state) => weeks, weeks)
+  const [startWeekOn, setStartWeekOn] = useState(options?.startWeekOn || 'mon')
   const [selectedDate, setSelectedDate] = useState(format(today, 'MMMM-yyyy'))
-  
+
+  const isDayMode = mode.toLowerCase() === 'day'
+  const isWeekMode = mode.toLowerCase() === 'week'
+  const isMonthMode = mode.toLowerCase() === 'month'
+  const isTimelineMode = mode.toLowerCase() === 'timeline'
+  const TransitionMode = (
+    options?.transitionMode === 'zoom' ? Zoom :
+      options?.transitionMode === 'fade' ? Fade : Slide
+  )
+
+  let dateFnsLocale = enAU
+  if (locale === 'fr') { dateFnsLocale = fr }
+  if (locale === 'ko') { dateFnsLocale = ko }
+  if (locale === 'de') { dateFnsLocale = de }
+  if (locale === 'es') { dateFnsLocale = es }
+  if (locale === 'ar') { dateFnsLocale = ar }
+  if (locale === 'ja') { dateFnsLocale = ja }
+  if (locale === 'ru') { dateFnsLocale = ru }
+  if (locale === 'zh') { dateFnsLocale = zhCN }
+
   /**
    * @name getMonthHeader
    * @description
    * @return {{headerClassName: string, headerAlign: string, headerName: string, field: string, flex: number, editable: boolean, id: string, sortable: boolean, align: string}[]}
    */
   const getMonthHeader = () => {
-    let weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-    if (options?.startWeekOn?.toUpperCase() === 'SUN') {
-      weekDays[0] = 'Sun'
-      weekDays[6] = 'Mon'
+    if (startWeekOn?.toUpperCase() === 'SUN') {
+      weekDays[0] = t('sun')
+      weekDays[6] = t('mon')
     }
     return weekDays.map((day, i) => ({
       id: `row-day-header-${i+1}`,
@@ -76,7 +114,7 @@ function Scheduler(props) {
   const getMonthRows = () => {
     let rows = [], daysBefore = []
     let iteration = getWeeksInMonth(selectedDay) //Math.ceil(daysInMonth / 7)
-    let startOnSunday = options?.startWeekOn?.toUpperCase() === 'SUN'
+    let startOnSunday = startWeekOn?.toUpperCase() === weekDays[6].toUpperCase
     let monthStartDate = startOfMonth(selectedDay)        // First day of month
     let monthStartDay = getDay(monthStartDate)            // Index of the day in week
     let dateDay = parseInt(format(monthStartDate, 'dd'))  // Month start day
@@ -213,9 +251,9 @@ function Scheduler(props) {
       let date = add(weekStart, {days: i})
       data.push({
         date: date,
-        weekDay: format(date, 'iii'),
-        day: format(date, 'dd'),
-        month: format(date, 'MM'),
+        weekDay: format(date, 'iii', { locale: dateFnsLocale }),
+        day: format(date, 'dd', { locale: dateFnsLocale }),
+        month: format(date, 'MM', { locale: dateFnsLocale }),
       })
     }
     return data
@@ -269,9 +307,9 @@ function Scheduler(props) {
   
   const getDayHeader = () => ([{
     date: selectedDay,
-    weekDay: format(selectedDay, 'iii'),
-    day: format(selectedDay, 'dd'),
-    month: format(selectedDay, 'MM')
+    weekDay: format(selectedDay, 'iii', { locale: dateFnsLocale }),
+    day: format(selectedDay, 'dd', { locale: dateFnsLocale }),
+    month: format(selectedDay, 'MM', { locale: dateFnsLocale })
   }])
   
   const getDayRows = () => {
@@ -307,12 +345,12 @@ function Scheduler(props) {
     return data
   }
   
-  
   const getTimeLineRows = () => (
-    events.filter((event) => {
-      let eventDate = parse(event?.date, 'yyyy-MM-dd', new Date())
-      return isSameDay(selectedDay, eventDate)
-    })
+    //events.filter((event) => {
+      //let eventDate = parse(event?.date, 'yyyy-MM-dd', new Date())
+      //return isSameDay(selectedDay, eventDate)
+    //})
+    events
   )
   
   /**
@@ -353,9 +391,9 @@ function Scheduler(props) {
     let eventIndex = events.findIndex(e => e.id === item?.id)
     if (eventIndex !== -1) {
       let oldObject = Object.assign({}, events[eventIndex])
-      if (alrtProps?.showNotification && !alrtProps.open) {
-        setAlrtProps({
-          ...alrtProps,
+      if (alertState?.showNotification && !alertState.open) {
+        setAlertState({
+          ...alertState,
           open: true,
           message: `
             ${item?.label} successfully moved from ${oldObject?.date}
@@ -363,35 +401,84 @@ function Scheduler(props) {
           `
         })
         setTimeout(() => {
-          setAlrtProps({ ...alrtProps, open: false, message: '' })
-        }, alrtProps.delay)
+          setAlertState({ ...alertState, open: false, message: '' })
+        }, alertState.delay)
       }
     }
   }
-  
+
   useEffect(() => {
-    if (mode === 'month') {
-      setState({...state, columns: getMonthHeader(), rows: getMonthRows()})
+    if (isMonthMode) {
+      setState({
+        ...state,
+        columns: getMonthHeader(),
+        rows: getMonthRows()
+      })
     }
-    if (mode === 'week') {
-      setState({...state, columns: getWeekHeader(), rows: getWeekRows()})
+    if (isWeekMode) {
+      setState({
+        ...state,
+        columns: getWeekHeader(),
+        rows: getWeekRows()
+      })
     }
-    if (mode === 'day') {
-      setState({...state, columns: getDayHeader(), rows: getDayRows()})
+    if (isDayMode) {
+      setState({
+        ...state,
+        columns: getDayHeader(),
+        rows: getDayRows()
+      })
     }
-    if (mode === 'timeline') {
-      setState({...state, columns: getDayHeader(), rows: getTimeLineRows()})
+    if (isTimelineMode) {
+      setState({
+        ...state,
+        columns: getDayHeader(),
+        rows: getTimeLineRows()
+      })
     }
     // eslint-disable-next-line
-  }, [daysInMonth, selectedDay, selectedDate, mode])
-  
+  }, [
+    mode,
+    weekDays,
+    daysInMonth, 
+    selectedDay, 
+    selectedDate,
+    dateFnsLocale,
+    i18n.language,
+    startWeekOn
+  ])
+
+  useEffect(() => {
+    if (locale !== i18n.language) { //localStorage.getItem('i18nextLng')
+      localStorage.setItem('i18nextLng', locale.toLowerCase())
+      i18n.changeLanguage(locale.toLowerCase())
+      updateWeekDays()
+    }
+  }, [locale])
+
+  useEffect(() => {
+    if (options?.defaultMode !== mode) {
+      setMode(options?.defaultMode)
+    }
+  }, [options?.defaultMode])
+
+  useEffect(() => {
+    if (options?.startWeekOn !== startWeekOn) {
+      setStartWeekOn(options?.startWeekOn)
+    }
+  }, [options?.startWeekOn])
+
+  //console.log(state.columns)
+
   return (
     <Paper variant="outlined" elevation={0} sx={{p: 0}}>
+      <DateFnsLocaleContext.Provider value={dateFnsLocale}>
         <SchedulerToolbar
           today={today}
           events={events}
+          locale={locale}
           switchMode={mode}
-          alertProps={alrtProps}
+          alertProps={alertState}
           toolbarProps={toolbarProps}
           onDateChange={handleDateChange}
           onModeChange={handleModeChange}
@@ -404,14 +491,16 @@ function Scheduler(props) {
           alignItems="center"
           justifyContent="start"
         >
-          {mode === 'month' &&
+          {isMonthMode &&
           <TransitionMode in>
             <Grid item xs={12}>
               <MonthModeView
+                locale={locale}
                 options={options}
                 date={selectedDate}
                 rows={state?.rows}
                 columns={state?.columns}
+                legacyStyle={legacyStyle}
                 onTaskClick={onTaskClick}
                 onCellClick={onCellClick}
                 searchResult={searchResult}
@@ -420,10 +509,11 @@ function Scheduler(props) {
               />
             </Grid>
           </TransitionMode>}
-          {mode === 'week' &&
+          {isWeekMode &&
           <TransitionMode in>
             <Grid item xs={12}>
               <WeekModeView
+                locale={locale}
                 events={events}
                 options={options}
                 date={selectedDate}
@@ -437,10 +527,11 @@ function Scheduler(props) {
               />
             </Grid>
           </TransitionMode>}
-          {mode === 'day' &&
+          {isDayMode &&
           <TransitionMode in>
             <Grid item xs={12}>
               <DayModeView
+                locale={locale}
                 events={events}
                 options={options}
                 date={selectedDate}
@@ -455,12 +546,13 @@ function Scheduler(props) {
             </Grid>
           </TransitionMode>}
         </Grid>
-        {mode === 'timeline' &&
+        {isTimelineMode &&
         <TransitionMode in>
           <Grid container spacing={2} alignItems="start">
             <Grid item xs={12}>
               <TimeLineModeView
                 events={events}
+                locale={locale}
                 options={options}
                 date={selectedDate}
                 rows={state?.rows}
@@ -474,6 +566,7 @@ function Scheduler(props) {
             </Grid>
           </Grid>
         </TransitionMode>}
+      </DateFnsLocaleContext.Provider>
       </Paper>
   )
 }
@@ -490,7 +583,8 @@ Scheduler.propTypes = {
 }
 
 Scheduler.defaultProps = {
-
+  locale: 'en',
+  legacyStyle: false
 }
 
 export default Scheduler

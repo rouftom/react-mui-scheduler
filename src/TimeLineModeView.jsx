@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import PropTypes from 'prop-types'
 import { styled } from '@mui/material/styles'
 import {Typography} from "@mui/material"
@@ -11,6 +11,7 @@ import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent'
 import TimelineDot from '@mui/lab/TimelineDot'
 import ScheduleIcon from '@mui/icons-material/Schedule'
 import { format, parse } from 'date-fns'
+import DateFnsLocaleContext from "../locales/dateFnsContext"
 
 const StyledContainer = styled(Typography)(({ theme }) => ({
   ['&::-webkit-scrollbar']: {
@@ -33,6 +34,7 @@ const StyledContainer = styled(Typography)(({ theme }) => ({
 
 function TimeLineModeView (props) {
   const {options, rows, searchResult, onTaskClick} = props
+  const dateFnsLocale = useContext(DateFnsLocaleContext)
   
   /**
    * @name handleTaskClick
@@ -78,7 +80,15 @@ function TimeLineModeView (props) {
                 color="text.secondary"
               >
                 {task?.date &&
-                format(parse(task?.date, 'yyyy-MM-dd', new Date()), 'PPP')}
+                format(
+                  parse(
+                    task?.date,
+                    'yyyy-MM-dd',
+                    new Date()
+                  ),
+                  'PPP',
+                  { locale: dateFnsLocale }
+                )}
                 <br />
                 <Typography variant="caption">
                   {task?.startHour} - {task?.endHour}

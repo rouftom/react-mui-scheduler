@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.0.0] - 2022-05-01
+
+### Added
+
+- Add Internationalization. Languages availables are `ar`, `de`, `en`, `es`, `fr`, `ja`, `ko`, `zh`
+
+- Resolves #2
+
+### Changed
+
+- Add new display style
+
+### Fixed
+
+
+
 ## [1.2.6] - 2022-04-26
 
 ### Added

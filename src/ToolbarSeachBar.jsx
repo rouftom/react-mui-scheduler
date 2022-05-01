@@ -1,8 +1,10 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import PropTypes from 'prop-types'
 import { format, parse } from 'date-fns'
+import { useTranslation } from 'react-i18next'
 import { styled } from '@mui/material/styles'
 import { TextField, Autocomplete, Box } from "@mui/material"
+import DateFnsLocaleContext from "../locales/dateFnsContext"
 
 const StyledAutoComplete = styled(Autocomplete)(({ theme }) => ({
   color: 'inherit',
@@ -14,17 +16,18 @@ const StyledAutoComplete = styled(Autocomplete)(({ theme }) => ({
     width: '100%'
   },
   [theme.breakpoints.up('md')]: {
-    width: '25ch'
+    width: '27ch'
   },
   [theme.breakpoints.up('lg')]: {
-    width: '25ch'
+    width: '27ch'
   },
 }))
 
 function ToolbarSearchbar (props) {
   const {events, onInputChange} = props
-  
+  const { t } = useTranslation(['common'])
   const [value, setValue] = useState('')
+  const dateFnsLocale = useContext(DateFnsLocaleContext)
   const [inputValue, setInputValue] = useState('')
   
   const handleOnChange = (event, newValue) => {
@@ -37,7 +40,7 @@ function ToolbarSearchbar (props) {
       value={value}
       id="scheduler-autocomplete"
       inputValue={inputValue}
-      sx={{display: 'inline-flex'}}
+      sx={{ mb: 0, display: 'inline-flex' }}
       onChange={handleOnChange}
       options={events?.sort((a, b) => -b.groupLabel.localeCompare(a.groupLabel))}
       groupBy={(option) => option ? option?.groupLabel : null}
@@ -79,7 +82,7 @@ function ToolbarSearchbar (props) {
         <TextField
           {...params}
           size="small"
-          label="Search..."
+          label={t('search')}
           InputProps={{...params.InputProps}}
         />
       )}
