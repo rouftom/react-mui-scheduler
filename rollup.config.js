@@ -1,5 +1,6 @@
 import babel from '@rollup/plugin-babel'
 import styles from "rollup-plugin-styles"
+import json from '@rollup/plugin-json'
 const autoprefixer = require('autoprefixer')
 
 // the entry point for the library
@@ -32,6 +33,7 @@ MODE.map((m) => {
       /@babel\/runtime/
     ],
     plugins: [
+      json(),
       // these are babel comfigurations
       babel({
         exclude: 'node_modules/**',
