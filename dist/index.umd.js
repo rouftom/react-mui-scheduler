@@ -827,7 +827,7 @@
     sx: PropTypes__default["default"].object,
     boxSx: PropTypes__default["default"].object,
     event: PropTypes__default["default"].object.isRequired,
-    rowId: PropTypes__default["default"].number,
+    rowId: PropTypes__default["default"].oneOfType([PropTypes__default["default"].string, PropTypes__default["default"].number]),
     isMonthMode: PropTypes__default["default"].bool,
     onClick: PropTypes__default["default"].func,
     handleTaskClick: PropTypes__default["default"].func,
@@ -890,13 +890,14 @@
 
     var today = new Date();
     var currentDaySx = {
+      width: 24,
+      height: 22,
+      margin: 'auto',
       display: 'block',
-      background: styles.alpha(theme.palette.primary.main, 1),
-      borderRadius: '50%',
-      padding: '1px 3px',
-      color: '#fff',
-      width: 'fit-content',
-      margin: 'auto'
+      paddingTop: '2px',
+      borderRadius: '50%' //padding: '1px 7px',
+      //width: 'fit-content'
+
     };
 
     var onCellDragOver = function onCellDragOver(e) {
@@ -1088,12 +1089,13 @@
       }, row === null || row === void 0 ? void 0 : (_row$days = row.days) === null || _row$days === void 0 ? void 0 : _row$days.map(function (day, indexD) {
         var _columns$indexD, _columns$indexD$heade, _day$data2, _day$data3;
 
+        var currentDay = day.day === dateFns.getDay(today) + 1 && dateFns.isSameMonth(day.date, today);
         return /*#__PURE__*/React__default["default"].createElement(StyledTableCell$2, {
           scope: "row",
           align: "center",
           component: "th",
           sx: {
-            px: 1,
+            px: 0.5,
             position: 'relative'
           },
           key: "day-".concat(day.id),
@@ -1105,13 +1107,21 @@
           onClick: function onClick(event) {
             return handleCellClick(event, row, day);
           }
+        }, /*#__PURE__*/React__default["default"].createElement(material.Box, {
+          sx: {
+            height: '100%',
+            overflowY: 'visible'
+          }
         }, !legacyStyle && index === 0 && ((_columns$indexD = columns[indexD]) === null || _columns$indexD === void 0 ? void 0 : (_columns$indexD$heade = _columns$indexD.headerName) === null || _columns$indexD$heade === void 0 ? void 0 : _columns$indexD$heade.toUpperCase()), ".", /*#__PURE__*/React__default["default"].createElement(material.Typography, {
           variant: "body2",
-          sx: day.day === dateFns.getDaysInMonth(today) && dateFns.isSameMonth(day.date, today) && currentDaySx || {}
+          sx: _objectSpread$3(_objectSpread$3({}, currentDaySx), {}, {
+            background: currentDay && styles.alpha(theme.palette.primary.main, 1),
+            color: currentDay && '#fff'
+          })
         }, day.day), (day === null || day === void 0 ? void 0 : (_day$data2 = day.data) === null || _day$data2 === void 0 ? void 0 : _day$data2.length) > 0 && renderTask(day === null || day === void 0 ? void 0 : day.data, row.id), legacyStyle && (day === null || day === void 0 ? void 0 : (_day$data3 = day.data) === null || _day$data3 === void 0 ? void 0 : _day$data3.length) === 0 && /*#__PURE__*/React__default["default"].createElement(EventNoteRoundedIcon__default["default"], {
           fontSize: "small",
           htmlColor: theme.palette.divider
-        }));
+        })));
       }));
     }))));
   }
@@ -2000,7 +2010,9 @@
         setSelectedDate = _useState16[1];
 
     var _useReducer = React.useReducer(function (state) {
-      if ((startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === 'SUN') {
+      var _options$startWeekOn;
+
+      if ((options === null || options === void 0 ? void 0 : (_options$startWeekOn = options.startWeekOn) === null || _options$startWeekOn === void 0 ? void 0 : _options$startWeekOn.toUpperCase()) === 'SUN') {
         return [t('sun'), t('mon'), t('tue'), t('wed'), t('thu'), t('fri'), t('sat')];
       }
 
@@ -2086,8 +2098,7 @@
 
       var rows = [],
           daysBefore = [];
-      var iteration = dateFns.getWeeksInMonth(selectedDay); //Math.ceil(daysInMonth / 7)
-
+      var iteration = dateFns.getWeeksInMonth(selectedDay);
       var startOnSunday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === 'SUN' && t('sun').toUpperCase() === weekDays[0].toUpperCase();
       var monthStartDate = dateFns.startOfMonth(selectedDay); // First day of month
 
@@ -2123,10 +2134,10 @@
         for (var i = 1; checkCondition(i); i++) {
           _loop(i);
         }
-      } else if (startOnSunday) {
+      } else if (!startOnSunday) {
         var _loop2 = function _loop2(_i) {
           var subDate = dateFns.sub(monthStartDate, {
-            days: _i + 1
+            days: _i
           });
           var day = parseInt(dateFns.format(subDate, 'dd'));
           var data = events.filter(function (event) {
@@ -2235,7 +2246,7 @@
     var getWeekHeader = function getWeekHeader() {
       var data = [];
       var weekStart = dateFns.startOfWeek(selectedDay, {
-        weekStartsOn: 1
+        weekStartsOn: startWeekOn === 'mon' ? 1 : 0
       });
 
       for (var i = 0; i < 7; i++) {
@@ -2506,6 +2517,8 @@
       if ((options === null || options === void 0 ? void 0 : options.startWeekOn) !== startWeekOn) {
         setStartWeekOn(options === null || options === void 0 ? void 0 : options.startWeekOn);
       }
+
+      updateWeekDays();
     }, [options === null || options === void 0 ? void 0 : options.startWeekOn]);
     return /*#__PURE__*/React__default["default"].createElement(material.Paper, {
       variant: "outlined",

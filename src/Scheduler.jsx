@@ -159,7 +159,7 @@ function Scheduler(props) {
       }
     } else if (!startOnSunday) {
       for (let i = 6; i > 0; i--) {
-        let subDate = sub(monthStartDate, {days: i+1})
+        let subDate = sub(monthStartDate, {days: i})
         let day = parseInt(format(subDate, 'dd'))
         let data = events.filter((event) => (
           isSameDay(subDate, parse(event?.date, 'yyyy-MM-dd', new Date()))
@@ -264,9 +264,21 @@ function Scheduler(props) {
       let date = add(weekStart, {days: i})
       data.push({
         date: date,
-        weekDay: format(date, 'iii', { locale: dateFnsLocale }),
-        day: format(date, 'dd', { locale: dateFnsLocale }),
-        month: format(date, 'MM', { locale: dateFnsLocale }),
+        weekDay: format(
+          date,
+          'iii',
+          { locale: dateFnsLocale }
+        ),
+        day: format(
+          date,
+          'dd',
+          { locale: dateFnsLocale }
+        ),
+        month: format(
+          date,
+          'MM',
+          { locale: dateFnsLocale }
+        ),
       })
     }
     return data
