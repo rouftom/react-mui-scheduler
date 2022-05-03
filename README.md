@@ -15,7 +15,7 @@
 ---
 
 React mui scheduler is a react component based on @mui v5 that allows you to manage data in a calendar.
-
+<p><a href="https://codesandbox.io/s/relaxed-neumann-174pod?file=/src/App.js" target="_blank">Demo here</a></p>
 
 ## 🚀 Installation
 ```nodejs
@@ -32,7 +32,7 @@ function App() {
   const [state] = useState({
     options: {
       transitionMode: "zoom", // or fade
-      startWeekOn: "Mon",     // or Sun
+      startWeekOn: "mon",     // or sun
       defaultMode: "month",    // or week | day | timeline
       minWidth: 540,
       maxWidth: 540,
@@ -64,7 +64,7 @@ function App() {
       color: "#f28f6a",
       startHour: "04:00 AM",
       endHour: "05:00 AM",
-      date: "2021-09-28",
+      date: "2022-05-05",
       createdAt: new Date(),
       createdBy: "Kristina Mayer"
     },
@@ -76,7 +76,7 @@ function App() {
       color: "#099ce5",
       startHour: "09:00 AM",
       endHour: "10:00 AM",
-      date: "2021-09-29",
+      date: "2022-05-09",
       createdAt: new Date(),
       createdBy: "Kristina Mayer"
     },
@@ -88,7 +88,7 @@ function App() {
       color: "#263686",
       startHour: "13 PM",
       endHour: "14 PM",
-      date: "2021-09-30",
+      date: "2022-05-10",
       createdAt: new Date(),
       createdBy: "Kristina Mayer"
     },
@@ -100,7 +100,7 @@ function App() {
       color: "#f28f6a",
       startHour: "08:00 AM",
       endHour: "09:00 AM",
-      date: "2021-10-01",
+      date: "2022-05-11",
       createdAt: new Date(),
       createdBy: "Kristina Mayer"
     }

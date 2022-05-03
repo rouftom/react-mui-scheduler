@@ -1,10 +1,10 @@
 import React, {useState, useContext} from 'react'
 import PropTypes from 'prop-types'
-import { format } from 'date-fns'
+import {format, getDay} from 'date-fns'
 import {useTheme, styled, alpha} from '@mui/material/styles'
 import {
   Paper, Typography, Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, tableCellClasses
+  TableHead, TableRow, tableCellClasses, Box
 } from "@mui/material"
 import { getDaysInMonth, isSameMonth } from 'date-fns'
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded'
@@ -63,13 +63,14 @@ function MonthModeView (props) {
   const { t } = useTranslation(['common'])
   const today = new Date()
   let currentDaySx = {
+    width: 24,
+    height: 22,
+    margin: 'auto',
     display: 'block',
-    background: alpha(theme.palette.primary.main, 1),
+    paddingTop: '2px',
     borderRadius: '50%',
-    padding: '1px 3px',
-    color: '#fff',
-    width: 'fit-content',
-    margin: 'auto'
+    //padding: '1px 7px',
+    //width: 'fit-content'
   }
 
   const onCellDragOver = (e) => {
@@ -235,36 +236,49 @@ function MonthModeView (props) {
                   }
                 }}
               >
-                {row?.days?.map((day, indexD) => (
-                  <StyledTableCell
-                    scope="row"
-                    align="center"
-                    component="th"
-                    sx={{ px: 1, position: 'relative' }}
-                    key={`day-${day.id}`}
-                    onDragEnd={onCellDragEnd}
-                    onDragOver={onCellDragOver}
-                    onDragEnter={e => onCellDragEnter(e, day.id, row.id)}
-                    onClick={(event) => handleCellClick(event, row, day)}
-                  >
-                    {!legacyStyle &&
-                    index === 0 && columns[indexD]?.headerName?.toUpperCase()}.
-                    <Typography
-                      variant="body2"
-                      sx={day.day === getDaysInMonth(today) &&
-                      isSameMonth(day.date, today) &&
-                      currentDaySx || {}}
+                {row?.days?.map((day, indexD) => {
+                  const currentDay = (
+                    day.day === (getDay(today) + 1) &&
+                    isSameMonth(day.date, today)
+                  )
+                  return (
+                    <StyledTableCell
+                      scope="row"
+                      align="center"
+                      component="th"
+                      sx={{px: 0.5, position: 'relative'}}
+                      key={`day-${day.id}`}
+                      onDragEnd={onCellDragEnd}
+                      onDragOver={onCellDragOver}
+                      onDragEnter={e => onCellDragEnter(e, day.id, row.id)}
+                      onClick={(event) => handleCellClick(event, row, day)}
                     >
-                      {day.day}
-                    </Typography>
-                    {(day?.data?.length > 0 && renderTask(day?.data, row.id))}
-                    {legacyStyle && day?.data?.length === 0 &&
-                    <EventNoteRoundedIcon 
-                      fontSize="small" 
-                      htmlColor={theme.palette.divider} 
-                    />}
-                  </StyledTableCell>
-                ))}
+                      <Box sx={{height: '100%', overflowY: 'visible'}}>
+                        {!legacyStyle &&
+                        index === 0 && columns[indexD]?.headerName?.toUpperCase()}.
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            ...currentDaySx,
+                            background: (
+                              currentDay &&
+                              alpha(theme.palette.primary.main, 1)
+                            ),
+                            color: (currentDay && '#fff')
+                          }}
+                        >
+                          {day.day}
+                        </Typography>
+                        {(day?.data?.length > 0 && renderTask(day?.data, row.id))}
+                        {legacyStyle && day?.data?.length === 0 &&
+                        <EventNoteRoundedIcon
+                          fontSize="small"
+                          htmlColor={theme.palette.divider}
+                        />}
+                      </Box>
+                    </StyledTableCell>
+                  )
+                })}
               </StyledTableRow>
             ))}
         </TableBody>

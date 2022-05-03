@@ -40,7 +40,10 @@ EventItem.propTypes = {
   sx: PropTypes.object,
   boxSx: PropTypes.object,
   event: PropTypes.object.isRequired,
-  rowId: PropTypes.number,
+  rowId: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   isMonthMode: PropTypes.bool,
   onClick: PropTypes.func,
   handleTaskClick: PropTypes.func,

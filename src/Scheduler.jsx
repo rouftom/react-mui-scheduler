@@ -63,7 +63,7 @@ function Scheduler(props) {
   const [startWeekOn, setStartWeekOn] = useState(options?.startWeekOn || 'mon')
   const [selectedDate, setSelectedDate] = useState(format(today, 'MMMM-yyyy'))
   const [weekDays, updateWeekDays]= useReducer((state) => {
-    if (startWeekOn?.toUpperCase() === 'SUN') {
+    if (options?.startWeekOn?.toUpperCase() === 'SUN') {
       return [
         t('sun'), t('mon'), t('tue'),
         t('wed'), t('thu'), t('fri'),
@@ -91,8 +91,6 @@ function Scheduler(props) {
   if (locale === 'ja') { dateFnsLocale = ja }
   if (locale === 'ru') { dateFnsLocale = ru }
   if (locale === 'zh') { dateFnsLocale = zhCN }
-
-
 
   /**
    * @name getMonthHeader
@@ -124,7 +122,7 @@ function Scheduler(props) {
    */
   const getMonthRows = () => {
     let rows = [], daysBefore = []
-    let iteration = getWeeksInMonth(selectedDay) //Math.ceil(daysInMonth / 7)
+    let iteration = getWeeksInMonth(selectedDay)
     let startOnSunday = (
       startWeekOn?.toUpperCase() === 'SUN' &&
       t('sun').toUpperCase() === weekDays[0].toUpperCase()
@@ -159,7 +157,7 @@ function Scheduler(props) {
           data: data
         })
       }
-    } else if (startOnSunday) {
+    } else if (!startOnSunday) {
       for (let i = 6; i > 0; i--) {
         let subDate = sub(monthStartDate, {days: i+1})
         let day = parseInt(format(subDate, 'dd'))
@@ -228,9 +226,8 @@ function Scheduler(props) {
     if (lastRowDaysdiff > 0) {
       let day = lastRow.days[lastRow?.days?.length-1]
       let addDate = day.date
-      
       for (let i = dateDay; i < (dateDay + lastRowDaysdiff); i++) {
-        addDate = add(addDate, {days: 1})
+        addDate = add(addDate, { days: 1 })
         let d = format(addDate, 'dd')
         // eslint-disable-next-line
         let data = events.filter((event) => (
@@ -259,7 +256,10 @@ function Scheduler(props) {
    */
   const getWeekHeader = () => {
     let data = []
-    let weekStart = startOfWeek(selectedDay, { weekStartsOn: 1 })
+    let weekStart = startOfWeek(
+      selectedDay,
+      { weekStartsOn: startWeekOn === 'mon' ? 1 : 0 }
+      )
     for (let i = 0; i < 7; i++) {
       let date = add(weekStart, {days: i})
       data.push({
@@ -479,6 +479,7 @@ function Scheduler(props) {
     if (options?.startWeekOn !== startWeekOn) {
       setStartWeekOn(options?.startWeekOn)
     }
+    updateWeekDays()
   }, [options?.startWeekOn])
 
   return (

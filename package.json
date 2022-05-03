@@ -1,6 +1,6 @@
 {
   "name": "react-mui-scheduler",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "📅 React mui scheduler is a react component based on @mui v5 that allows you to manage data in a calendar",
   "main": "dist/index.esm.js",
   "scripts": {
