@@ -65,6 +65,7 @@ function ToolbarSearchbar (props) {
         option ?
         `${option.groupLabel || ''} | (${option.startHour || ''} - ${option.endHour || ''})` : ''
       )}
+      isOptionEqualToValue={(option, value) => option.id === value.id}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue)
         onInputChange(newInputValue)

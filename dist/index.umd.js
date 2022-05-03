@@ -149,7 +149,7 @@
   var week$3 = "Semana";
   var month$3 = "Mes";
   var timeline$3 = "Cronología";
-  var mon$3 = "Lub";
+  var mon$3 = "Lun";
   var tue$3 = "Mar";
   var wed$3 = "Mié";
   var thu$3 = "Jue";
@@ -295,7 +295,8 @@
 
     },
     react: {
-      wait: true
+      wait: true,
+      useSuspense: false
     }
   });
 
@@ -383,6 +384,9 @@
       getOptionLabel: function getOptionLabel(option) {
         return option ? "".concat(option.groupLabel || '', " | (").concat(option.startHour || '', " - ").concat(option.endHour || '', ")") : '';
       },
+      isOptionEqualToValue: function isOptionEqualToValue(option, value) {
+        return option.id === value.id;
+      },
       onInputChange: function onInputChange(event, newInputValue) {
         setInputValue(newInputValue);
 
@@ -415,28 +419,28 @@
   function SchedulerToolbar(props) {
     props.locale;
         var events = props.events,
-        switchMode = props.switchMode,
         today = props.today,
+        switchMode = props.switchMode,
+        alertProps = props.alertProps,
         toolbarProps = props.toolbarProps,
         onModeChange = props.onModeChange,
+        onDateChange = props.onDateChange,
         onSearchResult = props.onSearchResult,
-        alertProps = props.alertProps,
-        onAlertCloseButtonClicked = props.onAlertCloseButtonClicked,
-        onDateChange = props.onDateChange;
+        onAlertCloseButtonClicked = props.onAlertCloseButtonClicked;
     var theme = styles.useTheme();
 
     var _useTranslation = reactI18next.useTranslation(['common']),
         t = _useTranslation.t;
 
-    var _useState = React.useState(),
+    var _useState = React.useState(switchMode),
         _useState2 = _slicedToArray__default["default"](_useState, 2),
-        searchResult = _useState2[0],
-        setSearchResult = _useState2[1];
+        mode = _useState2[0],
+        setMode = _useState2[1];
 
-    var _useState3 = React.useState(switchMode),
+    var _useState3 = React.useState(),
         _useState4 = _slicedToArray__default["default"](_useState3, 2),
-        mode = _useState4[0],
-        setMode = _useState4[1];
+        searchResult = _useState4[0],
+        setSearchResult = _useState4[1];
 
     var _useState5 = React.useState(null),
         _useState6 = _slicedToArray__default["default"](_useState5, 2),
@@ -461,9 +465,9 @@
     var openMenu = Boolean(anchorMenuEl);
     var openDateSelector = Boolean(anchorDateEl);
     var dateFnsLocale = React.useContext(DateFnsLocaleContext);
-    var isDayMode = (mode === null || mode === void 0 ? void 0 : mode.toLowerCase()) === t('day').toLowerCase();
-    var isWeekMode = (mode === null || mode === void 0 ? void 0 : mode.toLowerCase()) === t('week').toLowerCase();
-    var isMonthMode = (mode === null || mode === void 0 ? void 0 : mode.toLowerCase()) === t('month').toLowerCase();
+    var isDayMode = mode.toLowerCase() === 'day';
+    var isWeekMode = mode.toLowerCase() === 'week';
+    var isMonthMode = mode.toLowerCase() === 'month';
     var commonIconButtonProps = {
       size: "medium",
       edge: "start",
@@ -664,7 +668,7 @@
       onInputChange: function onInputChange(newValue) {
         var newDate = new Date();
 
-        if (newValue.date) {
+        if (newValue !== null && newValue !== void 0 && newValue.date) {
           newDate = dateFns.parse(newValue.date, 'yyyy-MM-dd', today);
         }
 
@@ -1985,13 +1989,6 @@
         daysInMonth = _useState12[0],
         setDaysInMonth = _useState12[1];
 
-    var _useReducer = React.useReducer(function (state) {
-      return weeks;
-    }, weeks),
-        _useReducer2 = _slicedToArray__default["default"](_useReducer, 2),
-        weekDays = _useReducer2[0],
-        updateWeekDays = _useReducer2[1];
-
     var _useState13 = React.useState((options === null || options === void 0 ? void 0 : options.startWeekOn) || 'mon'),
         _useState14 = _slicedToArray__default["default"](_useState13, 2),
         startWeekOn = _useState14[0],
@@ -2001,6 +1998,17 @@
         _useState16 = _slicedToArray__default["default"](_useState15, 2),
         selectedDate = _useState16[0],
         setSelectedDate = _useState16[1];
+
+    var _useReducer = React.useReducer(function (state) {
+      if ((startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === 'SUN') {
+        return [t('sun'), t('mon'), t('tue'), t('wed'), t('thu'), t('fri'), t('sat')];
+      }
+
+      return weeks;
+    }, weeks),
+        _useReducer2 = _slicedToArray__default["default"](_useReducer, 2),
+        weekDays = _useReducer2[0],
+        updateWeekDays = _useReducer2[1];
 
     var isDayMode = mode.toLowerCase() === 'day';
     var isWeekMode = mode.toLowerCase() === 'week';
@@ -2048,11 +2056,10 @@
 
 
     var getMonthHeader = function getMonthHeader() {
-      if ((startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === 'SUN') {
-        weekDays[0] = t('sun');
-        weekDays[6] = t('mon');
-      }
-
+      //if (startWeekOn?.toUpperCase() === 'SUN') {
+      //weekDays[0] = t('sun')
+      //weekDays[1] = t('mon')
+      //}
       return weekDays.map(function (day, i) {
         return {
           id: "row-day-header-".concat(i + 1),
@@ -2081,7 +2088,7 @@
           daysBefore = [];
       var iteration = dateFns.getWeeksInMonth(selectedDay); //Math.ceil(daysInMonth / 7)
 
-      var startOnSunday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === weekDays[6].toUpperCase;
+      var startOnSunday = (startWeekOn === null || startWeekOn === void 0 ? void 0 : startWeekOn.toUpperCase()) === 'SUN' && t('sun').toUpperCase() === weekDays[0].toUpperCase();
       var monthStartDate = dateFns.startOfMonth(selectedDay); // First day of month
 
       var monthStartDay = dateFns.getDay(monthStartDate); // Index of the day in week
@@ -2116,10 +2123,10 @@
         for (var i = 1; checkCondition(i); i++) {
           _loop(i);
         }
-      } else {
+      } else if (startOnSunday) {
         var _loop2 = function _loop2(_i) {
           var subDate = dateFns.sub(monthStartDate, {
-            days: _i
+            days: _i + 1
           });
           var day = parseInt(dateFns.format(subDate, 'dd'));
           var data = events.filter(function (event) {
@@ -2499,8 +2506,7 @@
       if ((options === null || options === void 0 ? void 0 : options.startWeekOn) !== startWeekOn) {
         setStartWeekOn(options === null || options === void 0 ? void 0 : options.startWeekOn);
       }
-    }, [options === null || options === void 0 ? void 0 : options.startWeekOn]); //console.log(state.columns)
-
+    }, [options === null || options === void 0 ? void 0 : options.startWeekOn]);
     return /*#__PURE__*/React__default["default"].createElement(material.Paper, {
       variant: "outlined",
       elevation: 0,

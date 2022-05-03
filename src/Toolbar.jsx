@@ -29,20 +29,21 @@ import DateFnsLocaleContext from "../locales/dateFnsContext"
 function SchedulerToolbar (props) {
   const {
     locale,
-    // events data
-    events, switchMode, today, toolbarProps,
-    // Mode
-    onModeChange, onSearchResult,
-    // Alert props
-    alertProps, onAlertCloseButtonClicked,
-    // Date
-    onDateChange
+    events,
+    today,
+    switchMode,
+    alertProps,
+    toolbarProps,
+    onModeChange,
+    onDateChange,
+    onSearchResult,
+    onAlertCloseButtonClicked
   } = props
 
   const theme = useTheme()
   const { t } = useTranslation(['common'])
-  const [searchResult, setSearchResult] = useState()
   const [mode, setMode] = useState(switchMode)
+  const [searchResult, setSearchResult] = useState()
   const [anchorMenuEl, setAnchorMenuEl] = useState(null)
   const [anchorDateEl, setAnchorDateEl] = useState(null)
   const [selectedDate, setSelectedDate] = useState(today || new Date())
@@ -51,9 +52,9 @@ function SchedulerToolbar (props) {
   const openMenu = Boolean(anchorMenuEl)
   const openDateSelector = Boolean(anchorDateEl)
   const dateFnsLocale = useContext(DateFnsLocaleContext)
-  const isDayMode = mode?.toLowerCase() === t('day').toLowerCase()
-  const isWeekMode = mode?.toLowerCase() === t('week').toLowerCase()
-  const isMonthMode = mode?.toLowerCase() === t('month').toLowerCase()
+  const isDayMode = mode.toLowerCase() === 'day'
+  const isWeekMode = mode.toLowerCase() === 'week'
+  const isMonthMode = mode.toLowerCase() === 'month'
 
   const commonIconButtonProps = {
     size: "medium",
@@ -237,7 +238,7 @@ function SchedulerToolbar (props) {
               events={events}
               onInputChange={(newValue) => {
                 let newDate = new Date()
-                if (newValue.date) {
+                if (newValue?.date) {
                   newDate = parse(newValue.date, 'yyyy-MM-dd', today)
                 }
                 setDaysInMonth(getDaysInMonth(newDate))

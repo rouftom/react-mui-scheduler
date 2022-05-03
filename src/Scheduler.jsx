@@ -60,9 +60,18 @@ function Scheduler(props) {
   const [alertState, setAlertState] = useState(alertProps)
   const [mode, setMode] = useState(options?.defaultMode || 'month')
   const [daysInMonth, setDaysInMonth] = useState(getDaysInMonth(today))
-  const [weekDays, updateWeekDays]= useReducer((state) => weeks, weeks)
   const [startWeekOn, setStartWeekOn] = useState(options?.startWeekOn || 'mon')
   const [selectedDate, setSelectedDate] = useState(format(today, 'MMMM-yyyy'))
+  const [weekDays, updateWeekDays]= useReducer((state) => {
+    if (startWeekOn?.toUpperCase() === 'SUN') {
+      return [
+        t('sun'), t('mon'), t('tue'),
+        t('wed'), t('thu'), t('fri'),
+        t('sat')
+      ]
+    }
+    return weeks
+  }, weeks)
 
   const isDayMode = mode.toLowerCase() === 'day'
   const isWeekMode = mode.toLowerCase() === 'week'
@@ -83,16 +92,18 @@ function Scheduler(props) {
   if (locale === 'ru') { dateFnsLocale = ru }
   if (locale === 'zh') { dateFnsLocale = zhCN }
 
+
+
   /**
    * @name getMonthHeader
    * @description
    * @return {{headerClassName: string, headerAlign: string, headerName: string, field: string, flex: number, editable: boolean, id: string, sortable: boolean, align: string}[]}
    */
   const getMonthHeader = () => {
-    if (startWeekOn?.toUpperCase() === 'SUN') {
-      weekDays[0] = t('sun')
-      weekDays[6] = t('mon')
-    }
+    //if (startWeekOn?.toUpperCase() === 'SUN') {
+      //weekDays[0] = t('sun')
+      //weekDays[1] = t('mon')
+    //}
     return weekDays.map((day, i) => ({
       id: `row-day-header-${i+1}`,
       flex: 1,
@@ -114,7 +125,10 @@ function Scheduler(props) {
   const getMonthRows = () => {
     let rows = [], daysBefore = []
     let iteration = getWeeksInMonth(selectedDay) //Math.ceil(daysInMonth / 7)
-    let startOnSunday = startWeekOn?.toUpperCase() === weekDays[6].toUpperCase
+    let startOnSunday = (
+      startWeekOn?.toUpperCase() === 'SUN' &&
+      t('sun').toUpperCase() === weekDays[0].toUpperCase()
+    )
     let monthStartDate = startOfMonth(selectedDay)        // First day of month
     let monthStartDay = getDay(monthStartDate)            // Index of the day in week
     let dateDay = parseInt(format(monthStartDate, 'dd'))  // Month start day
@@ -122,7 +136,6 @@ function Scheduler(props) {
     const checkCondition = (v) => (
       startOnSunday ? v <= monthStartDay : v < monthStartDay
     )
-    
     if (monthStartDay >= 1) {
       // Add days of precedent month
       // If Sunday is the first day of week, apply b <= monthStartDay
@@ -146,9 +159,9 @@ function Scheduler(props) {
           data: data
         })
       }
-    } else {
+    } else if (startOnSunday) {
       for (let i = 6; i > 0; i--) {
-        let subDate = sub(monthStartDate, {days: i})
+        let subDate = sub(monthStartDate, {days: i+1})
         let day = parseInt(format(subDate, 'dd'))
         let data = events.filter((event) => (
           isSameDay(subDate, parse(event?.date, 'yyyy-MM-dd', new Date()))
@@ -467,8 +480,6 @@ function Scheduler(props) {
       setStartWeekOn(options?.startWeekOn)
     }
   }, [options?.startWeekOn])
-
-  //console.log(state.columns)
 
   return (
     <Paper variant="outlined" elevation={0} sx={{p: 0}}>

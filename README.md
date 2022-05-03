@@ -29,7 +29,7 @@ import ReactDOM from 'react-dom'
 import Scheduler from "react-mui-scheduler"
 
 function App() {
-  const [state, setState] = useState({
+  const [state] = useState({
     options: {
       transitionMode: "zoom", // or fade
       startWeekOn: "Mon",     // or Sun
@@ -179,8 +179,8 @@ For more details about date formats, see [date-fns docs](https://date-fns.org/v2
 
 | Name 	|  Type 	|   Default	|  Description 	|  Values 	|
 |------	|---	|---	|---	|---	|
-|    transitionMode  	|  string 	|  `zoom` 	|  This option is used to define the type of scheduler transition 	|  `zoom`, `fade` 	|
-|   startWeekOn   	|   string	|  `Mon` 	|   This option is used to set the start of the calendar week to Monday or Sunday	|  `Mon`, `Sun` 	|
+|    transitionMode  	|  string 	|  `zoom` 	|  This option is used to define the type of scheduler transition 	|  `zoom`, `fade`, `slide` 	|
+|   startWeekOn   	|   string	|  `mon` 	|   This option is used to set the start of the calendar week to Monday or Sunday	|  `mon`, `sun` 	|
 |    defaultMode  	|  string 	|  `week` 	|  This option allows you to define the type of view to display 	|  `month`, `week`, `day`, `timeline` 	|
 |    minWidth  	|  number 	|  `540` 	|  This option allows you to define the minimum width of the container 	|  `number` 	|
 |    maxWidth  	|  number 	|  `540` 	|  This option allows you to define the maximum width of the container 	|  `number` 	|
@@ -239,7 +239,7 @@ For more details about date formats, see [date-fns docs](https://date-fns.org/v2
 
     Do you like this library ? Buy me a coffee or support me with a star on Github
 
-<a href="https://www.buymeacoffee.com/Lnp9rkM" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/Lnp9rkM" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 40px !important;width: 180px !important;" ></a>
 
 * Btc address: `bc1qettgagenn9nc8ks7ghntjfme96yvvkfhntk774`
 
