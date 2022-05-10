@@ -1089,7 +1089,7 @@
       }, row === null || row === void 0 ? void 0 : (_row$days = row.days) === null || _row$days === void 0 ? void 0 : _row$days.map(function (day, indexD) {
         var _columns$indexD, _columns$indexD$heade, _day$data2, _day$data3;
 
-        var currentDay = day.day === dateFns.getDay(today) + 1 && dateFns.isSameMonth(day.date, today);
+        var currentDay = day.day === today.getUTCDate() && dateFns.isSameMonth(day.date, today);
         return /*#__PURE__*/React__default["default"].createElement(StyledTableCell$2, {
           scope: "row",
           align: "center",

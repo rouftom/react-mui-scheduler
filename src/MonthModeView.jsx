@@ -238,8 +238,7 @@ function MonthModeView (props) {
               >
                 {row?.days?.map((day, indexD) => {
                   const currentDay = (
-                    day.day === (getDay(today) + 1) &&
-                    isSameMonth(day.date, today)
+                    day.day === today.getUTCDate() && isSameMonth(day.date, today)
                   )
                   return (
                     <StyledTableCell

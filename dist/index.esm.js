@@ -8,7 +8,7 @@ import i18n from 'i18next';
 import { initReactI18next, useTranslation } from 'react-i18next';
 import { styled, useTheme, alpha } from '@mui/material/styles';
 import { Autocomplete, Box, TextField, Toolbar, Grid, Typography, Hidden, IconButton, Button, Menu, Stack, ToggleButtonGroup, ToggleButton, MenuItem, ListItemIcon, Divider, Collapse, Alert, Paper, TableCell, tableCellClasses, TableRow, TableContainer, Table, TableHead, TableBody, Tooltip, Zoom, Fade, Slide } from '@mui/material';
-import { format, parse, getDaysInMonth, sub, add, getDay, isSameMonth, differenceInMinutes, isValid, getWeeksInMonth, startOfMonth, isSameDay, startOfWeek, startOfDay } from 'date-fns';
+import { format, parse, getDaysInMonth, sub, add, isSameMonth, differenceInMinutes, isValid, getWeeksInMonth, startOfMonth, getDay, isSameDay, startOfWeek, startOfDay } from 'date-fns';
 import _extends from '@babel/runtime/helpers/extends';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -1087,7 +1087,7 @@ function MonthModeView(props) {
     }, row === null || row === void 0 ? void 0 : (_row$days = row.days) === null || _row$days === void 0 ? void 0 : _row$days.map(function (day, indexD) {
       var _columns$indexD, _columns$indexD$heade, _day$data2, _day$data3;
 
-      var currentDay = day.day === getDay(today) + 1 && isSameMonth(day.date, today);
+      var currentDay = day.day === today.getUTCDate() && isSameMonth(day.date, today);
       return /*#__PURE__*/React.createElement(StyledTableCell$2, {
         scope: "row",
         align: "center",

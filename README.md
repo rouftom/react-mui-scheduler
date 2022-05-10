@@ -15,7 +15,7 @@
 ---
 
 React mui scheduler is a react component based on @mui v5 that allows you to manage data in a calendar.
-<p><a href="https://codesandbox.io/s/relaxed-neumann-174pod?file=/src/App.js" target="_blank">Demo here</a></p>
+<p><a href="https://rouftom.github.io/react-mui-scheduler-demo/" target="_blank">Demo here</a></p>
 
 ## 🚀 Installation
 ```nodejs
