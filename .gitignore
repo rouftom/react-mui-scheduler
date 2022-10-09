@@ -120,3 +120,4 @@ out
 .yarn/install-state.gz
 .pnp.*
 react-mui-scheduler-*
+yarn.lock
