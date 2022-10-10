@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import { format, parse } from 'date-fns'
 import { useTranslation } from 'react-i18next'
@@ -23,18 +23,18 @@ const StyledAutoComplete = styled(Autocomplete)(({ theme }) => ({
   },
 }))
 
-function ToolbarSearchbar (props) {
-  const {events, onInputChange} = props
+function ToolbarSearchbar(props) {
+  const { events, onInputChange } = props
   const { t } = useTranslation(['common'])
   const [value, setValue] = useState('')
   const dateFnsLocale = useContext(DateFnsLocaleContext)
   const [inputValue, setInputValue] = useState('')
-  
+
   const handleOnChange = (event, newValue) => {
     setValue(newValue)
     if (onInputChange) onInputChange(newValue)
   }
-  
+
   return (
     <StyledAutoComplete
       value={value}
@@ -42,7 +42,7 @@ function ToolbarSearchbar (props) {
       inputValue={inputValue}
       sx={{ mb: 0, display: 'inline-flex' }}
       onChange={handleOnChange}
-      options={events?.sort((a, b) => -b.groupLabel.localeCompare(a.groupLabel))}
+      options={[...events]?.sort((a, b) => -b.groupLabel.localeCompare(a.groupLabel))}
       groupBy={(option) => option ? option?.groupLabel : null}
       /*
       (
@@ -63,7 +63,7 @@ function ToolbarSearchbar (props) {
        */
       getOptionLabel={(option) => (
         option ?
-        `${option.groupLabel || ''} | (${option.startHour || ''} - ${option.endHour || ''})` : ''
+          `${option.groupLabel || ''} | (${option.startHour || ''} - ${option.endHour || ''})` : ''
       )}
       isOptionEqualToValue={(option, value) => option.id === value.id}
       onInputChange={(event, newInputValue) => {
@@ -71,7 +71,7 @@ function ToolbarSearchbar (props) {
         onInputChange(newInputValue)
       }}
       renderOption={(props, option) => (
-        <Box component="li" sx={{fontSize: 12}} {...props}>
+        <Box component="li" sx={{ fontSize: 12 }} {...props}>
           {format(
             parse(option?.date, 'yyyy-MM-dd', new Date()),
             'dd-MMMM-yyyy'
@@ -84,7 +84,7 @@ function ToolbarSearchbar (props) {
           {...params}
           size="small"
           label={t('search')}
-          InputProps={{...params.InputProps}}
+          InputProps={{ ...params.InputProps }}
         />
       )}
     />

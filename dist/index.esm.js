@@ -23,6 +23,7 @@ import AutorenewIcon from '@mui/icons-material/Autorenew';
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import GridViewIcon from '@mui/icons-material/GridView';
+import _toConsumableArray from '@babel/runtime/helpers/toConsumableArray';
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
 import { styled as styled$1 } from '@mui/system';
 import Timeline from '@mui/lab/Timeline';
@@ -323,6 +324,8 @@ var StyledAutoComplete = styled(Autocomplete)(function (_ref) {
 });
 
 function ToolbarSearchbar(props) {
+  var _ref3;
+
   var events = props.events,
       _onInputChange = props.onInputChange;
 
@@ -355,7 +358,7 @@ function ToolbarSearchbar(props) {
       display: 'inline-flex'
     },
     onChange: handleOnChange,
-    options: events === null || events === void 0 ? void 0 : events.sort(function (a, b) {
+    options: (_ref3 = _toConsumableArray(events)) === null || _ref3 === void 0 ? void 0 : _ref3.sort(function (a, b) {
       return -b.groupLabel.localeCompare(a.groupLabel);
     }),
     groupBy: function groupBy(option) {
@@ -1842,7 +1845,7 @@ var StyledContainer = styled(Typography)(function (_ref) {
 });
 
 function TimeLineModeView(props) {
-  var _fileredEvents2;
+  var _ref3, _fileredEvents2;
 
   var options = props.options,
       rows = props.rows,
@@ -1863,7 +1866,7 @@ function TimeLineModeView(props) {
     onTaskClick && onTaskClick(event, task);
   };
 
-  var fileredEvents = rows === null || rows === void 0 ? void 0 : rows.sort(function (a, b) {
+  var fileredEvents = (_ref3 = _toConsumableArray(rows)) === null || _ref3 === void 0 ? void 0 : _ref3.sort(function (a, b) {
     var _b$startHour;
 
     return -(b === null || b === void 0 ? void 0 : (_b$startHour = b.startHour) === null || _b$startHour === void 0 ? void 0 : _b$startHour.localeCompare(a === null || a === void 0 ? void 0 : a.startHour));
