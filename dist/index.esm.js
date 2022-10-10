@@ -23,6 +23,7 @@ import AutorenewIcon from '@mui/icons-material/Autorenew';
 import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import GridViewIcon from '@mui/icons-material/GridView';
+import _toConsumableArray from '@babel/runtime/helpers/toConsumableArray';
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
 import { styled as styled$1 } from '@mui/system';
 import Timeline from '@mui/lab/Timeline';
@@ -225,17 +226,17 @@ var trJA = {
 };
 
 var day = "天";
-var week = "星期";
+var week = "周";
 var month = "月";
-var timeline = "年表";
+var timeline = "时间线";
 var mon = "星期一";
-var tue = "三月";
-var wed = "海";
-var thu = "游戏";
-var fri = "周五";
+var tue = "星期二";
+var wed = "星期三";
+var thu = "星期四";
+var fri = "星期五";
 var sat = "星期六";
-var sun = "太阳";
-var search = "寻找...";
+var sun = "星期天";
+var search = "搜索...";
 var trZH = {
 	day: day,
 	week: week,
@@ -323,6 +324,8 @@ var StyledAutoComplete = styled(Autocomplete)(function (_ref) {
 });
 
 function ToolbarSearchbar(props) {
+  var _ref3;
+
   var events = props.events,
       _onInputChange = props.onInputChange;
 
@@ -355,7 +358,7 @@ function ToolbarSearchbar(props) {
       display: 'inline-flex'
     },
     onChange: handleOnChange,
-    options: events === null || events === void 0 ? void 0 : events.sort(function (a, b) {
+    options: (_ref3 = _toConsumableArray(events)) === null || _ref3 === void 0 ? void 0 : _ref3.sort(function (a, b) {
       return -b.groupLabel.localeCompare(a.groupLabel);
     }),
     groupBy: function groupBy(option) {
@@ -749,7 +752,7 @@ function SchedulerToolbar(props) {
   })), /*#__PURE__*/React.createElement(Typography, {
     variant: "body2"
   }, "Settings"))), /*#__PURE__*/React.createElement(Collapse, {
-    in: alertProps === null || alertProps === void 0 ? void 0 : alertProps.open
+    "in": alertProps === null || alertProps === void 0 ? void 0 : alertProps.open
   }, /*#__PURE__*/React.createElement(Alert, {
     color: alertProps === null || alertProps === void 0 ? void 0 : alertProps.color,
     severity: alertProps === null || alertProps === void 0 ? void 0 : alertProps.severity,
@@ -1842,7 +1845,7 @@ var StyledContainer = styled(Typography)(function (_ref) {
 });
 
 function TimeLineModeView(props) {
-  var _fileredEvents2;
+  var _ref3, _fileredEvents2;
 
   var options = props.options,
       rows = props.rows,
@@ -1863,7 +1866,7 @@ function TimeLineModeView(props) {
     onTaskClick && onTaskClick(event, task);
   };
 
-  var fileredEvents = rows === null || rows === void 0 ? void 0 : rows.sort(function (a, b) {
+  var fileredEvents = (_ref3 = _toConsumableArray(rows)) === null || _ref3 === void 0 ? void 0 : _ref3.sort(function (a, b) {
     var _b$startHour;
 
     return -(b === null || b === void 0 ? void 0 : (_b$startHour = b.startHour) === null || _b$startHour === void 0 ? void 0 : _b$startHour.localeCompare(a === null || a === void 0 ? void 0 : a.startHour));
@@ -2543,7 +2546,7 @@ function Scheduler(props) {
     alignItems: "center",
     justifyContent: "start"
   }, isMonthMode && /*#__PURE__*/React.createElement(TransitionMode, {
-    in: true
+    "in": true
   }, /*#__PURE__*/React.createElement(Grid, {
     item: true,
     xs: 12
@@ -2560,7 +2563,7 @@ function Scheduler(props) {
     onDateChange: handleDateChange,
     onEventsChange: handleEventsChange
   }))), isWeekMode && /*#__PURE__*/React.createElement(TransitionMode, {
-    in: true
+    "in": true
   }, /*#__PURE__*/React.createElement(Grid, {
     item: true,
     xs: 12
@@ -2577,7 +2580,7 @@ function Scheduler(props) {
     onDateChange: handleDateChange,
     onEventsChange: handleEventsChange
   }))), isDayMode && /*#__PURE__*/React.createElement(TransitionMode, {
-    in: true
+    "in": true
   }, /*#__PURE__*/React.createElement(Grid, {
     item: true,
     xs: 12
@@ -2594,7 +2597,7 @@ function Scheduler(props) {
     onDateChange: handleDateChange,
     onEventsChange: handleEventsChange
   })))), isTimelineMode && /*#__PURE__*/React.createElement(TransitionMode, {
-    in: true
+    "in": true
   }, /*#__PURE__*/React.createElement(Grid, {
     container: true,
     spacing: 2,

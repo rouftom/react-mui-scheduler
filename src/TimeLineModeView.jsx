@@ -1,7 +1,7 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { styled } from '@mui/material/styles'
-import {Typography} from "@mui/material"
+import { Typography } from "@mui/material"
 import Timeline from '@mui/lab/Timeline'
 import TimelineItem from '@mui/lab/TimelineItem'
 import TimelineSeparator from '@mui/lab/TimelineSeparator'
@@ -32,10 +32,10 @@ const StyledContainer = styled(Typography)(({ theme }) => ({
   }
 }))
 
-function TimeLineModeView (props) {
-  const {options, rows, searchResult, onTaskClick} = props
+function TimeLineModeView(props) {
+  const { options, rows, searchResult, onTaskClick } = props
   const dateFnsLocale = useContext(DateFnsLocaleContext)
-  
+
   /**
    * @name handleTaskClick
    * @description
@@ -48,14 +48,14 @@ function TimeLineModeView (props) {
     event.stopPropagation()
     onTaskClick && onTaskClick(event, task)
   }
-  
-  let fileredEvents = rows?.sort((a, b) => -b?.startHour?.localeCompare(a?.startHour))
+
+  let fileredEvents = [...rows]?.sort((a, b) => -b?.startHour?.localeCompare(a?.startHour))
   if (searchResult) {
     fileredEvents = fileredEvents?.filter(
       event => event?.groupLabel === searchResult?.groupLabel
     )
   }
-  
+
   return (
     <StyledContainer
       component='div'
@@ -70,7 +70,7 @@ function TimeLineModeView (props) {
           return (
             <TimelineItem
               key={`timeline-${index}`}
-              sx={{cursor: 'pointer'}}
+              sx={{ cursor: 'pointer' }}
               onClick={event => handleTaskClick(event, task)}
             >
               <TimelineOppositeContent
@@ -80,15 +80,15 @@ function TimeLineModeView (props) {
                 color="text.secondary"
               >
                 {task?.date &&
-                format(
-                  parse(
-                    task?.date,
-                    'yyyy-MM-dd',
-                    new Date()
-                  ),
-                  'PPP',
-                  { locale: dateFnsLocale }
-                )}
+                  format(
+                    parse(
+                      task?.date,
+                      'yyyy-MM-dd',
+                      new Date()
+                    ),
+                    'PPP',
+                    { locale: dateFnsLocale }
+                  )}
                 <br />
                 <Typography variant="caption">
                   {task?.startHour} - {task?.endHour}
@@ -96,7 +96,7 @@ function TimeLineModeView (props) {
               </TimelineOppositeContent>
               <TimelineSeparator>
                 <TimelineConnector />
-                <TimelineDot color="secondary" sx={{backgroundColor: task?.color}}>
+                <TimelineDot color="secondary" sx={{ backgroundColor: task?.color }}>
                   {task?.icon || <ScheduleIcon />}
                 </TimelineDot>
                 <TimelineConnector />
