@@ -474,7 +474,7 @@ function Scheduler(props) {
   ])
 
   useEffect(() => {
-    if (locale !== i18n.language) { //localStorage.getItem('i18nextLng')
+    if (locale !== i18n.language && localStorage) { //localStorage.getItem('i18nextLng')
       localStorage.setItem('i18nextLng', locale.toLowerCase())
       i18n.changeLanguage(locale.toLowerCase())
       updateWeekDays()
